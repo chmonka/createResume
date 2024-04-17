@@ -1,0 +1,16 @@
+.aboutUs>.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.aboutUs {
+    padding: 150px 0px;
+    display: flex;
+    background-color: #323941;
+    &_desc{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+}

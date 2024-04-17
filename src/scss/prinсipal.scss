@@ -1,0 +1,32 @@
+* {
+    margin: 0pt;
+    padding: 0pt;
+    box-sizing: border-box;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+}
+
+body {
+    background-color:#0D1117;
+}
+
+li {
+    list-style: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    padding: 0px 20px;
+}

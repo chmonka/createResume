@@ -1,0 +1,13 @@
+@import './mixins.scss';
+
+.text {
+    @include paragraf-l-font-size();
+}
+
+.nav-text {
+    @include h4-font();
+}
+
+.title {
+    @include h2-font();
+}

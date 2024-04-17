@@ -1,0 +1,25 @@
+@import "variables.scss";
+
+@mixin paragraf-l-font-size() {
+    font-family: $font-Oswald;
+    font-size: $paragraf-l-font-size;
+    color: $paragraf-l-color;
+}
+
+@mixin h2-font() {
+    font-family: $font-Oswald;
+    font-size: $h2-font-size;
+    color: $paragraf-l-color;
+}
+
+@mixin h4-font() {
+    font-family: $font-Oswald;
+    font-size: $h4-font-size;
+    color: $paragraf-l-color;
+}
+
+@mixin h5-font() {
+    font-family: $font-Oswald;
+    font-size: $h5-font-size;
+    color: $paragraf-l-color;
+}

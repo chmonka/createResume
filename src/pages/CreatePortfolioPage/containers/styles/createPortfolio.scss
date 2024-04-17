@@ -1,0 +1,93 @@
+.portfolio{
+    padding: 20px 0px;
+}
+
+.portfolio>.container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 30px;
+    border: 1px solid #C9D1D9;
+     img {
+        width: 100%;
+        filter: invert(1);
+     }
+}
+
+.portfolio-create {
+    overflow: auto;
+    overflow-x:hidden;
+    max-height: 670px;
+    height: 100vh;
+    max-width: 400px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 30px 20px 30px 30px;
+    gap: 20px;
+    border: 1px solid #C9D1D9;
+    border-radius: 10px;
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: gray; 
+        border-radius: 12px; 
+        border: 1px solid #C9D1D9; 
+    }
+    &_column{
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 100px 100px;
+    }
+}
+
+
+
+.portfolio-preview {
+    overflow: auto;
+    overflow-x:hidden ;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 670px;
+    max-width: 400px;
+    height: 100vh;
+    padding: 30px;
+    border: 1px solid #C9D1D9;
+    border-radius: 10px;
+    max-width:700px;
+    width: 100%;
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: gray; 
+        border-radius: 12px; 
+        border: 1px solid #C9D1D9; 
+    }
+}
+
+.portfolio-form{
+    max-height: 670px;
+    height: 100vh;
+    width: 300px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border: 1px solid #C9D1D9;
+    border-radius: 10px;
+    gap: 20px;
+}
+
