@@ -1,9 +1,10 @@
 import CustomContainer from "../../../components/container/CustomContainer"
+import ResumePreviewContainer from "./ResumePreview/ResumePreviewContainer"
 
 function ResumePreview() {
     return (
-        <CustomContainer>
-            <div>Привет</div>
+        <CustomContainer >
+            <ResumePreviewContainer></ResumePreviewContainer>
         </CustomContainer>
     )
 }

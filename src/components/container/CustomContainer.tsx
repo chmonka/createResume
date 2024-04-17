@@ -16,7 +16,7 @@ function CustomContainer({ children }: IContainerProps) {
         margin: "0 auto",
         maxWidth: '1280px',
         width: "100%",
-        padding:"0px"
+        padding: "0px"
       }}>
       {children}
     </Box>
