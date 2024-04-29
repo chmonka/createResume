@@ -1,12 +1,46 @@
-import {Accordion, Box, Grid, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material"
-import List from '@mui/material/List';
+import { Box, Grid, Typography } from "@mui/material"
 import CustomContainer from "../../../../components/container/CustomContainer"
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import Accardion from "../../../../components/Accordion/Accardion";
+import { useState } from "react";
 
 function ResumePreviewContainer() {
+
+    // const items = [];
+
+    const [items, setItems] = useState<Array<{ title: string, icon: string, content: string[] }>>([
+        {
+            title: 'Контакты',
+            icon: 'icon-1',
+            content: [
+                'Item 1',
+                'Item 2',
+                'Item 3'
+            ]
+        },
+        {
+            title: 'Accordion 2',
+            icon: 'icon-2',
+            content: [
+                'Item 4',
+                'Item 5',
+                'Item 6'
+            ]
+        },
+        {
+            title: 'Accordion 3',
+            icon: 'icon-3',
+            content: [
+                'Item 7',
+                'Item 8',
+                'Item 9'
+            ]
+        }
+    ]
+    )
+
+    console.log(items);
+
+
     return (
         <Grid
             sx={{
@@ -29,7 +63,7 @@ function ResumePreviewContainer() {
                         }}
                     >
                         <Box>
-                            <img src="" alt=""/>
+                            <img src="" alt="" />
                             <Grid>
                                 <Typography
                                     variant="h2"
@@ -60,144 +94,12 @@ function ResumePreviewContainer() {
                                 gap: "20px"
                             }}
                         >
-                            <Accordion
-                                sx={{
-                                    backgroundColor: "transparent",
-                                    color: "white"
-                                }}
+
+                            <Accardion
+                                items={items}
                             >
-                                <AccordionSummary
-                                    color="white"
-                                    expandIcon={<ArrowDownwardIcon/>}
-                                    aria-controls="panel1-content"
-                                    id="panel1-header"
-                                >
-                                    Контакты
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <List>
-                                        <ListItem>
-                                            <ListItemIcon sx={{
-                                                color: 'white'
-                                            }}><LocalPhoneIcon/></ListItemIcon>
-                                            <ListItemText primary={`+79536563765`}/>
-                                        </ListItem>
-                                    </List>
-                                </AccordionDetails>
-                                <AccordionDetails>
-                                    <List>
-                                        <ListItem>
-                                            <ListItemIcon sx={{
-                                                color: 'white'
-                                            }}><LocalPhoneIcon/></ListItemIcon>
-                                            <ListItemText primary={`smimov-dima@mail.ru`}/>
-                                        </ListItem>
-                                    </List>
-                                </AccordionDetails>
-                                <AccordionDetails>
-                                    <List>
-                                        <ListItem>
-                                            <ListItemIcon sx={{
-                                                padding: '0px',
-                                                color: 'white'
-                                            }}><LocalPhoneIcon/></ListItemIcon>
-                                            <ListItemText primary={`SmirnovDima`}/>
-                                        </ListItem>
-                                    </List>
-                                </AccordionDetails>
-                            </Accordion>
-                            <Accordion
-                                sx={{
-                                    backgroundColor: "transparent",
-                                    color: "white"
-                                }}
-                            >
-                                <AccordionSummary
-                                    color="white"
-                                    expandIcon={<ArrowDownwardIcon/>}
-                                    aria-controls="panel1-content"
-                                    id="panel1-header"
-                                >
-                                    Знание языков
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <List>
-                                        <ListItem>
-                                            <ListItemIcon sx={{
-                                                color: 'white'
-                                            }}><LocalPhoneIcon/></ListItemIcon>
-                                            <ListItemText primary={`+79536563765`}/>
-                                        </ListItem>
-                                    </List>
-                                </AccordionDetails>
-                                <AccordionDetails>
-                                    <List>
-                                        <ListItem>
-                                            <ListItemIcon sx={{
-                                                color: 'white'
-                                            }}><LocalPhoneIcon/></ListItemIcon>
-                                            <ListItemText primary={`smimov-dima@mail.ru`}/>
-                                        </ListItem>
-                                    </List>
-                                </AccordionDetails>
-                                <AccordionDetails>
-                                    <List>
-                                        <ListItem>
-                                            <ListItemIcon sx={{
-                                                padding: '0px',
-                                                color: 'white'
-                                            }}><LocalPhoneIcon/></ListItemIcon>
-                                            <ListItemText primary={`SmirnovDima`}/>
-                                        </ListItem>
-                                    </List>
-                                </AccordionDetails>
-                            </Accordion>
-                            <Accordion
-                                sx={{
-                                    backgroundColor: "transparent",
-                                    color: "white"
-                                }}
-                            >
-                                <AccordionSummary
-                                    color="white"
-                                    expandIcon={<ArrowDownwardIcon/>}
-                                    aria-controls="panel1-content"
-                                    id="panel1-header"
-                                >
-                                    Навыки
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <List>
-                                        <ListItem>
-                                            <ListItemIcon sx={{
-                                                color: 'white'
-                                            }}><LocalPhoneIcon/></ListItemIcon>
-                                            <ListItemText primary={`+79536563765`}/>
-                                        </ListItem>
-                                    </List>
-                                </AccordionDetails>
-                                <AccordionDetails>
-                                    <List>
-                                        <ListItem>
-                                            <ListItemIcon sx={{
-                                                color: 'white'
-                                            }}><LocalPhoneIcon/></ListItemIcon>
-                                            <ListItemText primary={`smimov-dima@mail.ru`}/>
-                                        </ListItem>
-                                    </List>
-                                </AccordionDetails>
-                                <AccordionDetails>
-                                    <List>
-                                        <ListItem>
-                                            <ListItemIcon sx={{
-                                                padding: '0px',
-                                                color: 'white'
-                                            }}><LocalPhoneIcon/></ListItemIcon>
-                                            <ListItemText primary={`SmirnovDima`}/>
-                                        </ListItem>
-                                    </List>
-                                </AccordionDetails>
-                            </Accordion>
+
+                            </Accardion>
                         </Box>
                     </Box>
                     <Box
@@ -207,144 +109,7 @@ function ResumePreviewContainer() {
                             flexDirection: "column"
                         }}
                     >
-                        <Accordion
-                            sx={{
-                                backgroundColor: "transparent",
-                                color: "white"
-                            }}
-                        >
-                            <AccordionSummary
-                                color="white"
-                                expandIcon={<ArrowDownwardIcon/>}
-                                aria-controls="panel1-content"
-                                id="panel1-header"
-                            >
-                                Контакты
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <List>
-                                    <ListItem>
-                                        <ListItemIcon sx={{
-                                            color: 'white'
-                                        }}><LocalPhoneIcon/></ListItemIcon>
-                                        <ListItemText primary={`+79536563765`}/>
-                                    </ListItem>
-                                </List>
-                            </AccordionDetails>
-                            <AccordionDetails>
-                                <List>
-                                    <ListItem>
-                                        <ListItemIcon sx={{
-                                            color: 'white'
-                                        }}><LocalPhoneIcon/></ListItemIcon>
-                                        <ListItemText primary={`smimov-dima@mail.ru`}/>
-                                    </ListItem>
-                                </List>
-                            </AccordionDetails>
-                            <AccordionDetails>
-                                <List>
-                                    <ListItem>
-                                        <ListItemIcon sx={{
-                                            padding: '0px',
-                                            color: 'white'
-                                        }}><LocalPhoneIcon/></ListItemIcon>
-                                        <ListItemText primary={`SmirnovDima`}/>
-                                    </ListItem>
-                                </List>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion
-                            sx={{
-                                backgroundColor: "transparent",
-                                color: "white"
-                            }}
-                        >
-                            <AccordionSummary
-                                color="white"
-                                expandIcon={<ArrowDownwardIcon/>}
-                                aria-controls="panel1-content"
-                                id="panel1-header"
-                            >
-                                Знание языков
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <List>
-                                    <ListItem>
-                                        <ListItemIcon sx={{
-                                            color: 'white'
-                                        }}><LocalPhoneIcon/></ListItemIcon>
-                                        <ListItemText primary={`+79536563765`}/>
-                                    </ListItem>
-                                </List>
-                            </AccordionDetails>
-                            <AccordionDetails>
-                                <List>
-                                    <ListItem>
-                                        <ListItemIcon sx={{
-                                            color: 'white'
-                                        }}><LocalPhoneIcon/></ListItemIcon>
-                                        <ListItemText primary={`smimov-dima@mail.ru`}/>
-                                    </ListItem>
-                                </List>
-                            </AccordionDetails>
-                            <AccordionDetails>
-                                <List>
-                                    <ListItem>
-                                        <ListItemIcon sx={{
-                                            padding: '0px',
-                                            color: 'white'
-                                        }}><LocalPhoneIcon/></ListItemIcon>
-                                        <ListItemText primary={`SmirnovDima`}/>
-                                    </ListItem>
-                                </List>
-                            </AccordionDetails>
-                        </Accordion>
-                        <Accordion
-                            sx={{
-                                backgroundColor: "transparent",
-                                color: "white"
-                            }}
-                        >
-                            <AccordionSummary
-                                color="white"
-                                expandIcon={<ArrowDownwardIcon/>}
-                                aria-controls="panel1-content"
-                                id="panel1-header"
-                            >
-                                Навыки
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <List>
-                                    <ListItem>
-                                        <ListItemIcon sx={{
-                                            color: 'white'
-                                        }}><LocalPhoneIcon/></ListItemIcon>
-                                        <ListItemText primary={`+79536563765`}/>
-                                    </ListItem>
-                                </List>
-                            </AccordionDetails>
-                            <AccordionDetails>
-                                <List>
-                                    <ListItem>
-                                        <ListItemIcon sx={{
-                                            color: 'white'
-                                        }}><LocalPhoneIcon/></ListItemIcon>
-                                        <ListItemText primary={`smimov-dima@mail.ru`}/>
-                                    </ListItem>
-                                </List>
-                            </AccordionDetails>
-                            <AccordionDetails>
-                                <List>
-                                    <ListItem>
-                                        <ListItemIcon sx={{
-                                            padding: '0px',
-                                            color: 'white'
-                                        }}><LocalPhoneIcon/></ListItemIcon>
-                                        <ListItemText primary={`SmirnovDima`}/>
-                                    </ListItem>
-                                </List>
-                            </AccordionDetails>
-                        </Accordion>
+                        <Accardion items={items}/>
                     </Box>
                 </Box>
             </CustomContainer>
