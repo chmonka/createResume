@@ -55,7 +55,7 @@ function CreatePortfolio() {
         }
     }
 
-    function handleInputvalue(e:ChangeEvent<HTMLTextAreaElement|HTMLInputElement>) {
+    function   handleInputvalue(e:ChangeEvent<HTMLTextAreaElement|HTMLInputElement>) {
         setInnerValue(e.target.value)
     }
 
