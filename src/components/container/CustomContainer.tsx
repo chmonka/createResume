@@ -21,9 +21,7 @@ function CustomContainer({children,...rest}: IContainerProps) {
                 padding: "0px"
             }}>
             {children}
-
         </Box>
-
     )
 }
 

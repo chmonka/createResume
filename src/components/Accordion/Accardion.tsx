@@ -1,59 +1,40 @@
-
-import { Accordion, Box, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import {Accordion, Box, ListItem, ListItemIcon, ListItemText} from "@mui/material";
 import List from '@mui/material/List';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import {FC} from "react";
 
 
 
 
 interface IAccordionProps {
-    items: Array<{ title: string; icon: string; content: string[] }>;
+    handleBlock:(index:number) => void
+    items: Array<{ title: string; icon?: JSX.Element; content: string[] }>;
 }
 
-
-function Accardion({ items }: IAccordionProps) {
-    console.log(items);
-
+const Accordionlist: FC<IAccordionProps> = ({ items,handleBlock }) => {
     return (
-        <Box>
-            {items.map((elem, index: number) => {
-                console.log(elem);
-
-                return <Accordion
-                    key={index}
-                    sx={{
-                        backgroundColor: "transparent",
-                        color: "white"
-                    }}
-                >
-                    <AccordionSummary
-                        color="white"
-                        expandIcon={<ArrowDownwardIcon />}
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                    >
+        <Box sx={{ flexDirection: 'column', display: 'flex', gap: '20px' }}>
+            {items.map((elem, index) => (
+                <Accordion key={index} onClick={() => handleBlock(index)} sx={{ backgroundColor: 'transparent', border: '1px solid white', color: 'white' }}>
+                    <AccordionSummary expandIcon={<ArrowDownwardIcon style={{ color: 'white' }} />}>
                         {elem.title}
                     </AccordionSummary>
                     <AccordionDetails>
                         <List>
-                            {elem.content.map(item => {
-                                return <ListItem >
-                                    <ListItemIcon sx={{
-                                        color: 'white'
-                                    }}><LocalPhoneIcon /></ListItemIcon>
+                            {elem.content.map((item, itemIndex) => (
+                                <ListItem key={itemIndex}>
+                                    <ListItemIcon sx={{ color: 'white' }}>{elem.icon}</ListItemIcon>
                                     <ListItemText primary={item} />
                                 </ListItem>
-                            })}
-
+                            ))}
                         </List>
                     </AccordionDetails>
                 </Accordion>
-            })}
+            ))}
         </Box>
-    )
-}
+    );
+};
 
-export default Accardion
+export default Accordionlist

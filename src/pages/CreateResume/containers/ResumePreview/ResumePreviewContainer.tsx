@@ -1,44 +1,52 @@
 import { Box, Grid, Typography } from "@mui/material"
-import CustomContainer from "../../../../components/container/CustomContainer"
-import Accardion from "../../../../components/Accordion/Accardion";
-import { useState } from "react";
+import Accordionlist from "../../../../components/Accordion/Accardion";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import {useEffect, useState} from "react";
 
 function ResumePreviewContainer() {
 
-    // const items = [];
+    const [editingItem, setEditingItem] = useState<number>();
+    // const [selectedItem: number setSelectedItem] = useState<number | null>(null);
 
-    const [items, setItems] = useState<Array<{ title: string, icon: string, content: string[] }>>([
+    function handleBlock(index: number) {
+        setEditingItem(index);
+    }
+
+    useEffect(() => {
+        console.log(editingItem);
+    })
+
+
+
+    const items: Array<{ title: string, icon?: JSX.Element, content: string[] }> = [
         {
             title: 'Контакты',
-            icon: 'icon-1',
+            icon: <LocalPhoneIcon style={{color:'white'}} />,
             content: [
-                'Item 1',
-                'Item 2',
-                'Item 3'
+                '+79536563765',
+                'smirno@mail.ru',
+                'SmimovDima'
             ]
         },
         {
-            title: 'Accordion 2',
-            icon: 'icon-2',
+            title: 'Знание языков',
+            icon: undefined,
             content: [
-                'Item 4',
-                'Item 5',
-                'Item 6'
+                'Русский язык',
+                'Английский',
+                'Немецкий'
             ]
         },
         {
-            title: 'Accordion 3',
-            icon: 'icon-3',
+            title: 'Навыки',
+            icon: undefined,
             content: [
-                'Item 7',
-                'Item 8',
-                'Item 9'
+                'Публичные выступления',
+                'Деловая переписка',
+                'Ведение переговоров'
             ]
         }
-    ]
-    )
-
-    console.log(items);
+    ];
 
 
     return (
@@ -47,9 +55,6 @@ function ResumePreviewContainer() {
                 padding: "0px"
             }}
         >
-            <CustomContainer
-                flexDirection={"column"}
-            >
                 <Box sx={{
                     display: "flex",
                     padding: "0px",
@@ -95,24 +100,23 @@ function ResumePreviewContainer() {
                             }}
                         >
 
-                            <Accardion
-                                items={items}
-                            >
+                            <Accordionlist
+                                handleBlock={handleBlock}
+                                items={items}/>
 
-                            </Accardion>
                         </Box>
                     </Box>
                     <Box
                         sx={{
-                            width: '100%',
                             display: "flex",
                             flexDirection: "column"
                         }}
                     >
-                        <Accardion items={items}/>
+                        <Accordionlist
+                            handleBlock={handleBlock}
+                            items={items}/>
                     </Box>
                 </Box>
-            </CustomContainer>
         </Grid>
     )
 }
