@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material"
-import Accordionlist from "../../../../components/Accordion/Accardion";
+import Accordionlist from "../../../../components/Accordion/AccardionList.tsx";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import {useEffect, useState} from "react";
 
