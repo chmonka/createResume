@@ -1,6 +1,7 @@
 import CustomContainer from "../../../components/container/CustomContainer"
-import ResumePreviewContainer from "./ResumePreview/ResumePreviewContainer"
 import {Grid} from "@mui/material";
+import ResumeForm from "./ResumeForm/ResumeForm.tsx";
+
 
 function ResumePreview() {
     return (
@@ -10,7 +11,7 @@ function ResumePreview() {
                     display: "flex",
                 }}
             >
-                <ResumePreviewContainer></ResumePreviewContainer>
+                <ResumeForm></ResumeForm>
             </Grid>
         </CustomContainer>
     )
