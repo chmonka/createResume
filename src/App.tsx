@@ -1,23 +1,22 @@
-import Header from "./components/header/Header";
-import MainPage from "./pages/MainPage/MainPage";
+import Header from './components/header/Header'
+import MainPage from './pages/MainPage/MainPage'
 // import CreatePortfolioPage from "./pages/CreatePortfolioPage/CreatePortfolioPage";
 import './scss/styles.scss'
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom'
 
-import CreateResumePage from "./pages/CreateResume/CreateResumePage";
+import CreateResumePage from './pages/CreateResume/CreateResumePage'
 function App() {
-    return (
-        <div className="App">
-            <Header />
+  return (
+    <div className='App'>
+      <Header />
 
-            <Routes>
-                <Route path="/" element={<MainPage />} />
-                {/* <Route path='/createPortfolio' element={<CreatePortfolioPage />}></Route> */}
-                <Route path='/createResume' element={<CreateResumePage />}></Route>
-            </Routes>
-
-        </div>
-    );
+      <Routes>
+        <Route path='/' element={<MainPage />} />
+        {/* <Route path='/createPortfolio' element={<CreatePortfolioPage />}></Route> */}
+        <Route path='/createResume' element={<CreateResumePage />}></Route>
+      </Routes>
+    </div>
+  )
 }
 
-export default App;
+export default App

@@ -1,12 +1,7 @@
-import { Grid} from "@mui/material";
-
+import { Grid } from '@mui/material'
 
 const ResumeEdit = () => {
-    return (
-        <Grid>
+  return <Grid></Grid>
+}
 
-        </Grid>
-    );
-};
-
-export default ResumeEdit;
+export default ResumeEdit

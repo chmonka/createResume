@@ -1,9 +1,7 @@
-import ResumePreview from "./containers/ResumePreview";
+import ResumePreview from './containers/ResumePreview'
 
 const CreateResumePage = () => {
-    return (
-        <ResumePreview/>
-    );
-};
+  return <ResumePreview />
+}
 
-export default CreateResumePage;
+export default CreateResumePage

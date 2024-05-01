@@ -1,5 +1,3 @@
 export default function WorksUsers() {
-  return (
-    <div>WorksUsers</div>
-  )
+  return <div>WorksUsers</div>
 }
