@@ -109,7 +109,7 @@ const ResumeForm = () => {
                         }}
                     >
                         <Box>
-                            <Typography>Дата рождения</Typography>
+                            <Typography sx={{color:'white'}}>Дата рождения</Typography>
                         </Box>
                         <Grid
                             sx={{
