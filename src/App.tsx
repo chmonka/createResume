@@ -1,7 +1,7 @@
 import Header from './components/header/Header'
 import MainPage from './pages/MainPage/MainPage'
 // import CreatePortfolioPage from "./pages/CreatePortfolioPage/CreatePortfolioPage";
-import './scss/styles.scss'
+
 import { Route, Routes } from 'react-router-dom'
 
 import CreateResumePage from './pages/CreateResume/CreateResumePage'

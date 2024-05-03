@@ -1,5 +1,12 @@
-
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, ThemeProvider, createTheme } from '@mui/material'
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  ThemeProvider,
+  createTheme,
+} from '@mui/material'
 import { FC } from 'react'
 
 const theme = createTheme({
@@ -8,29 +15,28 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'none'
+            borderColor: 'none',
           },
-          "& .MuiSelect-select": {
+          '& .MuiSelect-select': {
             borderColor: 'white',
-            color: "white",
+            color: 'white',
           },
-          "& .MuiOutlinedInput-root": {
-
-            "& fieldset": {
-              borderColor: "white",
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: 'white',
             },
           },
-          "&:hover": {
-            borderColor: "white",
+          '&:hover': {
+            borderColor: 'white',
           },
           '&:before': {
             borderColor: 'white',
           },
           '&:after': {
             borderColor: 'white',
-          }
-        }
-      }
+          },
+        },
+      },
     },
     MuiSelect: {
       styleOverrides: {
@@ -45,10 +51,10 @@ const theme = createTheme({
             fontSize: 16,
             color: 'white',
             borderColor: 'white',
-            "&.Mui-focused": {
-              "& .MuiSe-notchedOutline": {
-                borderColor: "white",
-                borderWidth: "3px",
+            '&.Mui-focused': {
+              '& .MuiSe-notchedOutline': {
+                borderColor: 'white',
+                borderWidth: '3px',
               },
             },
             '&:focus': {
@@ -57,35 +63,35 @@ const theme = createTheme({
             },
             '&:hover': {
               borderColor: 'white',
-            }
+            },
           },
-        }
+        },
       },
     },
-    MuiInputBase:{
-      styleOverrides:{
-        root:{
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
           '& .MuiInputBase-input': {
             border: 'px solid #FFFFFF',
-            borderColor:'#FFFFFF',
+            borderColor: '#FFFFFF',
             fontSize: 16,
             '&:focus': {
               borderColor: '#FFFFFF',
             },
           },
-        }
-      }
+        },
+      },
     },
 
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: "white",
+          color: 'white',
         },
       },
     },
   },
-});
+})
 
 interface ImyFormControlProps {
   inputLabel?: string
@@ -115,7 +121,6 @@ const MyFormControl: FC<ImyFormControlProps> = ({ inputLabel, handleChange, valu
         </Select>
       </FormControl>
     </ThemeProvider>
-
   )
 }
 

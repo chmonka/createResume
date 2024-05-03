@@ -1,29 +1,46 @@
-import React, { useRef } from 'react';
-import { jsPDF } from 'jspdf';
-// import { html2canvas } from 'html2canvas';
+import html2canvas from 'html2canvas'
+import { jsPDF } from 'jspdf'
+import { useRef } from 'react'
+import { Box, Grid, Typography } from '@mui/material'
 
-const PdfGenerator = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+const MyDocument = () => {
+  const pdfRef = useRef(null);
 
-  const handleGeneratePdf = () => {
-    const element = containerRef.current;
-
-    if (!element) {
-      alert('No container found!');
-      return;
+  const downloadPDF = () => {
+    const input = pdfRef.current;
+    if (input) {
+      html2canvas(input, {
+        width: 1000,
+        height: 1000,
+      }).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF("portrait", "pt", "a4");
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight =  pdf.internal.pageSize.getWidth()
+        pdf.addImage(imgData, "SVG", 0, 0, pdfWidth, pdfHeight);
+        pdf.save("shipping_label.pdf");
+      });
+    } else {
+      console.error('PDF ref is null');
     }
-
-  
   };
 
   return (
-    <div>
-      <div ref={containerRef}>
-        {/* Your container with elements */}
-      </div>
-      <button onClick={handleGeneratePdf}>Generate PDF</button>
-    </div>
+    <Box sx={{ display: 'flex'}}>
+      <Grid  ref={pdfRef}>
+        <Box sx={{ display: 'flex' }}>
+            <Typography>Контакты</Typography>
+
+        </Box>
+      </Grid>
+      <Box>
+        <button onClick={downloadPDF} style={{ fontSize: '10px' }}>Download</button>
+      </Box>
+    </Box>
   );
 };
 
-export default PdfGenerator;
+export default MyDocument;
+
+
+
