@@ -1,5 +1,5 @@
 import { TextField, ThemeProvider, createTheme } from '@mui/material'
-import { FC } from 'react'
+import { ChangeEvent, FC } from 'react'
 
 const theme = createTheme({
     components: {
@@ -43,9 +43,10 @@ interface IMyTextField {
     label: string
     type?: string
     inputProps?: object
+    handleChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 }
 
-const MyTextField: FC<IMyTextField> = ({ label, type, inputProps }) => {
+const MyTextField: FC<IMyTextField> = ({ label, type, inputProps,handleChange }) => {
     return (
         <ThemeProvider theme={theme}>
             <TextField
@@ -53,6 +54,7 @@ const MyTextField: FC<IMyTextField> = ({ label, type, inputProps }) => {
                 label={label}
                 type={type}
                 inputProps={inputProps}
+                onChange={handleChange}
             />
         </ThemeProvider>
     )

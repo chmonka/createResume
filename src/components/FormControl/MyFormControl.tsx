@@ -66,28 +66,16 @@ const theme = createTheme({
       styleOverrides:{
         root:{
           '& .MuiInputBase-input': {
-            // borderRadius: 4,
-            position: 'relative',
-            // backgroundColor: theme.palette.background.paper,
-            border: '2px solid #FFFFFF',
+            border: 'px solid #FFFFFF',
             borderColor:'#FFFFFF',
             fontSize: 16,
-            // padding: '10px 26px 10px 12px',
-            // transition: theme.transitions.create(['border-color', 'box-shadow']),
-            // Use the system font instead of the default Roboto font.
             '&:focus': {
-              // borderRadius: 4,
               borderColor: '#FFFFFF',
-              boxShadow: '0 0 0 0.2rem rgba(255,255,255,0.25)',
             },
           },
         }
       }
     },
-
-    // MuInputBase:{
-    //   
-    // },
 
     MuiInputLabel: {
       styleOverrides: {

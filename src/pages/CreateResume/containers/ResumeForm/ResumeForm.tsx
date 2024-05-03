@@ -1,12 +1,19 @@
-import {Accordion, Box, Grid, SelectChangeEvent, Typography} from '@mui/material'
-import {createTheme, ThemeProvider} from '@mui/material/styles'
+
+
+
+import { Accordion, Box, Grid, SelectChangeEvent, TextField, Typography } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 import CustomContainer from '../../../../components/container/CustomContainer.tsx'
-import {useState} from 'react'
+import { ChangeEvent, useState } from 'react'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import MyTextField from '../../../../components/TextField/MyTextField.tsx'
 import MyFormControl from '../../../../components/FormControl/MyFormControl.tsx'
+import { PDFViewer } from '@react-18-pdf/renderer'
+import { convertToPdf } from 'react-to-pdf-ts'
+import MyDocument from '../../../../components/Document/MyDocument.tsx'
+
 
 const ResumeForm = () => {
     const dayArray: number[] = [
@@ -42,8 +49,17 @@ const ResumeForm = () => {
     const [day, setDay] = useState<string>('')
     const [year, setYear] = useState<string>('')
     const [month, setMonth] = useState<string>('')
-    const [money, setMoney] = useState<string>('')
+    const [currency, setСurrency] = useState<string>('')
+    const [desiredPosition, setDesiredPosition] = useState<string>('')
+    const [name, setName] = useState<string>('')
+    const [middleName, setMiddleName] = useState<string>('')
+    const [lastName, setLastName] = useState<string>('')
+    const [city, setCity] = useState<string>('')
 
+    const [money, setMoney] = useState<number>(0)
+
+
+    //Select
     const handleChangeDay = (event: SelectChangeEvent) => {
         setDay(event.target.value as string)
     }
@@ -56,9 +72,38 @@ const ResumeForm = () => {
         setMonth(event.target.value as string)
     }
 
-    const handleChangeMoney = (event: SelectChangeEvent) => {
-        setMoney(event.target.value as string)
+    const handleСurrency = (event: SelectChangeEvent) => {
+        setСurrency(event.target.value as string)
     }
+
+    //TextField
+    const handleChangeDesiredPosition = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setDesiredPosition(event.target.value as string)
+    }
+
+    const handleName = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setName(event.target.value as string)
+    }
+
+    const handleMiddleName = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setMiddleName(event.target.value as string)
+    }
+
+    const handleLastName = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setLastName(event.target.value as string)
+    }
+
+    const handleCity = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setCity(event.target.value as string)
+    }
+
+    const handleMoney = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        let value = Number(event.target.value)
+        setMoney(value)
+    }
+
+
+
 
     interface Candidate {
         desiredPosition: string
@@ -67,22 +112,29 @@ const ResumeForm = () => {
         middleName: string
         dateOfBirth: string
         city: string
+        money: number
+        currency: string
     }
 
     const newCandidate: Candidate = {
-        desiredPosition: 'Software Engineer',
-        lastName: year,
-        firstName: 'John',
-        middleName: 'A.',
-        dateOfBirth: '1990-01-01',
-        city: 'New York',
+        desiredPosition: desiredPosition,
+        lastName: lastName,
+        firstName: name,
+        middleName: middleName,
+        dateOfBirth: `${year}-${month}-${day}`,
+        city: city,
+        money: money,
+        currency: currency,
     }
 
     console.log(newCandidate)
 
     return (
         <ThemeProvider theme={theme}>
-            <CustomContainer>
+            <CustomContainer
+                display={"flex"}
+                flexDirection={"row"}
+            >
                 <Grid
                     sx={{
                         display: 'flex',
@@ -97,10 +149,10 @@ const ResumeForm = () => {
                             gap: '20px',
                         }}
                     >
-                        <MyTextField label={'Желаемая должность'}/>
-                        <MyTextField label={'Фамилия'}/>
-                        <MyTextField label={'Имя'}/>
-                        <MyTextField label={'Отчество'}/>
+                        <MyTextField label={'Желаемая должность'} handleChange={handleChangeDesiredPosition} />
+                        <MyTextField label={'Фамилия'} handleChange={handleMiddleName} />
+                        <MyTextField label={'Имя'} handleChange={handleName} />
+                        <MyTextField label={'Отчество'} handleChange={handleLastName} />
                     </Grid>
                     <Grid
                         sx={{
@@ -109,7 +161,7 @@ const ResumeForm = () => {
                         }}
                     >
                         <Box>
-                            <Typography sx={{color:'white'}}>Дата рождения</Typography>
+                            <Typography sx={{ color: 'white' }}>Дата рождения</Typography>
                         </Box>
                         <Grid
                             sx={{
@@ -120,7 +172,7 @@ const ResumeForm = () => {
                             }}
                         >
                             <Grid
-                            sx={{display: 'flex', flexDirection: 'row' , gap: '20px'}}>
+                                sx={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
                                 <MyFormControl
                                     inputLabel={'день'}
                                     value={day}
@@ -140,6 +192,11 @@ const ResumeForm = () => {
                                     array={yearArray}
                                 ></MyFormControl>
                             </Grid>
+                            <Grid>
+                                <MyTextField label={'Город'} handleChange={handleCity}>
+
+                                </MyTextField>
+                            </Grid>
                             <Accordion
                                 sx={{
                                     backgroundColor: 'transparent',
@@ -147,7 +204,7 @@ const ResumeForm = () => {
                                     color: 'white',
                                 }}
                             >
-                                <AccordionSummary expandIcon={<ArrowDownwardIcon style={{color: 'white'}}/>}>
+                                <AccordionSummary expandIcon={<ArrowDownwardIcon style={{ color: 'white' }} />}>
                                     Дополнительная информация
                                 </AccordionSummary>
                                 <AccordionDetails>
@@ -161,10 +218,12 @@ const ResumeForm = () => {
                                         <MyTextField
                                             label={'Желаемая зарплата'}
                                             type={'number'}
-                                            inputProps={{min: 0, step: 5000}}/>
+                                            inputProps={{ min: 0, step: 5000 }}
+                                            handleChange={handleMoney}
+                                        />
                                         <MyFormControl
-                                            value={money}
-                                            handleChange={handleChangeMoney}
+                                            value={currency}
+                                            handleChange={handleСurrency}
                                             array={moneyArray}
                                         />
                                         <MyTextField
@@ -175,9 +234,19 @@ const ResumeForm = () => {
                                 </AccordionDetails>
                             </Accordion>
                         </Grid>
-
                     </Grid>
                 </Grid>
+                <Box>
+
+                    <MyDocument></MyDocument>
+                    <Typography color={'white'}>{newCandidate.firstName}</Typography>
+                    <Typography color={'white'}>{newCandidate.middleName}</Typography>
+                    <Typography color={'white'}>{newCandidate.lastName}</Typography>
+                    <Typography color={'white'}>{newCandidate.city}</Typography>
+                    <Typography color={'white'}>{newCandidate.desiredPosition}</Typography>
+                    <Typography color={'white'}>{newCandidate.dateOfBirth}</Typography>
+                    <Typography color={'white'}>{newCandidate.money} {newCandidate.currency}</Typography>
+                </Box>
             </CustomContainer>
         </ThemeProvider>
     )

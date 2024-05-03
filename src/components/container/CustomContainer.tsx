@@ -10,7 +10,6 @@ function CustomContainer({ children, ...rest }: IContainerProps) {
     <Box
       component='div'
       {...rest}
-      flexDirection={'column'}
       sx={{
         margin: '0 auto',
         maxWidth: '1280px',
