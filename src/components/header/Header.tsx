@@ -1,25 +1,23 @@
-import './styles/header.scss'
-import { Link } from 'react-router-dom'
-import CustomContainer from '../container/CustomContainer.tsx'
-import { Box,  Slide, Typography } from '@mui/material'
+import CustomContainer from '../Container/CustomContainer.tsx'
+import { AppBar, Box, Grid, Toolbar, Typography } from '@mui/material'
 
 function Header() {
   return (
-    <Box>
+    <Box sx={{ backgroundColor:'#220135', padding: '0', margin: '0' , boxShadow:'0px -5px 5px -5px rgba(255, 255, 255, 0.6) inset'}}>
       <CustomContainer>
-        <Typography component='h2' variant='h4'>logo</Typography>
-        <Slide>
-          <nav>
-            <ul className="navigation">
-              <li>
-                <Link to="/" className="nav-text">
-                  Главная страница
-                </Link>
-              </li>
-              <li className="nav-text">Вход</li>
-            </ul>
-          </nav>
-        </Slide>
+        <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none', padding:0, margin:0}}>
+          <Toolbar sx={{display:'flex', justifyContent:'space-between', padding:0, margin:0}}>
+            <Typography variant="h6">
+              Logo
+            </Typography>
+            <Grid>
+              <Typography variant="h6" sx={{ color: '#000'}}>
+              </Typography>
+              <Typography variant="h6" sx={{ color: '#000' }}>
+              </Typography>
+            </Grid>
+          </Toolbar>
+        </AppBar>
       </CustomContainer>
     </Box>
   )

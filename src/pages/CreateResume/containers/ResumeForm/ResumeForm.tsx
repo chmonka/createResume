@@ -1,14 +1,16 @@
 import { Accordion, Box, Grid, SelectChangeEvent, Typography } from '@mui/material'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import CustomContainer from '../../../../components/container/CustomContainer.tsx'
+
+import CustomContainer from '../../../../components/Container/CustomContainer.tsx'
 import { ChangeEvent, useState } from 'react'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import MyTextField from '../../../../components/TextField/MyTextField.tsx'
 import MyFormControl from '../../../../components/FormControl/MyFormControl.tsx'
-import MyDocument from '../../../../components/Document/MyDocument.tsx'
+// import MyDocument from '../../../../components/Document/MyDocument.tsx'
 
+import PDFViewer from '@react-18-pdf/renderer'
+import MyDocument from '../../../../components/Document/MyDocument.tsx'
 const ResumeForm = () => {
   const dayArray: number[] = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
@@ -33,13 +35,13 @@ const ResumeForm = () => {
     2016, 2017, 2018, 2019, 2020,
   ]
   const moneyArray: string[] = ['Руб', '$']
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: '#FFFFFF',
-      },
-    },
-  })
+  // const theme = createTheme({
+  //   palette: {
+  //     primary: {
+  //       main: '#FFFFFF',
+  //     },
+  //   },
+  // })
   const [day, setDay] = useState<string>('')
   const [year, setYear] = useState<string>('')
   const [month, setMonth] = useState<string>('')
@@ -122,15 +124,14 @@ const ResumeForm = () => {
   console.log(newCandidate)
 
   return (
-    <ThemeProvider theme={theme}>
-      <CustomContainer display={'flex'} flexDirection={'row'}>
+    <Box sx={{ backgroundColor: '#190028', paddingTop: '40px' }}>
+      <CustomContainer display={'flex'} flexDirection={'row'} >
         <Grid
           sx={{
             display: 'flex',
             flexDirection: 'column',
             gap: '20px',
-          }}
-        >
+          }}>
           <Grid
             sx={{
               display: 'flex',
@@ -230,9 +231,11 @@ const ResumeForm = () => {
             {newCandidate.money} {newCandidate.currency}
           </Typography>
         </Box>
-        <MyDocument></MyDocument>
+        <MyDocument>
+          
+        </MyDocument>
       </CustomContainer>
-    </ThemeProvider>
+    </Box>
   )
 }
 

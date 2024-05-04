@@ -3,7 +3,7 @@ import MainPage from './pages/MainPage/MainPage'
 // import CreatePortfolioPage from "./pages/CreatePortfolioPage/CreatePortfolioPage";
 
 import { Route, Routes } from 'react-router-dom'
-
+import './scss/prinсipal.scss'
 import CreateResumePage from './pages/CreateResume/CreateResumePage'
 function App() {
   return (

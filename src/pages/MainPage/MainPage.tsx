@@ -1,11 +1,9 @@
-import Welcome from './containers/welcome/Welcome'
-import AboutUs from './containers/aboutUs/AboutUs'
+import Welcome from './containers/Welcome/Welcome'
 
 function MainPage() {
   return (
     <>
       <Welcome />
-      <AboutUs />
     </>
   )
 }

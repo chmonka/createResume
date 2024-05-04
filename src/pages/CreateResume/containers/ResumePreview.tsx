@@ -1,4 +1,4 @@
-import CustomContainer from '../../../components/container/CustomContainer'
+import CustomContainer from '../../../components/Container/CustomContainer.tsx'
 import { Grid } from '@mui/material'
 import ResumeForm from './ResumeForm/ResumeForm.tsx'
 

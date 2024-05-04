@@ -1,20 +1,30 @@
-import './styles/welcome.scss'
-import Button from '../../../../components/buttons/Button.js'
+import CustomButton from '../../../../components/Button/CustomButton.js'
 import { Link } from 'react-router-dom'
+import { Box, Grid, Typography } from '@mui/material'
+import CustomContainer from '../../../../components/Container/CustomContainer.js'
 
 function Welcome() {
   return (
-    <section className='welcome'>
-      <div className='container'>
-        <div className='welcome_desc'>
-          <h2 className='title'>Создание вашего портфолио</h2>
-          <p className='text'>Займет всего несколько минут вашего времени</p>
-        </div>
-        <Link to='/createResume'>
-          <Button className='button' innerText={'Сделать портфолио'} />
-        </Link>
-      </div>
-    </section>
+    <Box sx={{ backgroundColor: '#190028' }}>
+      <CustomContainer>
+        <Grid sx={{
+          display:'flex',
+          justifyContent:'center',
+          flexDirection:'column',
+          alignItems:'center',
+          padding:'100px',
+          gap:'40px'
+        }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Typography variant='subtitle2' fontSize={'20px'} color={'#FFFFFF'}>Создание вашего резюме</Typography>
+            <Typography variant='subtitle2' fontSize={'20px'} color={'#FFFFFF'}>Займет всего несколько минут вашего времени</Typography>
+          </Box>
+          <Link to='/createResume'>
+            <CustomButton innerText={'Сделать резюме'} />
+          </Link>
+        </Grid>
+      </CustomContainer>
+    </Box>
   )
 }
 export default Welcome
