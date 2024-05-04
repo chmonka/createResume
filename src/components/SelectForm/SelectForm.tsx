@@ -1,12 +1,4 @@
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  ThemeProvider,
-  createTheme,
-} from '@mui/material'
+import { BaseSelectProps, createTheme, MenuItem, Select, ThemeProvider } from '@mui/material'
 import { FC } from 'react'
 
 const theme = createTheme({
@@ -93,35 +85,24 @@ const theme = createTheme({
   },
 })
 
-interface ImyFormControlProps {
-  inputLabel?: string
-  value: string
-  handleChange: (event: SelectChangeEvent<string>) => void
+type ISelectForm = BaseSelectProps<string> & {
   array: string[] | number[]
 }
 
-const MyFormControl: FC<ImyFormControlProps> = ({ inputLabel, handleChange, value, array }) => {
+const SelectForm: FC<ISelectForm> = ({ array, ...props }) => {
   return (
     <ThemeProvider theme={theme}>
-      <FormControl sx={{ border: 'none', width: '100%' }}>
-        <InputLabel id='demo-simple-select-label'>{inputLabel}</InputLabel>
-        <Select
-          labelId='demo-simple-select-label'
-          id='demo-simple-select'
-          value={value}
-          onChange={handleChange}
-        >
-          {array.map((item, index) => {
-            return (
-              <MenuItem key={index} value={item}>
-                {item}
-              </MenuItem>
-            )
-          })}
-        </Select>
-      </FormControl>
+      <Select {...props}>
+        {array.map((item, index) => {
+          return (
+            <MenuItem key={index} value={item}>
+              {item}
+            </MenuItem>
+          )
+        })}
+      </Select>
     </ThemeProvider>
   )
 }
 
-export default MyFormControl
+export default SelectForm

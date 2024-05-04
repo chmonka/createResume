@@ -7,17 +7,23 @@ function Welcome() {
   return (
     <Box sx={{ backgroundColor: '#190028' }}>
       <CustomContainer>
-        <Grid sx={{
-          display:'flex',
-          justifyContent:'center',
-          flexDirection:'column',
-          alignItems:'center',
-          padding:'100px',
-          gap:'40px'
-        }}>
+        <Grid
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            alignItems: 'center',
+            padding: '100px',
+            gap: '40px',
+          }}
+        >
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Typography variant='subtitle2' fontSize={'20px'} color={'#FFFFFF'}>Создание вашего резюме</Typography>
-            <Typography variant='subtitle2' fontSize={'20px'} color={'#FFFFFF'}>Займет всего несколько минут вашего времени</Typography>
+            <Typography variant='subtitle2' fontSize={'20px'} color={'#FFFFFF'}>
+              Создание вашего резюме
+            </Typography>
+            <Typography variant='subtitle2' fontSize={'20px'} color={'#FFFFFF'}>
+              Займет всего несколько минут вашего времени
+            </Typography>
           </Box>
           <Link to='/createResume'>
             <CustomButton innerText={'Сделать резюме'} />

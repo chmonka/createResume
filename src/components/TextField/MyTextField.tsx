@@ -1,5 +1,5 @@
-import { TextField, ThemeProvider, createTheme } from '@mui/material'
-import { ChangeEvent, FC } from 'react'
+import { TextField, ThemeProvider, createTheme, TextFieldProps } from '@mui/material'
+import { forwardRef } from 'react'
 
 const theme = createTheme({
   components: {
@@ -39,25 +39,14 @@ const theme = createTheme({
   },
 })
 
-interface IMyTextField {
-  label: string
-  type?: string
-  inputProps?: object
-  handleChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-}
+interface IMyTextField extends Omit<TextFieldProps<'outlined'>, 'variant'> {}
 
-const MyTextField: FC<IMyTextField> = ({ label, type, inputProps, handleChange }) => {
+const MyTextField = forwardRef<HTMLInputElement, IMyTextField>((props, ref) => {
   return (
     <ThemeProvider theme={theme}>
-      <TextField
-        sx={{ width: '100%' }}
-        label={label}
-        type={type}
-        inputProps={inputProps}
-        onChange={handleChange}
-      />
+      <TextField inputRef={ref} sx={{ width: '100%' }} {...props} />
     </ThemeProvider>
   )
-}
+})
 
 export default MyTextField
