@@ -12,7 +12,7 @@ function CustomContainer({ children, ...rest }: IContainerProps) {
       {...rest}
       sx={{
         margin: '0 auto',
-        maxWidth: '1280px',
+        maxWidth: '1400px',
         width: '100%',
         padding: '0px',
       }}

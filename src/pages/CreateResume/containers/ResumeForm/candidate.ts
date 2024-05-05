@@ -3,10 +3,14 @@ export interface Candidate {
   lastName: string
   firstName: string
   middleName: string
-  dateOfBirth: string
+  date: string
+  month: string
+  year: string
   city: string
   money: number
   currency: string
+  citizenship: string
+  scheduleArray: string
 }
 
 export const defaultValueForm: Candidate = {
@@ -14,8 +18,12 @@ export const defaultValueForm: Candidate = {
   lastName: '',
   firstName: '',
   middleName: '',
-  dateOfBirth: '',
+  date: '',
+  month: '',
+  year: '',
   city: '',
   money: 0,
   currency: '',
+  citizenship: '',
+  scheduleArray:'',
 }
