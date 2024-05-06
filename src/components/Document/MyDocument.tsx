@@ -50,58 +50,69 @@ const MyDocument = () => {
             overflow: 'hidden',
           }}
         >
-          <Grid
-            ref={pdfRef}
+          <Box
             sx={{
-              width: '210mm',
-              height: '297mm',
-              maxHeight: '297mm',
-              display: 'flex',
+              textAlign: 'left',
+              position: 'relative',
+              margin: 'auto',
+              width: '795px',
             }}
           >
-            <Box
-              sx={{
-                padding: '20px',
-                height: '100%',
-                width: '40%',
-                position: 'relative',
-                backgroundColor: '#023e8a',
-              }}
-            >
-              <Box>
-                <Typography>Желаемая зарплата:</Typography>
-                <Box>
-                  <Typography>{object.money} {object.currency}</Typography>
-                </Box>
-              </Box>
-              <Box>
-                <Typography>Гражданство:</Typography>
-                <Box>
-                  <Typography>{object.citizenship}</Typography>
-                </Box>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                backgroundColor: '#03045e',
-                height: '100%',
-                width: '60%',
-                position: 'relative',
-                padding: '20px',
-              }}
-            >
-              <Box>
-                <Typography
-                  variant="h6">{object.middleName.toUpperCase()} {object.firstName.toUpperCase()} {object.lastName.toUpperCase()}</Typography>
-                <Typography variant="h6">{object.desiredPosition}</Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                  <PlaceIcon sx={{ color: 'rgba(255, 255, 255, 1)' }} />
-                  <Typography>{object.city}</Typography>
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
 
+
+
+            <Grid
+              ref={pdfRef}
+              sx={{
+                width: '210mm',
+                height: '297mm',
+                // maxHeight: '297mm',
+                display: 'flex',
+              }}
+            >
+              <Box
+                sx={{
+                  padding: '20px',
+                  height: '100%',
+                  width: '40%',
+                  position: 'relative',
+                  backgroundColor: '#023e8a',
+                }}
+              >
+                <Box>
+                  <Typography>Желаемая зарплата:</Typography>
+                  <Box>
+                    <Typography>{object.money} {object.currency}</Typography>
+                  </Box>
+                </Box>
+                <Box>
+                  <Typography>Гражданство:</Typography>
+                  <Box>
+                    <Typography>{object.citizenship}</Typography>
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  backgroundColor: '#03045e',
+                  height: '100%',
+                  width: '60%',
+                  position: 'relative',
+                  padding: '20px',
+                }}
+              >
+                <Box>
+                  <Typography
+                    variant="h6">{object.middleName.toUpperCase()} {object.firstName.toUpperCase()} {object.lastName.toUpperCase()}</Typography>
+                  <Typography variant="h6">{object.desiredPosition}</Typography>
+                  <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                    <PlaceIcon sx={{ color: 'rgba(255, 255, 255, 1)' }} />
+                    <Typography>{object.city}</Typography>
+                  </Box>
+                </Box>
+              </Box>
+            </Grid>
+          </Box>
         </Grid>
       </Box>
       <Box>

@@ -8,7 +8,9 @@ type ISelectForm = BaseSelectProps<string> & {
 
 const SelectForm: FC<ISelectForm> = ({ array, ...props }) => {
   return (
-    <Select {...props}
+    <Select
+      variant="outlined"
+      {...props}
       sx={{
         width: '100%',
       }}

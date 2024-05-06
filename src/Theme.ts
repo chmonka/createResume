@@ -1,130 +1,90 @@
 import { createTheme } from '@mui/material'
+import { color } from 'html2canvas/dist/types/css/types/color'
 
 const theme = createTheme({
   components: {
-    MuiTypography:{
+    MuiTypography: {
       styleOverrides: {
         root: {
           color: '#FFFFFF',
-          '& .MuiTypography-root':{
+          '& .MuiTypography-root': {
             color: '#FFFFFF',
           }
         }
       }
     },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          '& .MuiOutlinedInput-root': {
-            color: 'white',
-            fontFamily: 'Arial',
-            fontWeight: 'bold',
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: 'white',
-              borderWidth: '2px',
-            },
-            '&.Mui-focused': {
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'white',
-                borderWidth: '3px',
-              },
-            },
-            '&:hover:not(.Mui-focused)': {
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'white',
-              },
-            },
-          },
-          '& .MuiInputLabel-outlined': {
-            color: 'white',
-            fontWeight: 'bold',
-            '&.Mui-focused': {
-              color: 'white',
-            },
-          },
-        },
-      },
-    },
-    MuiFormControl: {
-      styleOverrides: {
-        root: {
-          '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'none',
-          },
-          '& .MuiSelect-select': {
-            borderColor: 'white',
-            color: 'white',
-          },
-          '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-              borderColor: 'white',
-            },
-          },
-          '&:hover': {
-            borderColor: 'white',
-          },
-          '&:before': {
-            borderColor: 'white',
-          },
-          '&:after': {
-            borderColor: 'white',
-          },
-        },
-      },
-    },
+
     MuiSelect: {
       styleOverrides: {
         root: {
-          '&:before': {
-            borderColor: 'white',
+          "& .MuiSelect-select": {
+            color: "#FFFFFF",
+            borderColor: "#FFFFFF",
           },
-          '&:after': {
-            borderColor: 'white',
+          "& .MuiSelect-root": {
+            color: "#FFFFFF",
+            borderColor: "#FFFFFF",
           },
-          '& .MuiInputBase-input': {
-            fontSize: 16,
-            color: 'white',
-            borderColor: 'white',
-            '&.Mui-focused': {
-              '& .MuiSe-notchedOutline': {
-                borderColor: 'white',
-                borderWidth: '3px',
+
+          "& .MuiSelect-outlined":{
+            color: "#FFFFFF",
+            borderColor: "#FFFFFF",
+          },
+
+          "& .MuiSelect-icon": {
+            color: "#FFFFFF",
+          },
+          "& .MuiSelect-menu": {
+            backgroundColor: "white",
+            color: "black",
+          },
+          "& .MuiMenuItem-root": {
+            backgroundColor: "white",
+            borderColor: '#FFFFFF',
+            color: "#FFFFFF",
+
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-root": {
+            color: "#FFFFFF",
+            fontFamily: "Arial",
+            fontWeight: "bold",
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#FFFFFF",
+              color: "#FFFFFF",
+              borderWidth: "2px",
+            },
+            "&.Mui-focused": {
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: "#FFFFFF",
+                color: "#FFFFFF",
+                borderWidth: "3px",
               },
             },
-            '&:focus': {
-              borderRadius: 4,
-              borderColor: '2px solid white',
+            "&:hover:not(.Mui-focused)": {
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: "#FFFFFF",
+                color: "#FFFFFF",
+              },
             },
-            '&:hover': {
-              borderColor: 'white',
+          },
+          "& .MuiInputLabel-outlined": {
+            color: "#FFFFFF",
+            fontWeight: "bold",
+            "&.Mui-focused": {
+              color: "#FFFFFF",
+              fontWeight: "bold",
             },
           },
         },
-      },
-    },
-    MuiInputBase: {
-      styleOverrides: {
-        root: {
-          '& .MuiInputBase-input': {
-            border: 'px solid #FFFFFF',
-            borderColor: '#FFFFFF',
-            fontSize: 16,
-            '&:focus': {
-              borderColor: '#FFFFFF',
-            },
-          },
-        },
-      },
-    },
-
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          color: 'white',
-        },
-      },
-    },
-  },
+      }
+    }
+  }
 })
 
 

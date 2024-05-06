@@ -11,6 +11,8 @@ export interface Candidate {
   currency: string
   citizenship: string
   scheduleArray: string
+  phoneNumber: string
+  email: string
 }
 
 export const defaultValueForm: Candidate = {
@@ -26,4 +28,6 @@ export const defaultValueForm: Candidate = {
   currency: '',
   citizenship: '',
   scheduleArray:'',
+  email:'',
+  phoneNumber:''
 }
