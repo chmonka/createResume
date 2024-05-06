@@ -5,7 +5,7 @@ import CustomContainer from '../../../../components/Container/CustomContainer.js
 
 function Welcome() {
   return (
-    <Box sx={{ backgroundColor: '#190028' }}>
+    <Box>
       <CustomContainer>
         <Grid
           sx={{
@@ -18,10 +18,10 @@ function Welcome() {
           }}
         >
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Typography variant='subtitle2' fontSize={'20px'} color={'#FFFFFF'}>
+            <Typography variant='subtitle2' fontSize={'20px'}>
               Создание вашего резюме
             </Typography>
-            <Typography variant='subtitle2' fontSize={'20px'} color={'#FFFFFF'}>
+            <Typography variant='subtitle2' fontSize={'20px'}>
               Займет всего несколько минут вашего времени
             </Typography>
           </Box>

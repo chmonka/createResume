@@ -3,7 +3,6 @@ import { jsPDF } from 'jspdf'
 import { useRef } from 'react'
 import { Box, Grid, Typography } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
-import PlaceIcon from '@mui/icons-material/Place'
 
 const MyDocument = () => {
   const { watch } = useFormContext()
@@ -22,7 +21,7 @@ const MyDocument = () => {
         const pdf = new jsPDF('portrait', 'pt', 'a4')
         // const pdfWidth = pdf.internal.pageSize.getWidth()
         // const pdfHeight = pdf.internal.pageSize.getWidth()
-        pdf.addImage(imgData, 'SVG', 0, 0, 600, 845)
+        pdf.addImage(imgData, 'SVG', 0, 0, 600, 50)
         pdf.save('shipping_label.pdf')
       })
     } else {
@@ -31,8 +30,56 @@ const MyDocument = () => {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <Box
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+      width: '100%',
+      border: '1px solid black',
+      alignItems: 'center',
+      minWidth: '795px',
+      minHeight: '900px',
+      maxWidth: '795px',
+      maxHeight: '1000px',
+      justifyContent: 'center',
+      borderRadius: '4px',
+    }}>
+      <Grid
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
+          height: '100%',
+          minWidth: '595px',
+          minHeight: '800px',
+          maxWidth: '595px',
+          maxHeight: '800px',
+          border: '1px solid black',
+          borderRadius: '4px',
+        }}>
+        <Grid
+          ref={pdfRef}
+          sx={{
+            display: 'flex',
+          }}>
+          <Box
+            sx={{backgroundColor: '#023e8a',
+              minHeight: '800px',
+              maxHeight: '800px', width: '100%'}}>
+            <Typography>Желаемая зарплата:</Typography>
+            <Box>
+              <Typography>{object.money} {object.currency}</Typography>
+            </Box>
+
+          </Box>
+        </Grid>
+
+      </Grid>
+      <button onClick={downloadPDF} style={{ fontSize: '10px' }}>
+        Download
+      </button>
+
+      {/*  <Box
         sx={{}}
       >
         <Grid
@@ -48,19 +95,14 @@ const MyDocument = () => {
             borderRadius: '4px',
             boxShadow: '0 0 32px white',
             overflow: 'hidden',
-          }}
-        >
+          }}>
           <Box
             sx={{
               textAlign: 'left',
               position: 'relative',
               margin: 'auto',
               width: '795px',
-            }}
-          >
-
-
-
+            }}>
             <Grid
               ref={pdfRef}
               sx={{
@@ -68,8 +110,7 @@ const MyDocument = () => {
                 height: '297mm',
                 // maxHeight: '297mm',
                 display: 'flex',
-              }}
-            >
+              }}>
               <Box
                 sx={{
                   padding: '20px',
@@ -77,8 +118,7 @@ const MyDocument = () => {
                   width: '40%',
                   position: 'relative',
                   backgroundColor: '#023e8a',
-                }}
-              >
+                }}>
                 <Box>
                   <Typography>Желаемая зарплата:</Typography>
                   <Box>
@@ -116,10 +156,8 @@ const MyDocument = () => {
         </Grid>
       </Box>
       <Box>
-        <button onClick={downloadPDF} style={{ fontSize: '10px' }}>
-          Download
-        </button>
-      </Box>
+
+      </Box>*/}
     </Box>
   )
 }

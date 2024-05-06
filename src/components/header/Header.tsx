@@ -5,10 +5,10 @@ function Header() {
   return (
     <Box
       sx={{
-        backgroundColor: '#220135',
         padding: '0',
         margin: '0',
         boxShadow: '0px -5px 5px -5px rgba(255, 255, 255, 0.6) inset',
+        backgroundColor: '#1e88e5'
       }}
     >
       <CustomContainer>
@@ -17,10 +17,10 @@ function Header() {
           sx={{ backgroundColor: 'transparent', boxShadow: 'none', padding: 0, margin: 0 }}
         >
           <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', padding: 0, margin: 0 }}>
-            <Typography variant='h6'>Logo</Typography>
+            <Typography variant='h6' sx={{color: 'white'}}>Logo</Typography>
             <Grid>
-              <Typography variant='h6' sx={{ color: '#000' }}></Typography>
-              <Typography variant='h6' sx={{ color: '#000' }}></Typography>
+              <Typography variant='h6'></Typography>
+              <Typography variant='h6'></Typography>
             </Grid>
           </Toolbar>
         </AppBar>
