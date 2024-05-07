@@ -3,6 +3,7 @@ import { jsPDF } from 'jspdf'
 import { useRef } from 'react'
 import { Box, Grid, Typography } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
+import PlaceIcon from '@mui/icons-material/Place'
 
 const MyDocument = () => {
   const { watch } = useFormContext()
@@ -19,8 +20,6 @@ const MyDocument = () => {
       html2canvas(input).then(canvas => {
         const imgData = canvas.toDataURL('image/png')
         const pdf = new jsPDF('portrait', 'pt', 'a4')
-        // const pdfWidth = pdf.internal.pageSize.getWidth()
-        // const pdfHeight = pdf.internal.pageSize.getWidth()
         pdf.addImage(imgData, 'SVG', 0, 0, 600, 900)
         pdf.save('shipping_label.pdf')
       })
@@ -33,41 +32,71 @@ const MyDocument = () => {
     <Box sx={{
       display: 'flex',
       maxWidth: '100%',
+      flexDirection: 'column',
       width: '800px',
       height: '1000px',
       maxHeight: '100%',
-      border: '1px solid black'
+      border: '1px solid black',
+      justifyContent: 'center',
+      alignItems: 'center',
     }}>
       <Box sx={{
         display: 'flex',
         flexDirection: 'row',
-        width:'700px'
-      
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '700px',
+        height: '900px',
+        border:'1px solid black'
       }}>
-        <Box sx={{
-          display: 'flex',
-          width: '210mm',
-          height: '297mm',
-        }}>
+        <Box
+          ref={pdfRef}
+          sx={{
+            display: 'flex',
+            width: '100%',
+            height: '100%',
+          }}>
           <Box
             sx={{
-              height: '800px',
               width: '40%',
-              background: '#023e8a'   
+              background: '#023e8a',
+              padding: '10px',
             }}>
-            <Typography>{object.money} {object.currency}</Typography>
+            <Box>
+              <Typography sx={{color:'white'}}>Желаемая зарплата:</Typography>
+              <Box>
+                <Typography  sx={{color:'white'}}>{object.money} {object.currency}</Typography>
+              </Box>
+            </Box>
+            <Box>
+              <Typography sx={{color:'white'}}>Гражданство:</Typography>
+              <Box>
+                <Typography>{object.citizenship}</Typography>
+              </Box>
+            </Box>
           </Box>
           <Box
             sx={{
-              height: '800px',
-              width: '100%',
-              background: 'red'
-            }}
-          >
-            <Typography>{object.money} {object.currency}</Typography>
+              width: '60%',
+              padding: '10px',
+            }}>
+            <Box>
+            <Typography
+              variant="h6">{object.middleName.toUpperCase()} {object.firstName.toUpperCase()} {object.lastName.toUpperCase()}</Typography>
+            <Typography variant="h6">{object.desiredPosition}</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+              <PlaceIcon />
+              <Typography>{object.city}</Typography>
+            </Box>
+          </Box>
           </Box>
         </Box>
+
+
       </Box>
+      <button onClick={downloadPDF} style={{ fontSize: '10px' }}>
+        Download
+      </button>
     </Box>
 
 
@@ -153,18 +182,7 @@ const MyDocument = () => {
                     position: 'relative',
                     backgroundColor: '#023e8a',
                   }}>
-                  <Box>
-                    <Typography>Желаемая зарплата:</Typography>
-                    <Box>
-                      <Typography>{object.money} {object.currency}</Typography>
-                    </Box>
-                  </Box>
-                  <Box>
-                    <Typography>Гражданство:</Typography>
-                    <Box>
-                      <Typography>{object.citizenship}</Typography>
-                    </Box>
-                  </Box>
+
                 </Box>
                 <Box
                   sx={{
@@ -175,15 +193,7 @@ const MyDocument = () => {
                     padding: '20px',
                   }}
                 >
-                  <Box>
-                    <Typography
-                      variant="h6">{object.middleName.toUpperCase()} {object.firstName.toUpperCase()} {object.lastName.toUpperCase()}</Typography>
-                    <Typography variant="h6">{object.desiredPosition}</Typography>
-                    <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                      <PlaceIcon sx={{ color: 'rgba(255, 255, 255, 1)' }} />
-                      <Typography>{object.city}</Typography>
-                    </Box>
-                  </Box>
+
                 </Box>
               </Grid>
             </Box>
