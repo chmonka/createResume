@@ -13,6 +13,10 @@ export interface Candidate {
   scheduleArray: string
   phoneNumber: string
   email: string
+  interesting: string
+  schedule:string
+  socialIcon: string
+  link:string
 }
 
 export const defaultValueForm: Candidate = {
@@ -29,5 +33,9 @@ export const defaultValueForm: Candidate = {
   citizenship: '',
   scheduleArray:'',
   email:'',
-  phoneNumber:''
+  phoneNumber:'',
+  interesting:'',
+  schedule:'',
+  socialIcon:'',
+  link:''
 }

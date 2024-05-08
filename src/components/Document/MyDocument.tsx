@@ -47,7 +47,7 @@ const MyDocument = () => {
         justifyContent: 'center',
         width: '700px',
         height: '900px',
-        border:'1px solid black'
+        border: '1px solid black'
       }}>
         <Box
           ref={pdfRef}
@@ -60,18 +60,36 @@ const MyDocument = () => {
             sx={{
               width: '40%',
               background: '#023e8a',
-              padding: '10px',
             }}>
-            <Box>
-              <Typography sx={{color:'white'}}>Желаемая зарплата:</Typography>
+            <Box
+              sx={{
+                paddingLeft:'10px'
+              }}
+            >
+              <Typography sx={{ color: '023e8a',
+                backgroundColor:'white',
+              
+               }}>Контакты:</Typography>
               <Box>
-                <Typography  sx={{color:'white'}}>{object.money} {object.currency}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.citizenship}</Typography>
               </Box>
             </Box>
             <Box>
-              <Typography sx={{color:'white'}}>Гражданство:</Typography>
+              <Typography sx={{ color: 'white' }}>Гражданство:</Typography>
               <Box>
-                <Typography>{object.citizenship}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.citizenship}</Typography>
+              </Box>
+            </Box>
+            <Box>
+              <Typography sx={{ color: 'white' }}>Желаемая зарплата:</Typography>
+              <Box>
+                <Typography sx={{ color: 'white' }}>{object.money} {object.currency}</Typography>
+              </Box>
+            </Box>
+            <Box>
+              <Typography sx={{ color: 'white' }}>Занятность:</Typography>
+              <Box>
+                <Typography sx={{ color: 'white' }}>{object.interesting} {object.schedule}</Typography>
               </Box>
             </Box>
           </Box>
@@ -81,14 +99,14 @@ const MyDocument = () => {
               padding: '10px',
             }}>
             <Box>
-            <Typography
-              variant="h6">{object.middleName.toUpperCase()} {object.firstName.toUpperCase()} {object.lastName.toUpperCase()}</Typography>
-            <Typography variant="h6">{object.desiredPosition}</Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-              <PlaceIcon />
-              <Typography>{object.city}</Typography>
+              <Typography
+                variant="h6">{object.middleName.toUpperCase()} {object.firstName.toUpperCase()} {object.lastName.toUpperCase()}</Typography>
+              <Typography variant="h6">{object.desiredPosition}</Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                <PlaceIcon />
+                <Typography>{object.city}</Typography>
+              </Box>
             </Box>
-          </Box>
           </Box>
         </Box>
 

@@ -33,17 +33,40 @@ const ResumeForm = () => {
   ]
   const interestingArray: string[] = ['', 'Полная занятность', 'Частичная занятность', 'Проектная работа', 'Волонтёрство', 'Стажировка']
   const scheduleArray: string[] = ['', 'Полный день', 'Сменный график', 'Гибкий график', 'Удалённая работа', 'Вахтовый метод']
-
+  const socialArray: string[] = [' ','vk', 'telegram','instagram']
   const [accardion, setAccardion] = useState<Array<JSX.Element>>([])
 
 
   const addAccardion = () => {
     setAccardion([...accardion,
-      <Accordion>
-        <AccordionSummary expandIcon={<ArrowDownwardIcon style={{ color: 'white' }} />}>
-          <Typography variant={'h6'}>Контакты</Typography>
-        </AccordionSummary>
-      </Accordion>,
+    <Accordion>
+      <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
+        <Typography variant={'h6'}>Контакты</Typography>
+      </AccordionSummary>
+      <AccordionDetails
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+        }}>
+        <Box
+          sx={{
+            display:'flex',
+            gap:'20px'
+          }}
+        >
+          <SelectForm
+             label={'Социальная сеть'}
+            array={socialArray}
+            {...register('socialIcon')}>
+          </SelectForm>
+          <MyTextField label={'Ссылка на профиль'} {...register('link')} />
+
+        </Box>
+
+
+      </AccordionDetails>
+    </Accordion>,
     ])
   }
 
@@ -82,11 +105,11 @@ const ResumeForm = () => {
                 <SelectForm
                   label={'День'}
                   {...register('date')}
-                  array={dayArray}/>
+                  array={dayArray} />
                 <SelectForm
                   label={'месяц'}
                   {...register('month')}
-                  array={monthArray}/>
+                  array={monthArray} />
                 <SelectForm
                   label={'День'}
                   {...register('year')}
@@ -97,7 +120,7 @@ const ResumeForm = () => {
               </Grid>
               <Accordion>
                 <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-                  <Typography variant={'h6'}>Контакты</Typography>
+                  <Typography variant={'h6'}>Дополнительная информация</Typography>
                 </AccordionSummary>
                 <AccordionDetails
                   sx={{
@@ -131,10 +154,14 @@ const ResumeForm = () => {
                     }}>
                     <SelectForm
                       label={'Занятность'}
-                      array={interestingArray}/>
+                      array={interestingArray}
+                      {...register('interesting')}
+                    />
                     <SelectForm
                       label={'График работы'}
-                      array={scheduleArray}/>
+                      array={scheduleArray}
+                      {...register('schedule')}
+                    />
                   </Grid>
                 </AccordionDetails>
               </Accordion>
@@ -171,7 +198,7 @@ const ResumeForm = () => {
                       />
                       <MyTextField
                         label={'Номер телефона'}
-                        {...register('phoneNumber')}/>
+                        {...register('phoneNumber')} />
                     </Box>
                     <Box
                       sx={{
@@ -181,7 +208,7 @@ const ResumeForm = () => {
                       }}>
                       {accardion}
                     </Box>
-                    <CustomButton innerText="Добавить социальную сеть" onClick={addAccardion}/>
+                    <CustomButton innerText="Добавить социальную сеть" onClick={addAccardion} />
                   </Box>
                 </Box>
                 <Box
@@ -200,7 +227,7 @@ const ResumeForm = () => {
                       gap: '20px',
                     }}>
                     </Box>
-                    <CustomButton innerText="Добавить Опыт работы"/>
+                    <CustomButton innerText="Добавить Опыт работы" />
                   </Box>
                 </Box>
                 <Box
