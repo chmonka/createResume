@@ -3,7 +3,7 @@ export interface Candidate {
   lastName: string
   firstName: string
   middleName: string
-  date: string
+  day: string
   month: string
   year: string
   city: string
@@ -24,7 +24,7 @@ export const defaultValueForm: Candidate = {
   lastName: '',
   firstName: '',
   middleName: '',
-  date: '',
+  day: '',
   month: '',
   year: '',
   city: '',

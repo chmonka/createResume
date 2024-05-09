@@ -6,14 +6,14 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import MyTextField from '../../../../components/TextField/MyTextField.tsx'
 import MyDocument from '../../../../components/Document/MyDocument.tsx'
 import { Candidate, defaultValueForm } from './candidate.ts'
-import { FormProvider, useForm } from 'react-hook-form'
+import { Controller, FormProvider, useForm } from 'react-hook-form'
 import SelectForm from '../../../../components/SelectForm/SelectForm.tsx'
 import CustomButton from '../../../../components/Button/CustomButton.tsx'
 import { useState } from 'react'
 
 const ResumeForm = () => {
   const methods = useForm<Candidate>({ defaultValues: defaultValueForm, mode: 'onChange' })
-  const { register } = methods
+  const { register, control } = methods
   const moneyArray: string[] = ['Руб', '$']
   const dayArray: number[] = Array.from({ length: 31 }, (_, index) => index + 1)
   const yearArray: number[] = Array.from({ length: 21 }, (_, index) => 2000 + index)
@@ -33,8 +33,11 @@ const ResumeForm = () => {
   ]
   const interestingArray: string[] = ['', 'Полная занятность', 'Частичная занятность', 'Проектная работа', 'Волонтёрство', 'Стажировка']
   const scheduleArray: string[] = ['', 'Полный день', 'Сменный график', 'Гибкий график', 'Удалённая работа', 'Вахтовый метод']
-  const socialArray: string[] = [' ','vk', 'telegram','instagram']
+  const socialArray: string[] = [' ', 'vk', 'telegram', 'instagram']
   const [accardion, setAccardion] = useState<Array<JSX.Element>>([])
+  const [accardionWork, setAccardionWorker] = useState<Array<JSX.Element>>([])
+
+  const [accardionEducation, setAccardionEducation] = useState<Array<JSX.Element>>([])
 
 
   const addAccardion = () => {
@@ -51,22 +54,128 @@ const ResumeForm = () => {
         }}>
         <Box
           sx={{
-            display:'flex',
-            gap:'20px'
-          }}
-        >
+            display: 'flex',
+            gap: '20px'
+          }}>
           <SelectForm
-             label={'Социальная сеть'}
+            label={'Социальная сеть'}
             array={socialArray}
             {...register('socialIcon')}>
           </SelectForm>
           <MyTextField label={'Ссылка на профиль'} {...register('link')} />
-
         </Box>
-
-
       </AccordionDetails>
     </Accordion>,
+    ])
+  }
+
+  const addAccardionWorker = () => {
+    setAccardionWorker([...accardionWork,
+    <Accordion
+      sx={{
+        width: '100%'
+      }}
+    >
+      <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
+        <Typography variant={'h6'}>
+          Опыт работы
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+        }}>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '20px'
+          }}>
+          <MyTextField label={'Должность'} {...register('link')} />
+          <MyTextField label={'Компания'} {...register('link')} />
+        </Box>
+        <Box>
+          <Typography>Начало работы</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              gap: '20px'
+            }}
+          >
+            <MyTextField label={'Месяц'} {...register('link')} />
+            <MyTextField label={'Год'} {...register('link')} />
+          </Box>
+        </Box>
+        <Box>
+          <Typography>Окончание работы</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              gap: '20px'
+            }}
+          >
+            <MyTextField label={'Месяц'} {...register('link')} />
+            <MyTextField label={'Год'} {...register('link')} />
+          </Box>
+        </Box>
+      </AccordionDetails>
+    </Accordion>,
+    ])
+  }
+
+  const addAccardionEducation = () => {
+    setAccardionEducation([...accardionEducation,
+    <Accordion
+      sx={{
+        width: '100%'
+      }}
+    >
+      <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
+        <Typography variant={'h6'}>Образование</Typography>
+      </AccordionSummary>
+      <AccordionDetails
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+        }}>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '20px'
+          }}>
+          <MyTextField label={'Учебное заведение'} {...register('link')} />
+          <MyTextField label={'Уровень образования'} {...register('link')} />
+        </Box>
+        <Box>
+          <Typography>Начало работы</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              gap: '20px'
+            }}>
+            <Controller
+              control={control}
+              name="lastName"
+              render={({ field: { onChange } }) => (<MyTextField label={'Факультет'} onChange={onChange} />)}>
+            </Controller>
+
+            <MyTextField label={'Специальность'} {...register('link')} />
+          </Box>
+        </Box>
+        <Box>
+          <Typography>Окончание работы</Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              gap: '20px'
+            }}>
+            <MyTextField label={'Год окончания'} {...register('link')} />
+          </Box>
+        </Box>
+      </AccordionDetails>
+    </Accordion >,
     ])
   }
 
@@ -90,7 +199,13 @@ const ResumeForm = () => {
                 borderRadius: '20px',
                 gap: '20px',
               }}>
-              <MyTextField label={'Желаемая должность'} {...register('desiredPosition')} />
+
+              <Controller
+                control={control}
+                name="desiredPosition"
+                render={({ field: { onChange } }) => (<MyTextField label={'Желаемая должность'} onChange={onChange}/>)}>
+              </Controller>
+             
               <MyTextField label={'Фамилия'} {...register('middleName')} />
               <MyTextField label={'Имя'} {...register('firstName')} />
               <MyTextField label={'Отчество'} {...register('lastName')} />
@@ -104,7 +219,7 @@ const ResumeForm = () => {
               }}>
                 <SelectForm
                   label={'День'}
-                  {...register('date')}
+                  {...register('day')}
                   array={dayArray} />
                 <SelectForm
                   label={'месяц'}
@@ -224,10 +339,12 @@ const ResumeForm = () => {
                     sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                     <Box sx={{
                       display: 'flex',
+                      flexDirection: 'column',
                       gap: '20px',
                     }}>
+                      {accardionWork}
                     </Box>
-                    <CustomButton innerText="Добавить Опыт работы" />
+                    <CustomButton onClick={addAccardionWorker} innerText="Добавить Опыт работы" />
                   </Box>
                 </Box>
                 <Box
@@ -245,9 +362,11 @@ const ResumeForm = () => {
                     <Box sx={{
                       display: 'flex',
                       gap: '20px',
+                      flexDirection: 'column'
                     }}>
+                      {accardionEducation}
                     </Box>
-                    <CustomButton innerText="Добавить образование"></CustomButton>
+                    <CustomButton onClick={addAccardionEducation} innerText="Добавить образование"></CustomButton>
                   </Box>
                 </Box>
                 <Box
