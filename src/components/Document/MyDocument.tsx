@@ -1,6 +1,6 @@
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Box, Typography } from '@mui/material'
 import { useFormContext } from 'react-hook-form'
 import PlaceIcon from '@mui/icons-material/Place'
@@ -9,10 +9,6 @@ const MyDocument = () => {
   const { watch } = useFormContext()
   const object = watch()
   const date = new Date().getFullYear()
-
-  console.log(date)
-
-
   const pdfRef = useRef(null)
   const downloadPDF = () => {
     const input = pdfRef.current
@@ -20,13 +16,15 @@ const MyDocument = () => {
       html2canvas(input).then(canvas => {
         const imgData = canvas.toDataURL('image/png')
         const pdf = new jsPDF('portrait', 'pt', 'a4')
-        pdf.addImage(imgData, 'SVG', 0, 0, 600, 900)
+        pdf.addImage(imgData, 'SVG', 0, 0, 600, 850)
         pdf.save('shipping_label.pdf')
       })
     } else {
       console.error('PDF ref is null')
     }
   }
+
+
 
   return (
     <Box sx={{
@@ -55,19 +53,29 @@ const MyDocument = () => {
             display: 'flex',
             width: '100%',
             height: '100%',
-
           }}>
           <Box
             sx={{
               width: '40%',
               background: '#023e8a',
-              paddingTop: '10px',
+              padding: '10px'
             }}>
-            <Box
-              sx={{
-                paddingLeft: '10px',
-
-              }}>
+            <Box>
+              <Box>
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Box sx={{ width: '150px', height: '150px', backgroundColor: 'white', borderRadius: '20px' }}></Box>
+                </Box>
+                <Typography sx={{ color: 'white' }} variant="h6">{object.middleName.toUpperCase()} {object.firstName.toUpperCase()} {object.lastName.toUpperCase()}</Typography>
+                <Box>
+                  <Typography sx={{ color: 'white' }} variant="h6">Должность: {object.desiredPosition}</Typography>
+                  <Typography sx={{ color: 'white' }} variant="h6">Возраст: {date - object.year}</Typography>
+                  <Typography sx={{ color: 'white' }} variant="h6">Зароботная плата: {object.money} {object.currency}</Typography>
+                </Box>
+                <Box>
+                  <PlaceIcon sx={{color:'white'}}/>
+                  <Typography>{object.city}</Typography>
+                </Box>
+              </Box>
               <Typography
                 sx={{
                   backgroundColor: '#0567e3',
@@ -76,46 +84,52 @@ const MyDocument = () => {
                 }}>Контакты:</Typography>
               <Box>
                 <Typography sx={{ color: 'white' }}>{object.email} {object.phoneNumber}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.desiredPosition}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.city}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.citizenship}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.scheduleArray}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.phoneNumber}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.email}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.interesting}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.schedule}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.socialIcon}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.link}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.monthStartWorking}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.yearStartWorking}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.monthEndWorking}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.yearEndWorking}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.postJob}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.nameCompany}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.yearEndEducation}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.faculty}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.speciality}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.institution}</Typography>
+                <Typography sx={{ color: 'white' }}>{object.levelEducation}</Typography>
               </Box>
             </Box>
-            <Box
-              sx={{
-                padding: '10px',
-              }}>
+            <Box>
               <Typography sx={{ color: 'white' }}>Гражданство:</Typography>
               <Box>
                 <Typography sx={{ color: 'white' }}>{object.citizenship}</Typography>
               </Box>
             </Box>
-            <Box sx={{
-              padding: '10px',
-            }}>
+            <Box>
               <Typography sx={{ color: 'white' }}>Желаемая зарплата:</Typography>
               <Box>
                 <Typography sx={{ color: 'white' }}>{object.money} {object.currency}</Typography>
               </Box>
             </Box>
-            <Box sx={{
-              padding: '10px',
-            }}>
+            <Box>
               <Typography sx={{ color: 'white' }}>Занятность:</Typography>
               <Box>
                 <Typography sx={{ color: 'white' }}>{object.interesting} {object.schedule}</Typography>
               </Box>
             </Box>
           </Box>
-          <Box
-            sx={{
-              width: '60%',
-              padding: '10px',
-            }}>
+          <Box>
             <Box>
-              <Typography
-                variant="h6">{object.middleName.toUpperCase()} {object.firstName.toUpperCase()} {object.lastName.toUpperCase()}</Typography>
-              <Typography variant="h6">{object.desiredPosition}</Typography>
               <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                <PlaceIcon />
-                <Typography>{object.city}</Typography>
+
               </Box>
             </Box>
           </Box>

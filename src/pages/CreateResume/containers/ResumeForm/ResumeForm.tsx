@@ -6,7 +6,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import MyTextField from '../../../../components/TextField/MyTextField.tsx'
 import MyDocument from '../../../../components/Document/MyDocument.tsx'
 import { Candidate, defaultValueForm } from './candidate.ts'
-import { Controller, FormProvider, useForm } from 'react-hook-form'
+import { Controller, FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import SelectForm from '../../../../components/SelectForm/SelectForm.tsx'
 import CustomButton from '../../../../components/Button/CustomButton.tsx'
 import { useState } from 'react'
@@ -14,33 +14,25 @@ import { useState } from 'react'
 const ResumeForm = () => {
   const methods = useForm<Candidate>({ defaultValues: defaultValueForm, mode: 'onChange' })
   const { register, control } = methods
+
+  const { fields, append, remove } = useFieldArray<Candidate>({
+    control,
+    name: "socialIcon"
+  });
+
+
   const moneyArray: string[] = ['Руб', '$']
   const dayArray: number[] = Array.from({ length: 31 }, (_, index) => index + 1)
   const yearArray: number[] = Array.from({ length: 21 }, (_, index) => 2000 + index)
-  const monthArray: string[] = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
+  const monthArray: number[] = Array.from({ length: 12 }, (_, index) => index + 1)
   const interestingArray: string[] = ['', 'Полная занятность', 'Частичная занятность', 'Проектная работа', 'Волонтёрство', 'Стажировка']
   const scheduleArray: string[] = ['', 'Полный день', 'Сменный график', 'Гибкий график', 'Удалённая работа', 'Вахтовый метод']
   const socialArray: string[] = [' ', 'vk', 'telegram', 'instagram']
   const [accardion, setAccardion] = useState<Array<JSX.Element>>([])
   const [accardionWork, setAccardionWorker] = useState<Array<JSX.Element>>([])
-
   const [accardionEducation, setAccardionEducation] = useState<Array<JSX.Element>>([])
 
-
-  const addAccardion = () => {
+  const addAccardionSocial = () => {
     setAccardion([...accardion,
     <Accordion>
       <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
@@ -57,12 +49,14 @@ const ResumeForm = () => {
             display: 'flex',
             gap: '20px'
           }}>
-          <SelectForm
-            label={'Социальная сеть'}
-            array={socialArray}
-            {...register('socialIcon')}>
-          </SelectForm>
-          <MyTextField label={'Ссылка на профиль'} {...register('link')} />
+          <Controller
+            control={control}
+            name="socialIcon"
+            render={({ field: {onChange} }) => (<SelectForm label={'Социальная сеть'} onChange={onChange} array={socialArray} />)} />
+          <Controller
+            control={control}
+            name="link"
+            render={({ field: { onChange } }) => (<MyTextField label={'Ссылка'} onChange={onChange} />)} />
         </Box>
       </AccordionDetails>
     </Accordion>,
@@ -92,8 +86,14 @@ const ResumeForm = () => {
             display: 'flex',
             gap: '20px'
           }}>
-          <MyTextField label={'Должность'} {...register('link')} />
-          <MyTextField label={'Компания'} {...register('link')} />
+          <Controller
+            control={control}
+            name="postJob"
+            render={({ field: { onChange } }) => (<MyTextField label={'Должность'} onChange={onChange} />)} />
+          <Controller
+            control={control}
+            name="nameCompany"
+            render={({ field: { onChange } }) => (<MyTextField label={'Компания'} onChange={onChange} />)} />
         </Box>
         <Box>
           <Typography>Начало работы</Typography>
@@ -101,10 +101,15 @@ const ResumeForm = () => {
             sx={{
               display: 'flex',
               gap: '20px'
-            }}
-          >
-            <MyTextField label={'Месяц'} {...register('link')} />
-            <MyTextField label={'Год'} {...register('link')} />
+            }}>
+            <Controller
+              control={control}
+              name="monthStartWorking"
+              render={({ field: { onChange } }) => (<MyTextField label={'Месяц'} onChange={onChange} />)} />
+            <Controller
+              control={control}
+              name="yearStartWorking"
+              render={({ field: { onChange } }) => (<MyTextField label={'Год'} onChange={onChange} />)} />
           </Box>
         </Box>
         <Box>
@@ -115,8 +120,14 @@ const ResumeForm = () => {
               gap: '20px'
             }}
           >
-            <MyTextField label={'Месяц'} {...register('link')} />
-            <MyTextField label={'Год'} {...register('link')} />
+            <Controller
+              control={control}
+              name="monthEndWorking"
+              render={({ field: { onChange } }) => (<MyTextField label={'Месяц'} onChange={onChange} />)} />
+            <Controller
+              control={control}
+              name="yearEndWorking"
+              render={({ field: { onChange } }) => (<MyTextField label={'Год'} onChange={onChange} />)} />
           </Box>
         </Box>
       </AccordionDetails>
@@ -145,11 +156,17 @@ const ResumeForm = () => {
             display: 'flex',
             gap: '20px'
           }}>
-          <MyTextField label={'Учебное заведение'} {...register('link')} />
-          <MyTextField label={'Уровень образования'} {...register('link')} />
+          <Controller
+            control={control}
+            name="institution"
+            render={({ field: { onChange } }) => (<MyTextField label={'Учебное заведение'} onChange={onChange} />)} />
+          <Controller
+            control={control}
+            name="levelEducation"
+            render={({ field: { onChange } }) => (<MyTextField label={'Уровень образования'} onChange={onChange} />)} />
         </Box>
         <Box>
-          <Typography>Начало работы</Typography>
+          <Typography>Начало учёбы</Typography>
           <Box
             sx={{
               display: 'flex',
@@ -157,25 +174,29 @@ const ResumeForm = () => {
             }}>
             <Controller
               control={control}
-              name="lastName"
-              render={({ field: { onChange } }) => (<MyTextField label={'Факультет'} onChange={onChange} />)}>
-            </Controller>
-
-            <MyTextField label={'Специальность'} {...register('link')} />
+              name="faculty"
+              render={({ field: { onChange } }) => (<MyTextField label={'Факультет'} onChange={onChange} />)} />
+            <Controller
+              control={control}
+              name="speciality"
+              render={({ field: { onChange } }) => (<MyTextField label={'Специальность'} onChange={onChange} />)} />
           </Box>
         </Box>
         <Box>
-          <Typography>Окончание работы</Typography>
+          <Typography>Окончание учёбы</Typography>
           <Box
             sx={{
               display: 'flex',
               gap: '20px'
             }}>
-            <MyTextField label={'Год окончания'} {...register('link')} />
+            <Controller
+              control={control}
+              name="yearEndEducation"
+              render={({ field: { onChange } }) => (<MyTextField label={'Год окончания'} onChange={onChange} />)} />
           </Box>
         </Box>
       </AccordionDetails>
-    </Accordion >,
+    </Accordion >
     ])
   }
 
@@ -199,16 +220,22 @@ const ResumeForm = () => {
                 borderRadius: '20px',
                 gap: '20px',
               }}>
-
               <Controller
                 control={control}
                 name="desiredPosition"
-                render={({ field: { onChange } }) => (<MyTextField label={'Желаемая должность'} onChange={onChange}/>)}>
-              </Controller>
-             
-              <MyTextField label={'Фамилия'} {...register('middleName')} />
-              <MyTextField label={'Имя'} {...register('firstName')} />
-              <MyTextField label={'Отчество'} {...register('lastName')} />
+                render={({ field: { onChange } }) => (<MyTextField label={'Желаемая должность'} onChange={onChange} />)} />
+              <Controller
+                control={control}
+                name="middleName"
+                render={({ field: { onChange } }) => (<MyTextField label={'Фамилия'} onChange={onChange} />)} />
+              <Controller
+                control={control}
+                name="firstName"
+                render={({ field: { onChange } }) => (<MyTextField label={'Имя'} onChange={onChange} />)} />
+              <Controller
+                control={control}
+                name="lastName"
+                render={({ field: { onChange } }) => (<MyTextField label={'Отчество'} onChange={onChange} />)} />
               <Box>
                 <Typography variant={'h6'}>Дата рождения</Typography>
               </Box>
@@ -217,18 +244,18 @@ const ResumeForm = () => {
                 flexDirection: 'row',
                 gap: '20px',
               }}>
-                <SelectForm
-                  label={'День'}
-                  {...register('day')}
-                  array={dayArray} />
-                <SelectForm
-                  label={'месяц'}
-                  {...register('month')}
-                  array={monthArray} />
-                <SelectForm
-                  label={'День'}
-                  {...register('year')}
-                  array={yearArray} />
+                <Controller
+                  control={control}
+                  name="day"
+                  render={({ field: { onChange, value } }) => (<SelectForm label={'День'} onChange={onChange} value={value} array={dayArray || ''} />)} />
+                <Controller
+                  control={control}
+                  name="month"
+                  render={({ field: { onChange, value } }) => (<SelectForm label={'Месяц'} onChange={onChange} value={value} array={monthArray || ''} />)} />
+                <Controller
+                  control={control}
+                  name="year"
+                  render={({ field: { onChange, value } }) => (<SelectForm label={'Год'} onChange={onChange} value={value} array={yearArray || ''} />)} />
               </Grid>
               <Grid>
                 <MyTextField label={'Город'} {...register('city')}></MyTextField>
@@ -249,16 +276,19 @@ const ResumeForm = () => {
                       flexDirection: 'row',
                       gap: '20px',
                     }}>
-                    <MyTextField
-                      label={'Желаемая зарплата'}
-                      type={'number'}
-                      inputProps={{ min: 0, step: 5000 }}
-                      {...register('money')} />
-                    <SelectForm
-                      label={'День'}
-                      {...register('currency')}
-                      array={moneyArray} />
-                    <MyTextField label={'Гражданство'} type={'string'}  {...register('citizenship')} />
+
+                    <Controller
+                      control={control}
+                      name="money"
+                      render={({ field: { onChange } }) => (<MyTextField label={'Желаемая зарплата'} type={'number'} inputProps={{ min: 0, step: 5000 }} onChange={onChange} />)} />
+                    <Controller
+                      control={control}
+                      name="currency"
+                      render={({ field: { onChange, value } }) => (<SelectForm label={'День'} value={value} onChange={onChange} array={moneyArray} />)} />
+                    <Controller
+                      control={control}
+                      name="citizenship"
+                      render={({ field: { onChange } }) => (<MyTextField label={'Гражданство'} type={'string'} onChange={onChange} />)} />
                   </Grid>
                   <Grid
                     sx={{
@@ -267,16 +297,14 @@ const ResumeForm = () => {
                       justifyContent: 'space-between',
                       gap: '20px',
                     }}>
-                    <SelectForm
-                      label={'Занятность'}
-                      array={interestingArray}
-                      {...register('interesting')}
-                    />
-                    <SelectForm
-                      label={'График работы'}
-                      array={scheduleArray}
-                      {...register('schedule')}
-                    />
+                    <Controller
+                      control={control}
+                      name='interesting'
+                      render={({ field: { onChange, value } }) => (<SelectForm label={'Занятность'} onChange={onChange} value={value} array={interestingArray} />)} />
+                    <Controller
+                      control={control}
+                      name='schedule'
+                      render={({ field: { onChange, value } }) => (<SelectForm label={'График работы'} onChange={onChange} value={value} array={scheduleArray} />)} />
                   </Grid>
                 </AccordionDetails>
               </Accordion>
@@ -323,7 +351,7 @@ const ResumeForm = () => {
                       }}>
                       {accardion}
                     </Box>
-                    <CustomButton innerText="Добавить социальную сеть" onClick={addAccardion} />
+                    <CustomButton innerText="Добавить социальную сеть" onClick={addAccardionSocial} />
                   </Box>
                 </Box>
                 <Box
