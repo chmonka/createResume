@@ -92,7 +92,7 @@ const MyDocument = () => {
                 <Typography sx={{ color: 'white' }}>{object.email}</Typography>
                 <Typography sx={{ color: 'white' }}>{object.interesting}</Typography>
                 <Typography sx={{ color: 'white' }}>{object.schedule}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.socialIcon}</Typography>
+                {/* <Typography sx={{ color: 'white' }}>{object.socialIcon}</Typography> */}
                 <Typography sx={{ color: 'white' }}>{object.link}</Typography>
                 <Typography sx={{ color: 'white' }}>{object.monthStartWorking}</Typography>
                 <Typography sx={{ color: 'white' }}>{object.yearStartWorking}</Typography>

@@ -13,13 +13,15 @@ import { useState } from 'react'
 
 const ResumeForm = () => {
   const methods = useForm<Candidate>({ defaultValues: defaultValueForm, mode: 'onChange' })
-  const { register, control } = methods
+  const { register, control, setValue, watch } = methods
 
   const { fields, append, remove } = useFieldArray<Candidate>({
-    control,
-    name: "socialIcon"
+    name: "socials",
+    control: control
   });
+  console.log(fields)
 
+  const social = watch('socials')
 
   const moneyArray: string[] = ['Руб', '$']
   const dayArray: number[] = Array.from({ length: 31 }, (_, index) => index + 1)
@@ -32,36 +34,35 @@ const ResumeForm = () => {
   const [accardionWork, setAccardionWorker] = useState<Array<JSX.Element>>([])
   const [accardionEducation, setAccardionEducation] = useState<Array<JSX.Element>>([])
 
-  const addAccardionSocial = () => {
-    setAccardion([...accardion,
-    <Accordion>
-      <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-        <Typography variant={'h6'}>Контакты</Typography>
-      </AccordionSummary>
-      <AccordionDetails
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '20px',
-        }}>
-        <Box
+  const socialsElement =
+    fields.map((field, index) => (
+      <Accordion>
+        <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
+          <Typography variant={'h6'}>Контакты</Typography>
+        </AccordionSummary>
+        <AccordionDetails
           sx={{
             display: 'flex',
-            gap: '20px'
+            flexDirection: 'column',
+            gap: '20px',
           }}>
-          <Controller
-            control={control}
-            name="socialIcon"
-            render={({ field: {onChange} }) => (<SelectForm label={'Социальная сеть'} onChange={onChange} array={socialArray} />)} />
-          <Controller
-            control={control}
-            name="link"
-            render={({ field: { onChange } }) => (<MyTextField label={'Ссылка'} onChange={onChange} />)} />
-        </Box>
-      </AccordionDetails>
-    </Accordion>,
-    ])
-  }
+          <Box
+            sx={{
+              display: 'flex',
+              gap: '20px'
+            }}>
+            <SelectForm value={social[index].icon} label={'Социальная сеть'} onChange={(e) => {
+              setValue(`socials.${index}.icon`, e.target.value)
+            }} array={socialArray} />
+            <MyTextField label={'Ссылка'} onChange={(e) => {
+              setValue(`socials.${index}.link`, e.target.value)
+            }} />
+          </Box>
+        </AccordionDetails>
+      </Accordion>
+    ))
+  
+
 
   const addAccardionWorker = () => {
     setAccardionWorker([...accardionWork,
@@ -90,6 +91,7 @@ const ResumeForm = () => {
             control={control}
             name="postJob"
             render={({ field: { onChange } }) => (<MyTextField label={'Должность'} onChange={onChange} />)} />
+
           <Controller
             control={control}
             name="nameCompany"
@@ -134,7 +136,7 @@ const ResumeForm = () => {
     </Accordion>,
     ])
   }
-
+  console.log(fields)
   const addAccardionEducation = () => {
     setAccardionEducation([...accardionEducation,
     <Accordion
@@ -160,6 +162,9 @@ const ResumeForm = () => {
             control={control}
             name="institution"
             render={({ field: { onChange } }) => (<MyTextField label={'Учебное заведение'} onChange={onChange} />)} />
+
+
+
           <Controller
             control={control}
             name="levelEducation"
@@ -349,9 +354,9 @@ const ResumeForm = () => {
                         flexDirection: 'column',
                         gap: '20px',
                       }}>
-                      {accardion}
+                      {socialsElement}
                     </Box>
-                    <CustomButton innerText="Добавить социальную сеть" onClick={addAccardionSocial} />
+                    <CustomButton innerText="Добавить социальную сеть" onClick={()=>{append({icon:'',link:'',value:''})}} />
                   </Box>
                 </Box>
                 <Box

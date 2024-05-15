@@ -15,7 +15,12 @@ export interface Candidate {
   email: string
   interesting: string
   schedule:string
-  socialIcon: string[]
+  socialIcon: { value: string }[];
+
+  socials: {
+    icon:string
+    link:string
+  }[]
   link:string[]
   monthStartWorking:string
   yearStartWorking:string
@@ -47,7 +52,7 @@ export const defaultValueForm: Candidate = {
   phoneNumber:'',
   interesting:'',
   schedule:'',
-  socialIcon:[],
+  socialIcon:[{value:''}],
   link:[],
   yearStartWorking:'',
   yearEndWorking:'',
@@ -59,5 +64,6 @@ export const defaultValueForm: Candidate = {
   faculty:'',
   speciality:'',
   institution:'',
-  levelEducation:''
+  levelEducation:'',
+  socials:[]
 }
