@@ -14,25 +14,29 @@ export interface Candidate {
   phoneNumber: string
   email: string
   interesting: string
-  schedule:string
-  socialIcon: { value: string }[];
-
+  schedule: string
   socials: {
-    icon:string
-    link:string
+    icon: string
+    link: string
   }[]
-  link:string[]
-  monthStartWorking:string
-  yearStartWorking:string
-  monthEndWorking:string
-  yearEndWorking:string
-  postJob: string
-  nameCompany: string
-  yearEndEducation:string
-  faculty: string
-  speciality:string
-  institution:string
-  levelEducation: string
+  jobs: {
+    postJob: string
+    nameCompany: string
+    monthStart: string,
+    yearStart: string
+    monthEnd: string,
+    yearEnd: string
+  }[]
+  education: {
+    institution: string
+    levelEducation: string
+    faculty: string
+    speciality: string
+    yearEndEducation: string
+  }[]
+  trainingСourses:{
+
+  }[]
 }
 
 export const defaultValueForm: Candidate = {
@@ -47,23 +51,13 @@ export const defaultValueForm: Candidate = {
   money: 0,
   currency: '',
   citizenship: '',
-  scheduleArray:'',
-  email:'',
-  phoneNumber:'',
-  interesting:'',
-  schedule:'',
-  socialIcon:[{value:''}],
-  link:[],
-  yearStartWorking:'',
-  yearEndWorking:'',
-  monthStartWorking:'',
-  monthEndWorking:'',
-  nameCompany:'',
-  postJob:'',
-  yearEndEducation:'',
-  faculty:'',
-  speciality:'',
-  institution:'',
-  levelEducation:'',
-  socials:[]
+  scheduleArray: '',
+  email: '',
+  phoneNumber: '',
+  interesting: '',
+  schedule: '',
+  socials: [],
+  jobs: [],
+  education:[],
+  trainingСourses:[]
 }

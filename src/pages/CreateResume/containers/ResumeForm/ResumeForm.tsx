@@ -15,14 +15,26 @@ const ResumeForm = () => {
   const methods = useForm<Candidate>({ defaultValues: defaultValueForm, mode: 'onChange' })
   const { register, control, setValue, watch } = methods
 
-  const { fields, append, remove } = useFieldArray<Candidate>({
-    name: "socials",
-    control: control
+  const { fields: socials, append: appendSocial, remove: removeSocial } = useFieldArray<Candidate>({
+    name: 'socials',
+    control: control,
   });
-  console.log(fields)
+
+  const { fields: jobs, append: appendJob, remove: removeJob } = useFieldArray<Candidate>({
+    name: 'jobs',
+    control: control,
+  });
+
+  const { fields: education, append: appendEducation, remove: removeEducation } = useFieldArray<Candidate>({
+    name: 'education',
+    control: control,
+  });
+
+
 
   const social = watch('socials')
-
+  const jobsValue = watch('jobs')
+  const educationArray = watch('education')
   const moneyArray: string[] = ['Руб', '$']
   const dayArray: number[] = Array.from({ length: 31 }, (_, index) => index + 1)
   const yearArray: number[] = Array.from({ length: 21 }, (_, index) => 2000 + index)
@@ -35,8 +47,10 @@ const ResumeForm = () => {
   const [accardionEducation, setAccardionEducation] = useState<Array<JSX.Element>>([])
 
   const socialsElement =
-    fields.map((field, index) => (
-      <Accordion>
+    socials.map((field, index) => (
+      <Accordion
+        key={index}
+      >
         <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
           <Typography variant={'h6'}>Контакты</Typography>
         </AccordionSummary>
@@ -61,150 +75,128 @@ const ResumeForm = () => {
         </AccordionDetails>
       </Accordion>
     ))
-  
-
-
-  const addAccardionWorker = () => {
-    setAccardionWorker([...accardionWork,
-    <Accordion
-      sx={{
-        width: '100%'
-      }}
-    >
-      <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-        <Typography variant={'h6'}>
-          Опыт работы
-        </Typography>
-      </AccordionSummary>
-      <AccordionDetails
+  const jobsWorkerElement =
+    jobs.map((field, index) => (
+      <Accordion
+        key={index}
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '20px',
+          width: '100%'
         }}>
-        <Box
+        <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
+          <Typography variant={'h6'}>
+            Опыт работы
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails
           sx={{
             display: 'flex',
-            gap: '20px'
+            flexDirection: 'column',
+            gap: '20px',
           }}>
-          <Controller
-            control={control}
-            name="postJob"
-            render={({ field: { onChange } }) => (<MyTextField label={'Должность'} onChange={onChange} />)} />
-
-          <Controller
-            control={control}
-            name="nameCompany"
-            render={({ field: { onChange } }) => (<MyTextField label={'Компания'} onChange={onChange} />)} />
-        </Box>
-        <Box>
-          <Typography>Начало работы</Typography>
           <Box
             sx={{
               display: 'flex',
               gap: '20px'
             }}>
-            <Controller
-              control={control}
-              name="monthStartWorking"
-              render={({ field: { onChange } }) => (<MyTextField label={'Месяц'} onChange={onChange} />)} />
-            <Controller
-              control={control}
-              name="yearStartWorking"
-              render={({ field: { onChange } }) => (<MyTextField label={'Год'} onChange={onChange} />)} />
+            <MyTextField label={'Должность'} onChange={(e) => {
+              setValue(`jobs.${index}.postJob`, e.target.value)
+            }} />
+            <MyTextField label={'Компания'} onChange={(e) => {
+              setValue(`jobs.${index}.nameCompany`, e.target.value)
+            }} />
           </Box>
-        </Box>
-        <Box>
-          <Typography>Окончание работы</Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              gap: '20px'
-            }}
-          >
-            <Controller
-              control={control}
-              name="monthEndWorking"
-              render={({ field: { onChange } }) => (<MyTextField label={'Месяц'} onChange={onChange} />)} />
-            <Controller
-              control={control}
-              name="yearEndWorking"
-              render={({ field: { onChange } }) => (<MyTextField label={'Год'} onChange={onChange} />)} />
+          <Box>
+            <Typography>Начало работы</Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                gap: '20px'
+              }}>
+              <SelectForm array={monthArray} label={'Месяц'} onChange={(e) => {
+                setValue(`jobs.${index}.monthStart`, e.target.value)
+              }} />
+              <SelectForm array={yearArray} label={'Год'} onChange={(e) => {
+                setValue(`jobs.${index}.yearStart`, e.target.value)
+              }} />
+            </Box>
           </Box>
-        </Box>
-      </AccordionDetails>
-    </Accordion>,
-    ])
-  }
-  console.log(fields)
-  const addAccardionEducation = () => {
-    setAccardionEducation([...accardionEducation,
-    <Accordion
-      sx={{
-        width: '100%'
-      }}
-    >
-      <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-        <Typography variant={'h6'}>Образование</Typography>
-      </AccordionSummary>
-      <AccordionDetails
+          <Box>
+            <Typography>Окончание работы</Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                gap: '20px'
+              }}>
+              <SelectForm array={monthArray} label={'Месяц'} onChange={(e) => {
+                setValue(`jobs.${index}.monthEnd`, e.target.value)
+              }} />
+              <SelectForm array={yearArray} label={'Год'} onChange={(e) => {
+                setValue(`jobs.${index}.yearEnd`, e.target.value)
+              }} />
+            </Box>
+          </Box>
+        </AccordionDetails>
+      </Accordion>
+    ))
+
+  const educationElement =
+    education.map((field, index) => (
+      <Accordion
+        key={index}
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '20px',
+          width: '100%'
         }}>
-        <Box
+        <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
+          <Typography variant={'h6'}>Образование</Typography>
+        </AccordionSummary>
+        <AccordionDetails
           sx={{
             display: 'flex',
-            gap: '20px'
+            flexDirection: 'column',
+            gap: '20px',
           }}>
-          <Controller
-            control={control}
-            name="institution"
-            render={({ field: { onChange } }) => (<MyTextField label={'Учебное заведение'} onChange={onChange} />)} />
-
-
-
-          <Controller
-            control={control}
-            name="levelEducation"
-            render={({ field: { onChange } }) => (<MyTextField label={'Уровень образования'} onChange={onChange} />)} />
-        </Box>
-        <Box>
-          <Typography>Начало учёбы</Typography>
           <Box
             sx={{
               display: 'flex',
               gap: '20px'
             }}>
-            <Controller
-              control={control}
-              name="faculty"
-              render={({ field: { onChange } }) => (<MyTextField label={'Факультет'} onChange={onChange} />)} />
-            <Controller
-              control={control}
-              name="speciality"
-              render={({ field: { onChange } }) => (<MyTextField label={'Специальность'} onChange={onChange} />)} />
+            <MyTextField label={'Учебное заведение'} onChange={(e) => {
+              setValue(`education.${index}.institution`, e.target.value)
+            }} />
+            <MyTextField label={'Уровень образования'} onChange={(e) => {
+              setValue(`education.${index}.levelEducation`, e.target.value)
+            }} />
           </Box>
-        </Box>
-        <Box>
-          <Typography>Окончание учёбы</Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              gap: '20px'
-            }}>
-            <Controller
-              control={control}
-              name="yearEndEducation"
-              render={({ field: { onChange } }) => (<MyTextField label={'Год окончания'} onChange={onChange} />)} />
+          <Box>
+            <Typography>Начало учёбы</Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                gap: '20px'
+              }}>
+              <MyTextField label={'Факультет'}   onChange={(e) => {
+                setValue(`education.${index}.faculty`, e.target.value)
+              }} />
+              <MyTextField label={'Специальность'} onChange={(e) => {
+                setValue(`education.${index}.speciality`, e.target.value)
+              }} />
+            </Box>
           </Box>
-        </Box>
-      </AccordionDetails>
-    </Accordion >
-    ])
-  }
-
+          <Box>
+            <Typography>Окончание учёбы</Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                gap: '20px'
+              }}>
+              <SelectForm value={''} array={dayArray || ''} label={'Год окончания'} onChange={(e) => {
+                setValue(`education.${index}.yearEndEducation`, e.target.value)
+              }} />
+            </Box>
+          </Box>
+        </AccordionDetails>
+      </Accordion >
+    ))
 
   return (
     <Box sx={{ paddingTop: '40px' }}>
@@ -281,7 +273,6 @@ const ResumeForm = () => {
                       flexDirection: 'row',
                       gap: '20px',
                     }}>
-
                     <Controller
                       control={control}
                       name="money"
@@ -356,7 +347,7 @@ const ResumeForm = () => {
                       }}>
                       {socialsElement}
                     </Box>
-                    <CustomButton innerText="Добавить социальную сеть" onClick={()=>{append({icon:'',link:'',value:''})}} />
+                    <CustomButton innerText="Добавить социальную сеть" onClick={() => { appendSocial({ icon: '', link: '' }) }} />
                   </Box>
                 </Box>
                 <Box
@@ -375,9 +366,18 @@ const ResumeForm = () => {
                       flexDirection: 'column',
                       gap: '20px',
                     }}>
-                      {accardionWork}
+                      {jobsWorkerElement}
                     </Box>
-                    <CustomButton onClick={addAccardionWorker} innerText="Добавить Опыт работы" />
+                    <CustomButton innerText="Добавить Опыт работы" onClick={() => {
+                      appendJob({
+                        postJob: '',
+                        nameCompany: '',
+                        monthStart: '',
+                        yearStart: '',
+                        monthEnd: '',
+                        yearEnd: ''
+                      })
+                    }} />
                   </Box>
                 </Box>
                 <Box
@@ -397,9 +397,15 @@ const ResumeForm = () => {
                       gap: '20px',
                       flexDirection: 'column'
                     }}>
-                      {accardionEducation}
+                      {educationElement}
                     </Box>
-                    <CustomButton onClick={addAccardionEducation} innerText="Добавить образование"></CustomButton>
+                    <CustomButton innerText="Добавить образование" onClick={() => appendEducation({
+                      institution: '',
+                      levelEducation: '',
+                      faculty: '',
+                      speciality: '',
+                      yearEndEducation: ''
+                    })}></CustomButton>
                   </Box>
                 </Box>
                 <Box
@@ -418,6 +424,9 @@ const ResumeForm = () => {
                       display: 'flex',
                       gap: '20px',
                     }}>
+                      <SelectForm array={yearArray} label={'Год окончания'} ></SelectForm>
+                      <MyTextField label={'Название'}></MyTextField>
+                      <MyTextField label={'Название организации'}></MyTextField>
                     </Box>
                     <CustomButton innerText="Добавить Курс"></CustomButton>
                   </Box>

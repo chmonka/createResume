@@ -8,6 +8,8 @@ import PlaceIcon from '@mui/icons-material/Place'
 const MyDocument = () => {
   const { watch } = useFormContext()
   const object = watch()
+  console.log(object)
+
   const date = new Date().getFullYear()
   const pdfRef = useRef(null)
   const downloadPDF = () => {
@@ -24,7 +26,7 @@ const MyDocument = () => {
     }
   }
 
-
+  console.log(object.socials)
 
   return (
     <Box sx={{
@@ -72,7 +74,7 @@ const MyDocument = () => {
                   <Typography sx={{ color: 'white' }} variant="h6">Зароботная плата: {object.money} {object.currency}</Typography>
                 </Box>
                 <Box>
-                  <PlaceIcon sx={{color:'white'}}/>
+                  <PlaceIcon sx={{ color: 'white' }} />
                   <Typography>{object.city}</Typography>
                 </Box>
               </Box>
@@ -82,30 +84,11 @@ const MyDocument = () => {
                   padding: '10px',
                   color: '#FFFFFF',
                 }}>Контакты:</Typography>
-              <Box>
-                <Typography sx={{ color: 'white' }}>{object.email} {object.phoneNumber}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.desiredPosition}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.city}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.citizenship}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.scheduleArray}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.phoneNumber}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.email}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.interesting}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.schedule}</Typography>
-                {/* <Typography sx={{ color: 'white' }}>{object.socialIcon}</Typography> */}
-                <Typography sx={{ color: 'white' }}>{object.link}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.monthStartWorking}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.yearStartWorking}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.monthEndWorking}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.yearEndWorking}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.postJob}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.nameCompany}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.yearEndEducation}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.faculty}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.speciality}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.institution}</Typography>
-                <Typography sx={{ color: 'white' }}>{object.levelEducation}</Typography>
-              </Box>
+              {object.socials.map((item: { icon: string, link: string }, index: number) => {
+                return (<Box display={"flex"} flexDirection={"row"} gap={"20px"}>
+                  <Typography color={'white'}>{item.icon}</Typography>
+                  <Typography color={'white'}>{item.link}</Typography>
+                </Box>)})}
             </Box>
             <Box>
               <Typography sx={{ color: 'white' }}>Гражданство:</Typography>
