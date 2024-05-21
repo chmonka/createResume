@@ -8,8 +8,7 @@ import PlaceIcon from '@mui/icons-material/Place'
 const MyDocument = () => {
   const { watch } = useFormContext()
   const object = watch()
-  console.log(object)
-
+  
   const date = new Date().getFullYear()
   const pdfRef = useRef(null)
   const downloadPDF = () => {
@@ -26,7 +25,7 @@ const MyDocument = () => {
     }
   }
 
-  console.log(object.socials)
+  console.log(object)
 
   return (
     <Box sx={{
@@ -88,7 +87,8 @@ const MyDocument = () => {
                 return (<Box display={"flex"} flexDirection={"row"} gap={"20px"}>
                   <Typography color={'white'}>{item.icon}</Typography>
                   <Typography color={'white'}>{item.link}</Typography>
-                </Box>)})}
+                </Box>)
+              })}
             </Box>
             <Box>
               <Typography sx={{ color: 'white' }}>Гражданство:</Typography>
@@ -111,8 +111,32 @@ const MyDocument = () => {
           </Box>
           <Box>
             <Box>
-              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-
+              <Box sx={{ display: 'flex', flexDirection: 'column', padding: "20px",gap:"20px"}}>
+                <Box>
+                  <Typography variant='h6' sx={{border:'1px solid #0567e3', padding:'10px'}}>Опыт работы</Typography>
+                  <Box>
+                    <Typography>1 сентября 2022 - 2 сентября 2024  </Typography>
+                    <Typography>Организация: ММТР</Typography>
+                    <Typography>Должность: IT Директор</Typography>
+                  </Box>
+                </Box>
+                <Box>
+                  <Typography variant='h6' sx={{border:'1px solid #0567e3', padding:'10px'}}>Образование</Typography>
+                  <Box>
+                    <Typography>Год окончания: 2024</Typography>
+                    <Typography>Высшее: Костромской политехнический техникум</Typography>
+                    <Typography>Факультет: Информационные технологии</Typography>
+                    <Typography>Специальность: Менеджмент в IT</Typography>
+                  </Box>
+                </Box>
+                <Box>
+                  <Typography variant='h6' sx={{border:'1px solid #0567e3', padding:'10px'}}>Курсы</Typography>
+                  <Box>
+                    <Typography>Год окончания: 2024</Typography>
+                    <Typography>Название:Менеджер web проектов</Typography>
+                    <Typography>Организация: Учебный центр</Typography>
+                  </Box>
+                </Box>
               </Box>
             </Box>
           </Box>

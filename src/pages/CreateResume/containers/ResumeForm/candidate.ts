@@ -34,8 +34,15 @@ export interface Candidate {
     speciality: string
     yearEndEducation: string
   }[]
-  trainingСourses:{
+  trainingCourses: {
+    yearEnd: string
+    nameCompany: string
+    nameCourse: string
+  }[]
 
+  languages:{
+    nameLanguage:string
+    levelLanguage:string
   }[]
 }
 
@@ -58,6 +65,7 @@ export const defaultValueForm: Candidate = {
   schedule: '',
   socials: [],
   jobs: [],
-  education:[],
-  trainingСourses:[]
+  education: [],
+  trainingCourses: [],
+  languages:[]
 }
