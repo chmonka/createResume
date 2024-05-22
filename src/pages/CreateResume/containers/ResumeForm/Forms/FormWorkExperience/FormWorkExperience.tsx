@@ -12,7 +12,7 @@ function FormWorkExperience() {
     const { control, setValue } = methods
     const yearArray: number[] = Array.from({ length: 21 }, (_, index) => 2000 + index)
     const monthArray: number[] = Array.from({ length: 12 }, (_, index) => index + 1)
-    const { fields: jobs, append: appendJob} = useFieldArray<Candidate>({
+    const { fields: jobs, append: appendJob } = useFieldArray<Candidate>({
         name: 'jobs',
         control: control,
     });
@@ -26,7 +26,7 @@ function FormWorkExperience() {
                 }}>
                 <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
                     <Typography variant={'h6'}>
-                        Опыт работы
+
                     </Typography>
                 </AccordionSummary>
                 <AccordionDetails
@@ -54,10 +54,10 @@ function FormWorkExperience() {
                                 display: 'flex',
                                 gap: '20px'
                             }}>
-                            <SelectForm array={monthArray} label={'Месяц'} onChange={(e) => {
+                            <SelectForm array={monthArray || ['']} label={'Месяц'} onChange={(e) => {
                                 setValue(`jobs.${index}.monthStart`, e.target.value)
                             }} />
-                            <SelectForm array={yearArray} label={'Год'} onChange={(e) => {
+                            <SelectForm array={yearArray || ['']} label={'Год'} onChange={(e) => {
                                 setValue(`jobs.${index}.yearStart`, e.target.value)
                             }} />
                         </Box>
@@ -69,10 +69,10 @@ function FormWorkExperience() {
                                 display: 'flex',
                                 gap: '20px'
                             }}>
-                            <SelectForm array={monthArray} label={'Месяц'} onChange={(e) => {
+                            <SelectForm array={monthArray || ['']} label={'Месяц'} onChange={(e) => {
                                 setValue(`jobs.${index}.monthEnd`, e.target.value)
                             }} />
-                            <SelectForm array={yearArray} label={'Год'} onChange={(e) => {
+                            <SelectForm array={yearArray || ['']} label={'Год'} onChange={(e) => {
                                 setValue(`jobs.${index}.yearEnd`, e.target.value)
                             }} />
                         </Box>

@@ -7,6 +7,7 @@ import FormMainInFormation from './Forms/FormMainInformation/FormMainInFormation
 import FormContacts from './Forms/FormContacts/FormContacts.tsx'
 import FormWorkExperience from './Forms/FormWorkExperience/FormWorkExperience.tsx'
 import FormEducations from './Forms/FormEducations/FormEducations.tsx'
+import FormLanguages from './Forms/FormLanguages/FormLanguages.tsx'
 
 const ResumeForm = () => {
   const methods = useForm<Candidate>({ defaultValues: defaultValueForm, mode: 'onChange' })
@@ -37,11 +38,11 @@ const ResumeForm = () => {
                 <FormContacts />
                 <FormWorkExperience/>
                 <FormEducations/>
-                <FormEducations/>
+                <FormLanguages/>
               </Grid>
             </Grid>
           </Grid>
-          <MyDocument></MyDocument>
+          <MyDocument/>
         </CustomContainer>
       </FormProvider>
     </Box>

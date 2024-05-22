@@ -1,8 +1,46 @@
-import { Box, Typography } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "@mui/material"
 import CustomButton from "../../../../../../components/Button/CustomButton"
+import { useFieldArray, useFormContext } from "react-hook-form";
+import { Candidate } from "../../candidate";
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
+import MyTextField from "../../../../../../components/TextField/MyTextField";
+import SelectForm from "../../../../../../components/SelectForm/SelectForm";
+
 
 
 function FormLanguages() {
+
+    const methods = useFormContext<Candidate>()
+    const { control, setValue } = methods
+    const { fields: languages, append: appendLanguages, remove: removeLanguages } = useFieldArray<Candidate>({
+        name: 'languages',
+        control: control,
+    });
+    console.log(languages)
+    const arrayLevelLanguages = ['A1-начальный', 'A2—элементарный', 'B1—пороговый', 'B2—промежуточный', 'C1—продвинутый', 'C2—совершенный']
+
+    const languagesElement = languages.map((field, index) => (
+
+        <Accordion key={index}>
+            <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
+                <Typography variant={'h6'}>
+                    
+                </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+                <Box>
+                    <MyTextField label={'Язык'} onChange={(e) => {
+                        setValue(`languages.${index}.nameLanguage`, e.target.value)
+                    }} />
+                    <SelectForm array={arrayLevelLanguages || ['']} label={'Уровень'} onChange={(e) => {
+                        setValue(`languages.${index}.levelLanguage`, e.target.value)
+                    }} />
+                </Box>
+            </AccordionDetails>
+        </Accordion>
+    ))
+
+
     return (
         <Box
             sx={{
@@ -21,7 +59,13 @@ function FormLanguages() {
                     flexDirection: 'column'
                 }}>
                 </Box>
-                <CustomButton innerText="Добавить язык" onClick={() => {console.log(1)}}/>
+                {languagesElement}
+                <CustomButton innerText="Добавить язык" onClick={() => {
+                    appendLanguages({
+                        nameLanguage: '',
+                        levelLanguage: ''
+                    })
+                }} />
             </Box>
         </Box>
     )
