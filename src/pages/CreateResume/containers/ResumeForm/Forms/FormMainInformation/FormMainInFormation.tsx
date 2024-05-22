@@ -1,11 +1,11 @@
-import { Accordion, Box, FormControl, Grid, Typography } from '@mui/material'
+import { Accordion, Box, Grid, Typography } from '@mui/material'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
-import { Controller, FormProvider, useForm, useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import MyTextField from '../../../../../../components/TextField/MyTextField'
 import SelectForm from '../../../../../../components/SelectForm/SelectForm'
-import { Candidate, defaultValueForm } from '../../candidate'
+import { Candidate } from '../../candidate'
 
 const FormMainInFormation = () => {
     const methods = useFormContext<Candidate>()
