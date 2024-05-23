@@ -17,14 +17,43 @@ function FormLanguages() {
         control: control,
     });
     console.log(languages)
-    const arrayLevelLanguages = ['A1-начальный', 'A2—элементарный', 'B1—пороговый', 'B2—промежуточный', 'C1—продвинутый', 'C2—совершенный']
+    const arrayLevelLanguages = ['A1-начальный', 'A2-элементарный', 'B1—пороговый', 'B2—промежуточный', 'C1—продвинутый', 'C2—совершенный']
+
+    const arrayValues = [
+        {
+            level: 'A1-начальный',
+            value: 1
+        },
+        {
+            level: 'A2—элементарный',
+            value: 2
+        },
+        {
+            level: 'B1—пороговый',
+            value: 3
+        },
+        {
+            level: 'B2—промежуточный',
+            value: 4
+        },
+        {
+            level: 'C1—продвинутый',
+            value: 5
+        },
+        {
+            level: 'C2—совершенный',
+            value: 6
+        }
+    ];
+
+
 
     const languagesElement = languages.map((field, index) => (
 
         <Accordion key={index}>
             <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
                 <Typography variant={'h6'}>
-                    
+
                 </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -32,7 +61,7 @@ function FormLanguages() {
                     <MyTextField label={'Язык'} onChange={(e) => {
                         setValue(`languages.${index}.nameLanguage`, e.target.value)
                     }} />
-                    <SelectForm array={arrayLevelLanguages || ['']} label={'Уровень'} onChange={(e) => {
+                    <SelectForm array={arrayLevelLanguages || ''} value="" label={'Уровень'} onChange={(e) => {
                         setValue(`languages.${index}.levelLanguage`, e.target.value)
                     }} />
                 </Box>

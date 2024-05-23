@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Rating, Typography } from "@mui/material"
 import PlaceIcon from '@mui/icons-material/Place'
 import { useFormContext } from "react-hook-form"
 
@@ -28,17 +28,39 @@ function FormViewMain() {
                     <Typography sx={{ color: 'white' }}>{object.city}</Typography>
                 </Box>
             </Box>
-            <Typography
-                sx={{
-                    backgroundColor: '#0567e3',
-                    color: '#FFFFFF',
-                }}>Контакты:</Typography>
-            {object.socials.map((item: { icon: string, link: string }, index: number) => {
-                return (<Box display={"flex"} flexDirection={"row"} gap={"20px"} key={index}>
-                    <Typography color={'white'}>{item.icon}</Typography>
-                    <Typography color={'white'}>{item.link}</Typography>
-                </Box>)
-            })}
+            <Box>
+                <Typography
+                    sx={{
+                        backgroundColor: '#0567e3',
+                        color: '#FFFFFF',
+                    }}>Контакты:</Typography>
+                {object.socials.map((item: { icon: string, link: string }, index: number) => {
+                    return (<Box display={"flex"} flexDirection={"row"} gap={"20px"} key={index}>
+                        <Typography color={'white'}>{item.icon}</Typography>
+                        <Typography color={'white'}>{item.link}</Typography>
+                    </Box>)
+                })}
+            </Box>
+            <Box>
+                <Typography
+                    sx={{
+                        backgroundColor: '#0567e3',
+                        color: '#FFFFFF',
+                    }}>Знание языков:</Typography>
+                {object.languages.map((item: { nameLanguage: string, levelLanguage: string }, index:number) => {
+                    let value = 0
+                    if(item.levelLanguage === 'A1-начальный'){
+                        value = 0
+                    }if(item.levelLanguage === 'A2-элементарный'){
+                        value = 1
+                    }
+                    return (<Box display={"flex"} flexDirection={"row"} gap={"20px"} key={index} >
+                        <Typography component="legend">{item.nameLanguage}</Typography>
+                        <Rating name="read-only" readOnly value={value} />
+                    </Box>)
+                })}
+
+            </Box>
         </Box>
     )
 }

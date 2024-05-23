@@ -2,7 +2,7 @@ import { BaseSelectProps, MenuItem, Select } from '@mui/material'
 import { forwardRef } from 'react'
 
 type ISelectForm = BaseSelectProps<string> & {
-  array: string[] | number[]
+ array: any[]
 }
 
 const SelectForm = forwardRef<HTMLSelectElement, ISelectForm>(
