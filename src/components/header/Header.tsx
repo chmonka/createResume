@@ -14,8 +14,7 @@ function Header() {
       <CustomContainer>
         <AppBar
           position='static'
-          sx={{ backgroundColor: 'transparent', boxShadow: 'none', padding: 0, margin: 0 }}
-        >
+          sx={{ backgroundColor: 'transparent', boxShadow: 'none', padding: 0, margin: 0 }}>
           <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', padding: 0, margin: 0 }}>
             <Typography variant='h6' sx={{color: 'white'}}>Logo</Typography>
             <Grid>

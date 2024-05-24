@@ -1,0 +1,20 @@
+.welcome {
+    padding: 180px;
+
+}
+
+.welcome>.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome {
+    &_desc {
+        padding-bottom: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}

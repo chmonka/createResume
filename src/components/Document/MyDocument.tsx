@@ -32,7 +32,6 @@ const MyDocument = () => {
     }
   }
 
-  console.log(object)
 
   return (
     <Box sx={{

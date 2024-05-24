@@ -21,7 +21,7 @@ function FormContacts() {
         <Accordion
             key={index}>
             <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-                <Typography variant={'h6'}>Контакты</Typography>
+                <Typography variant={'h6'}>{social[index].icon}</Typography>
             </AccordionSummary>
             <AccordionDetails
                 sx={{

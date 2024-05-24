@@ -16,9 +16,7 @@ const FormMainInFormation = () => {
     const dayArray: number[] = Array.from({ length: 31 }, (_, index) => index + 1)
     const yearArray: number[] = Array.from({ length: 21 }, (_, index) => 2000 + index)
     const monthArray: number[] = Array.from({ length: 12 }, (_, index) => index + 1)
-
     const object = watch();
-    console.log(object)
 
     return (
         <Box

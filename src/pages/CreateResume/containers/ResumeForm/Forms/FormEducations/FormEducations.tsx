@@ -11,12 +11,14 @@ function FormEducations() {
 
 
     const methods = useFormContext<Candidate>()
-    const { control, setValue } = methods
+    const { control, setValue, watch } = methods
     const { fields: education, append: appendEducation, remove: removeEducation } = useFieldArray<Candidate>({
         name: 'education',
         control: control,
     });
     const yearArray: number[] = Array.from({ length: 21 }, (_, index) => 2000 + index)
+    const object = watch('education')
+
 
     const educationElement =
         education.map((field, index) => (
@@ -26,7 +28,7 @@ function FormEducations() {
                     width: '100%'
                 }}>
                 <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-                    <Typography variant={'h6'}>Образование</Typography>
+                    <Typography variant={'h6'}>{object[index].institution}</Typography>
                 </AccordionSummary>
                 <AccordionDetails
                     sx={{
@@ -68,7 +70,7 @@ function FormEducations() {
                                 display: 'flex',
                                 gap: '20px'
                             }}>
-                            <SelectForm value={''} array={yearArray || ''} label={'Год окончания'} onChange={(e) => {
+                            <SelectForm value={object[index].yearEndEducation} array={yearArray || ''} label={'Год окончания'} onChange={(e) => {
                                 setValue(`education.${index}.yearEndEducation`, e.target.value)
                             }} />
                         </Box>

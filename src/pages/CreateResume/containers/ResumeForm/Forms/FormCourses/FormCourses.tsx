@@ -9,29 +9,33 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 
 function FormCourses() {
     const methods = useFormContext<Candidate>()
-    const { control, setValue } = methods
-    const dayArray: number[] = Array.from({ length: 31 }, (_, index) => index + 1)
+    const { control, setValue, watch } = methods
+    const yearArray: number[] = Array.from({ length: 21 }, (_, index) => 2000 + index)
     const { fields: trainingCourses, append: appendCourses, remove: removeCourses } = useFieldArray<Candidate>({
         name: 'trainingCourses',
         control: control,
     });
 
+    const object = watch('trainingCourses')
+
     const coursesElement = trainingCourses.map((field, index) => (
         <Accordion
             key={index}>
             <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-                <Typography variant={'h6'}>Курсы</Typography>
+                <Typography variant={'h6'}>{object[index].nameCourse}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <Box>
-                    <SelectForm array={dayArray || ''} value={''} label={'Год окончания'} onChange={(e) => {
-                        setValue(`trainingCourses.${index}.yearEnd`, e.target.value)
-                    }} />
+                <Box
+                sx={{display:'flex', gap:'20px', flexDirection:'column'}}
+                >
                     <MyTextField label={'Название'} onChange={(e) => {
                         setValue(`trainingCourses.${index}.nameCourse`, e.target.value)
                     }} />
                     <MyTextField label={'Название организации'} onChange={(e) => {
                         setValue(`trainingCourses.${index}.nameCompany`, e.target.value)
+                    }} />
+                     <SelectForm array={yearArray || []} value={object[index].yearEnd} label={'Год окончания'} onChange={(e) => {
+                        setValue(`trainingCourses.${index}.yearEnd`, e.target.value)
                     }} />
                 </Box>
             </AccordionDetails>

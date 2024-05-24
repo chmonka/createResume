@@ -47,19 +47,21 @@ function FormViewMain() {
                         backgroundColor: '#0567e3',
                         color: '#FFFFFF',
                     }}>Знание языков:</Typography>
-                {object.languages.map((item: { nameLanguage: string, levelLanguage: string }, index:number) => {
-                    let value = 0
-                    if(item.levelLanguage === 'A1-начальный'){
-                        value = 0
-                    }if(item.levelLanguage === 'A2-элементарный'){
-                        value = 1
+                {object.languages.map((item: { nameLanguage: string, levelLanguage: string }, index: number) => {
+                    const levelLang = {
+                        'A1-начальный': 0,
+                        'A2-элементарный': 1,
+                        'B1-пороговый': 2,
+                        'B2-промежуточный': 3,
+                        'C1-продвинутый': 4,
+                        'C2-совершенный': 5
                     }
+                    const levelLangValue= levelLang[item.levelLanguage as keyof typeof levelLang]
                     return (<Box display={"flex"} flexDirection={"row"} gap={"20px"} key={index} >
                         <Typography component="legend">{item.nameLanguage}</Typography>
-                        <Rating name="read-only" readOnly value={value} />
+                        <Rating name="read-only" readOnly value={levelLangValue !=undefined? levelLangValue : 0} />
                     </Box>)
                 })}
-
             </Box>
         </Box>
     )

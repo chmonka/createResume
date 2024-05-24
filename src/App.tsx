@@ -1,4 +1,4 @@
-import Header from './components/header/Header'
+import Header from './components/Header/Header.tsx'
 import MainPage from './pages/MainPage/MainPage'
 // import CreatePortfolioPage from "./pages/CreatePortfolioPage/CreatePortfolioPage";
 import { Route, Routes } from 'react-router-dom'
@@ -15,9 +15,10 @@ function App() {
       <div className="App">
         <Header />
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/" element={<CreateResumePage />} />
           {/* <Route path='/createPortfolio' element={<CreatePortfolioPage />}></Route> */}
-          <Route path="/createResume" element={<CreateResumePage />}></Route>
+          {/* {/* <Route path="/createResume" element={}></Route>  */}
+
         </Routes>
       </div>
     </ThemeProvider>
