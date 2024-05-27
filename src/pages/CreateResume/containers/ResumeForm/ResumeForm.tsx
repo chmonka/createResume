@@ -14,14 +14,13 @@ const ResumeForm = () => {
   const methods = useForm<Candidate>({ defaultValues: defaultValueForm, mode: 'onChange' })
 
   return (
-    <Box sx={{ paddingTop: '40px' }}>
+    <Box >
       <FormProvider {...methods}>
         <CustomContainer position={'relative'} display={'flex'} flexDirection={'row'} justifyContent={'space-between'} gap={'20px'}>
           <Grid
             sx={{
               display: 'flex',
               flexDirection: 'column',
-
               gap: '20px',
             }}>
             <FormMainInFormation />

@@ -1,9 +1,10 @@
-import { Button, ThemeProvider, createTheme } from '@mui/material'
+import { Button, ButtonProps, ThemeProvider, createTheme } from '@mui/material'
 import { FC } from 'react'
 
-interface ButtonProps {
+interface IButtonProps extends ButtonProps {
   onClick?: () => void
   innerText: string
+  children?: React.ReactNode
 }
 
 const theme = createTheme({
@@ -14,7 +15,6 @@ const theme = createTheme({
           '&.MuiButton-root': {
             border: '2px #000 solid',
             color: '#000',
-            // backgroundColor: "#FFFFFF"
           },
           '& :hover': {
             boxShadow: '0px 15px 5px -5px rgba(255, 255, 255, 1) inset',
@@ -25,15 +25,15 @@ const theme = createTheme({
   },
 })
 
-const CustomButton: FC<ButtonProps> = ({ onClick, innerText }) => {
+function CustomButton({ children, onClick, innerText, ...rest }: IButtonProps) {
   return (
     <ThemeProvider theme={theme}>
       <Button
+        {...rest}
         onClick={onClick}
         variant='outlined'
         size='medium'
-        sx={{ borderColor: '#FFFFFF', color: '#FFFFFF' }}
-      >
+        sx={{ borderColor: '#FFFFFF', color: '#FFFFFF' }}>
         {innerText}
       </Button>
     </ThemeProvider>

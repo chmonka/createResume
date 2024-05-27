@@ -18,7 +18,12 @@ function FormEducations() {
     });
     const yearArray: number[] = Array.from({ length: 21 }, (_, index) => 2000 + index)
     const object = watch('education')
-
+    const educationLevel = [
+        'Основное общее',
+        'Среднее общее', 'Среднее профессиональное',
+        'Высшее — бакалавриат',
+        'Высшее — специалитет, магистратура',
+        'Высшее — подготовка кадров высшей квалификации.']
 
     const educationElement =
         education.map((field, index) => (
@@ -44,7 +49,7 @@ function FormEducations() {
                         <MyTextField label={'Учебное заведение'} onChange={(e) => {
                             setValue(`education.${index}.institution`, e.target.value)
                         }} />
-                        <MyTextField label={'Уровень образования'} onChange={(e) => {
+                        <SelectForm array={educationLevel} onChange={(e) => {
                             setValue(`education.${index}.levelEducation`, e.target.value)
                         }} />
                     </Box>
