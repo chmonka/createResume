@@ -17,15 +17,15 @@ function FormViewMain() {
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                     <Box sx={{ width: '150px', height: '150px', backgroundColor: 'white', borderRadius: '20px' }}></Box>
                 </Box>
-                <Typography sx={{ color: 'white' }} variant="h6">{object.middleName.toUpperCase()} {object.firstName.toUpperCase()} {object.lastName.toUpperCase()}</Typography>
+                <Typography sx={{ color: 'white',fontSize:'16px' }} variant="h6">{object.middleName.toUpperCase()} {object.firstName.toUpperCase()} {object.lastName.toUpperCase()}</Typography>
                 <Box>
-                    <Typography sx={{ color: 'white' }} variant="h6">Должность: {object.desiredPosition}</Typography>
-                    <Typography sx={{ color: 'white' }} variant="h6">Возраст: {date - object.year}</Typography>
-                    <Typography sx={{ color: 'white' }} variant="h6">Зароботная плата: {object.money} {object.currency}</Typography>
+                    <Typography sx={{ color: 'white',fontSize:'16px' }} variant="h6">Должность: {object.desiredPosition}</Typography>
+                    <Typography sx={{ color: 'white',fontSize:'16px' }} variant="h6">Возраст: {date - object.year}</Typography>
+                    <Typography sx={{ color: 'white',fontSize:'16px' }} variant="h6">Зароботная плата: {object.money} {object.currency}</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <PlaceIcon sx={{ color: 'white' }} />
-                    <Typography sx={{ color: 'white' }}>{object.city}</Typography>
+                    <Typography sx={{ color: 'white',fontSize:'16px' }}>{object.city}</Typography>
                 </Box>
             </Box>
             <Box>
@@ -33,19 +33,21 @@ function FormViewMain() {
                     sx={{
                         backgroundColor: '#0567e3',
                         color: '#FFFFFF',
+                        fontSize:'20px'
                     }}>Контакты:</Typography>
                 {object.socials.map((item: { icon: string, link: string }, index: number) => {
                     return (<Box display={"flex"} flexDirection={"row"} gap={"20px"} key={index}>
-                        <Typography color={'white'}>{item.icon}</Typography>
-                        <Typography color={'white'}>{item.link}</Typography>
+                        <Typography color={'white'} sx={{fontSize:'16px'}}>{item.icon}</Typography>
+                        <Typography color={'white'} sx={{fontSize:'16px'}}>{item.link}</Typography>
                     </Box>)
                 })}
             </Box>
             <Box>
                 <Typography
-                    sx={{
+                     sx={{
                         backgroundColor: '#0567e3',
                         color: '#FFFFFF',
+                        fontSize:'20px'
                     }}>Знание языков:</Typography>
                 {object.languages.map((item: { nameLanguage: string, levelLanguage: string }, index: number) => {
                     const levelLang = {
@@ -58,7 +60,7 @@ function FormViewMain() {
                     }
                     const levelLangValue= levelLang[item.levelLanguage as keyof typeof levelLang]
                     return (<Box display={"flex"} flexDirection={"row"} gap={"20px"} key={index} >
-                        <Typography component="legend">{item.nameLanguage}</Typography>
+                        <Typography component="legend" sx={{fontSize:'16px'}}>{item.nameLanguage}</Typography>
                         <Rating name="read-only" readOnly value={levelLangValue !=undefined? levelLangValue : 0} />
                     </Box>)
                 })}

@@ -28,10 +28,9 @@ const FormMainInFormation = () => {
                 borderRadius: '20px',
                 gap: '20px',
             }}>
-            <Controller
-                control={control}
-                name="desiredPosition"
-                render={({ field: { onChange } }) => (<MyTextField label={'Желаемая должность'} onChange={onChange} />)} />
+            <Box>
+                
+            </Box>
             <Controller
                 control={control}
                 name="middleName"
@@ -44,6 +43,10 @@ const FormMainInFormation = () => {
                 control={control}
                 name="lastName"
                 render={({ field: { onChange } }) => (<MyTextField label={'Отчество'} onChange={onChange} />)} />
+            <Controller
+                control={control}
+                name="desiredPosition"
+                render={({ field: { onChange } }) => (<MyTextField label={'Желаемая должность'} onChange={onChange} />)} />
             <Box>
                 <Typography variant={'h6'}>Дата рождения</Typography>
             </Box>
@@ -91,7 +94,7 @@ const FormMainInFormation = () => {
                         <Controller
                             control={control}
                             name="currency"
-                            render={({ field: { onChange, value } }) => (<SelectForm label={'День'} value={value} onChange={onChange} array={moneyArray|| ['']} />)} />
+                            render={({ field: { onChange, value } }) => (<SelectForm label={'День'} value={value} onChange={onChange} array={moneyArray || ['']} />)} />
                         <Controller
                             control={control}
                             name="citizenship"
@@ -107,11 +110,11 @@ const FormMainInFormation = () => {
                         <Controller
                             control={control}
                             name='interesting'
-                            render={({ field: { onChange, value } }) => (<SelectForm label={'Занятность'} onChange={onChange} value={value} array={interestingArray|| ['']} />)} />
+                            render={({ field: { onChange, value } }) => (<SelectForm label={'Занятность'} onChange={onChange} value={value} array={interestingArray || ['']} />)} />
                         <Controller
                             control={control}
                             name='schedule'
-                            render={({ field: { onChange, value } }) => (<SelectForm label={'График работы'} onChange={onChange} value={value} array={scheduleArray|| ['']} />)} />
+                            render={({ field: { onChange, value } }) => (<SelectForm label={'График работы'} onChange={onChange} value={value} array={scheduleArray || ['']} />)} />
                     </Grid>
                 </AccordionDetails>
             </Accordion>

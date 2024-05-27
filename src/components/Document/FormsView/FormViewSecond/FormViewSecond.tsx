@@ -14,7 +14,7 @@ function FormViewSecond() {
         }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: "20px" }}>
                 <Box>
-                    <Typography variant='h6' sx={{ border: '1px solid #0567e3', padding: '10px' }}>Опыт работы</Typography>
+                    <Typography variant='h6' sx={{ border: '1px solid #0567e3', padding: '10px' , fontSize:'18px' }}>Опыт работы</Typography>
                     {object.jobs.map((item: { postJob: string, nameCompany: string, monthStart: string, yearStart: string, monthEnd: string, yearEnd: string }, index: number) => {
                         return (
                             <Box key={index}>
@@ -26,7 +26,7 @@ function FormViewSecond() {
                     })}
                 </Box>
                 <Box>
-                    <Typography variant='h6' sx={{ border: '1px solid #0567e3', padding: '10px' }}>Образование</Typography>
+                    <Typography variant='h6' sx={{ border: '1px solid #0567e3', padding: '10px' , fontSize:'18px'  }}>Образование</Typography>
                     {object.education.map((item: { institution: string, levelEducation: string, faculty: string, speciality: string, yearEndEducation: string }, index: number) => {
                         return (
                             <Box key={index}>
@@ -39,7 +39,7 @@ function FormViewSecond() {
 
                 </Box>
                 <Box>
-                    <Typography variant='h6' sx={{ border: '1px solid #0567e3', padding: '10px' }}>Курсы</Typography>
+                    <Typography variant='h6' sx={{ border: '1px solid #0567e3', padding: '10px' , fontSize:'18px'  }}>Курсы</Typography>
                     {object.trainingCourses.map((item: { yearEnd: string, nameCompany: string, nameCourse: string }, index: number) => {
                         return (
                             <Box key={index}>

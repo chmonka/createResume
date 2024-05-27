@@ -49,7 +49,6 @@ function FormEducations() {
                         }} />
                     </Box>
                     <Box>
-                        <Typography>Начало учёбы</Typography>
                         <Box
                             sx={{
                                 display: 'flex',

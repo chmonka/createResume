@@ -24,7 +24,7 @@ const MyDocument = () => {
       }).then(canvas => {
         const imgData = canvas.toDataURL('image/png')
         const pdf = new jsPDF('portrait', 'px', 'a4')
-        pdf.addImage(imgData, 'SVG', 0, 0, 450, 632)
+        pdf.addImage(imgData, 'SVG', 0, 0, 450, 630)
         pdf.save('shipping_label.pdf')
       })
     } else {
@@ -32,27 +32,28 @@ const MyDocument = () => {
     }
   }
 
-
   return (
     <Box sx={{
       display: 'flex',
       maxWidth: '100%',
       flexDirection: 'column',
-      width: '800px',
-      height: '1000px',
+      width: '700px',
+      height: '800px',
       maxHeight: '100%',
       border: '1px solid #023e8a',
       borderRadius: '20px',
       justifyContent: 'center',
       alignItems: 'center',
+      position:'sticky',
+      top:0
     }}>
       <Box sx={{
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '700px',
-        height: '900px',
+        width: '600px',
+        height: '700px',
         border: '1px solid #023e8a',
       }}>
         <Box

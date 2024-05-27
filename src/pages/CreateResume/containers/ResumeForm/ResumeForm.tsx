@@ -1,4 +1,4 @@
-import {Box, Grid } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import CustomContainer from '../../../../components/Container/CustomContainer.tsx'
 import MyDocument from '../../../../components/Document/MyDocument.tsx'
 import { Candidate, defaultValueForm } from './candidate.ts'
@@ -16,11 +16,12 @@ const ResumeForm = () => {
   return (
     <Box sx={{ paddingTop: '40px' }}>
       <FormProvider {...methods}>
-        <CustomContainer display={'flex'} flexDirection={'row'} justifyContent={'space-between'} gap={'20px'}>
+        <CustomContainer position={'relative'} display={'flex'} flexDirection={'row'} justifyContent={'space-between'} gap={'20px'}>
           <Grid
             sx={{
               display: 'flex',
               flexDirection: 'column',
+
               gap: '20px',
             }}>
             <FormMainInFormation />
@@ -37,14 +38,14 @@ const ResumeForm = () => {
                   gap: '20px',
                 }}>
                 <FormContacts />
-                <FormWorkExperience/>
-                <FormEducations/>
-                <FormCourses/>
-                <FormLanguages/>
+                <FormWorkExperience />
+                <FormEducations />
+                <FormCourses />
+                <FormLanguages />
               </Grid>
             </Grid>
           </Grid>
-          <MyDocument/>
+          <MyDocument />
         </CustomContainer>
       </FormProvider>
     </Box>
