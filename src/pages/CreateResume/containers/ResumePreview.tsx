@@ -4,15 +4,7 @@ import ResumeForm from './ResumeForm/ResumeForm.tsx'
 
 function ResumePreview() {
   return (
-    <CustomContainer>
-      <Grid
-        sx={{
-          display: 'flex',
-        }}
-      >
-        <ResumeForm></ResumeForm>
-      </Grid>
-    </CustomContainer>
+    <ResumeForm></ResumeForm>
   )
 }
 

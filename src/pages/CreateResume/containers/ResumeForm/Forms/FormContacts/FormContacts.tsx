@@ -48,14 +48,7 @@ function FormContacts() {
     ))
     
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '20px',
-                border: '2px solid #e1e5f2',
-                borderRadius: '20px',
-            }}>
+        <Box>
             <Typography sx={{ borderBottom: '2px solid #e1e5f2', padding: '20px' }}>Контакты</Typography>
             <Box sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <Box sx={{
@@ -66,7 +59,7 @@ function FormContacts() {
                         required
                         label={'Электронная почта'}
                         {...register('email', {
-                            required: 'This field is required',
+                            required: 'Заполните обязательное поле',
                             pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' }
                         })}
                         error={!!errors.email}
@@ -76,7 +69,7 @@ function FormContacts() {
                         required
                         label={'Номер телефона'}
                         {...register('phoneNumber', {
-                            required: "Phone number is required",
+                            required: 'Заполните обязательное поле',
                             pattern: {
                                 value: /^[0-9]+$/,
                                 message: "Используйте только цифры"

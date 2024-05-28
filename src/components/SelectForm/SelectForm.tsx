@@ -1,29 +1,35 @@
-import { BaseSelectProps, MenuItem, Select } from '@mui/material'
+import { BaseSelectProps, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import { forwardRef } from 'react'
 
 type ISelectForm = BaseSelectProps<string> & {
- array: any[]
+  array: any[]
 }
 
 const SelectForm = forwardRef<HTMLSelectElement, ISelectForm>(
-  ({ array, ...props }, ref) => {
+  ({label, array, ...props }, ref) => {
     return (
-      <Select
-        variant="outlined"
-        {...props}
-        ref={ref}
-        sx={{
-          width: '100%',
-        }}
-      >
-        {array.map((item, index) => {
-          return (
-            <MenuItem key={index} value={item}>
-              {item}
-            </MenuItem>
-          )
-        })}
-      </Select>
+      <FormControl>
+        <InputLabel style={{ color: '#000',background:'#FFFFFF' }}>{label}</InputLabel>
+        <Select
+          variant="outlined"
+          {...props}
+          ref={ref}
+          sx={{
+            width: '150px',
+ 
+            fontSize:'12px',
+           
+          }}
+        >
+          {array.map((item, index) => {
+            return (
+              <MenuItem key={index} value={item}>
+                {item}
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </FormControl>
     )
   }
 )

@@ -9,42 +9,23 @@ import FormWorkExperience from './Forms/FormWorkExperience/FormWorkExperience.ts
 import FormEducations from './Forms/FormEducations/FormEducations.tsx'
 import FormLanguages from './Forms/FormLanguages/FormLanguages.tsx'
 import FormCourses from './Forms/FormCourses/FormCourses.tsx'
+import CustomButton from '../../../../components/Button/CustomButton.tsx'
 
 const ResumeForm = () => {
   const methods = useForm<Candidate>({ defaultValues: defaultValueForm, mode: 'onChange' })
-
   return (
     <Box >
       <FormProvider {...methods}>
-        <CustomContainer position={'relative'} display={'flex'} flexDirection={'row'} justifyContent={'space-between'} gap={'20px'}>
-          <Grid
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '20px',
-            }}>
-            <FormMainInFormation />
-            <Grid
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-              }}>
-              <Grid
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  gap: '20px',
-                }}>
-                <FormContacts />
-                <FormWorkExperience />
-                <FormEducations />
-                <FormCourses />
-                <FormLanguages />
-              </Grid>
-            </Grid>
+        <CustomContainer sx={{position:'relative'}}>
+          <Grid sx={{ display: 'flex', justifyContent: 'center', alignItems:'center' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap:'20px', width:'50%'}}>
+              <FormMainInFormation />
+              <FormWorkExperience />
+              <FormEducations />
+              <FormCourses />
+              <FormLanguages />
+            </Box>
           </Grid>
-          <MyDocument />
         </CustomContainer>
       </FormProvider>
     </Box>

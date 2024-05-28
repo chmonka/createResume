@@ -57,7 +57,7 @@ function FormWorkExperience() {
                         <MyTextField label={'Должность'} onChange={(e) => {
                             setValue(`jobs.${index}.postJob`, e.target.value)
                         }} />
-                        <MyTextField label={'Компания'} onChange={(e) => {
+                        <MyTextField label={'Название компании'} onChange={(e) => {
                             setValue(`jobs.${index}.nameCompany`, e.target.value)
                         }} />
                     </Box>

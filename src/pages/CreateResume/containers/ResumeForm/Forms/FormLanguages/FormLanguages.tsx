@@ -17,6 +17,7 @@ function FormLanguages() {
         control: control,
     });
     const arrayLevelLanguages = ['A1-начальный', 'A2-элементарный', 'B1-пороговый', 'B2-промежуточный', 'C1-продвинутый', 'C2-совершенный']
+    const foreignLanguages = ["Испанский", "Французский", "Немецкий", "Японский", "Русский", "Китайский", "Арабский", "Португальский", "Итальянский", "Корейский"]
     const object = watch('languages')
 
     const languagesElement = languages.map((field, index) => (
@@ -28,8 +29,8 @@ function FormLanguages() {
             </AccordionSummary>
             <AccordionDetails>
                 <Box
-                sx={{display:'flex', flexDirection:'row', gap:'20px'}}>
-                    <MyTextField label={'Язык'} onChange={(e) => {
+                    sx={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
+                    <SelectForm array={foreignLanguages || ''} value={object[index].nameLanguage} label={'Язык'} onChange={(e) => {
                         setValue(`languages.${index}.nameLanguage`, e.target.value)
                     }} />
                     <SelectForm array={arrayLevelLanguages || ''} value={object[index].levelLanguage} label={'Уровень'} onChange={(e) => {
