@@ -9,7 +9,7 @@ import { Candidate } from '../../candidate'
 
 const FormMainInFormation = () => {
     const methods = useFormContext<Candidate>()
-    const { register, control, watch } = methods
+    const { register, control, watch, setValue, setError, trigger, formState: { errors } } = methods
     const moneyArray: string[] = ['Руб', '$']
     const interestingArray: string[] = ['', 'Полная занятность', 'Частичная занятность', 'Проектная работа', 'Волонтёрство', 'Стажировка']
     const scheduleArray: string[] = ['', 'Полный день', 'Сменный график', 'Гибкий график', 'Удалённая работа', 'Вахтовый метод']
@@ -28,25 +28,49 @@ const FormMainInFormation = () => {
                 borderRadius: '20px',
                 gap: '20px',
             }}>
-            <Box>
-                
-            </Box>
-            <Controller
-                control={control}
-                name="middleName"
-                render={({ field: { onChange } }) => (<MyTextField label={'Фамилия'} onChange={onChange} />)} />
-            <Controller
-                control={control}
-                name="firstName"
-                render={({ field: { onChange } }) => (<MyTextField label={'Имя'} onChange={onChange} />)} />
-            <Controller
-                control={control}
-                name="lastName"
-                render={({ field: { onChange } }) => (<MyTextField label={'Отчество'} onChange={onChange} />)} />
-            <Controller
-                control={control}
-                name="desiredPosition"
-                render={({ field: { onChange } }) => (<MyTextField label={'Желаемая должность'} onChange={onChange} />)} />
+            <MyTextField
+                required
+                label={'Фамилия'}
+                {...register('middleName', {
+                    required: "Заполните обязательное поле",
+                })}
+                error={!!errors.middleName}
+                helperText={errors.middleName ? errors.middleName.message : ""}
+                onChange={e => {
+                    setValue('middleName', e.target.value.slice(0, 14).replace(/[^a-zA-Zа-яА-Я]/g, ''));
+                    trigger('middleName');
+                }}
+            />
+
+
+            <MyTextField
+                required
+                label={'Имя'}
+                {...register('firstName', {
+                    required: "Заполните обязательное поле",
+                    pattern: {
+                        value: /[а-яё]+/,
+                        message: "Используйте только кирилические буквы"
+                    }
+                })}
+                error={!!errors.firstName}
+                helperText={errors.firstName ? errors.firstName.message : ""}
+            />
+            <MyTextField
+                label={'Отчество'}
+                {...register('lastName')} />
+            <MyTextField
+                required
+                label={'Желаемая должность'}
+                {...register('desiredPosition', {
+                    required: "Заполните обязательное поле",
+                    pattern: {
+                        value: /[а-яё]+/,
+                        message: "Используйте только кирилические буквы"
+                    }
+                })}
+                error={!!errors.desiredPosition}
+                helperText={errors.desiredPosition ? errors.desiredPosition.message : ""} />
             <Box>
                 <Typography variant={'h6'}>Дата рождения</Typography>
             </Box>
@@ -98,7 +122,27 @@ const FormMainInFormation = () => {
                         <Controller
                             control={control}
                             name="citizenship"
-                            render={({ field: { onChange } }) => (<MyTextField label={'Гражданство'} type={'string'} onChange={onChange} />)} />
+                            rules={{
+                                required: 'Гражданство обязательно',
+                                pattern: {
+                                    value: /^[а-яА-Я\s]*$/,
+                                    message: 'Введите гражданство на кириллице'
+                                },
+                                maxLength: {
+                                    value: 50,
+                                    message: 'Гражданство не должно превышать 50 символов'
+                                }
+                            }}
+                            render={({ field: { onChange, onBlur } }) => (
+                                <MyTextField
+                                    required
+                                    label={'Гражданство'}
+                                    type={'text'}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                />
+                            )}
+                        />
                     </Grid>
                     <Grid
                         sx={{

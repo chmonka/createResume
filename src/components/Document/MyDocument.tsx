@@ -26,8 +26,8 @@ const MyDocument = () => {
         const pdfHeight = pdf.internal.pageSize.getHeight();
         const imgWidth = canvas.width;
         const imgHeight = canvas.height;
-        const ratio = Math.max(pdfWidth / imgWidth, pdfHeight / imgHeight);
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth * ratio , imgHeight * ratio );
+        const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth * ratio + 5, imgHeight * ratio );
         pdf.save('resume.pdf')
       })
     } else {
@@ -40,7 +40,7 @@ const MyDocument = () => {
       display: 'flex',
       flexDirection: 'column',
       width: '768px',
-      height: "calc(100vh - 32px)",
+      height:'100vh',
       border: '1px solid #023e8a',
       borderRadius: '5px',
       justifyContent: 'flex-start',
@@ -65,8 +65,8 @@ const MyDocument = () => {
         justifyContent: 'center'
       }}>
         <Box sx={{
-          width: '550px',
-          height:'750px'
+          width: '500px',
+          height:'720px'
         }}>
           <Box
             sx={{

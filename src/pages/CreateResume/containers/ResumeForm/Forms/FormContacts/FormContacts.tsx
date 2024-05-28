@@ -6,16 +6,18 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '
 import { Candidate } from '../../candidate'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import SelectForm from '../../../../../../components/SelectForm/SelectForm'
+import { useState } from 'react'
 
 function FormContacts() {
     const socialArray: string[] = [' ', 'vk', 'telegram', 'instagram']
     const methods = useFormContext<Candidate>()
-    const { register, control, watch, setValue } = methods
+    const { register, control, watch, setValue, formState: { errors } } = methods
     const { fields: socials, append: appendSocial, remove: removeSocial } = useFieldArray<Candidate>({
         name: 'socials',
         control: control,
     });
     const social = watch('socials')
+    const object = watch()
 
     const socialsElement = socials.map((field, index) => (
         <Accordion
@@ -44,7 +46,7 @@ function FormContacts() {
             </AccordionDetails>
         </Accordion>
     ))
-
+    
     return (
         <Box
             sx={{
@@ -61,12 +63,28 @@ function FormContacts() {
                     gap: '20px',
                 }}>
                     <MyTextField
+                        required
                         label={'Электронная почта'}
-                        {...register('email')}
+                        {...register('email', {
+                            required: 'This field is required',
+                            pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' }
+                        })}
+                        error={!!errors.email}
+                        helperText={errors.email ? errors.email.message : ""}
                     />
                     <MyTextField
+                        required
                         label={'Номер телефона'}
-                        {...register('phoneNumber')} />
+                        {...register('phoneNumber', {
+                            required: "Phone number is required",
+                            pattern: {
+                                value: /^[0-9]+$/,
+                                message: "Используйте только цифры"
+                            }
+                        })}
+                        error={!!errors.phoneNumber}
+                        helperText={errors.phoneNumber ? errors.phoneNumber.message : ""}
+                    />
                 </Box>
                 <Box
                     sx={{
