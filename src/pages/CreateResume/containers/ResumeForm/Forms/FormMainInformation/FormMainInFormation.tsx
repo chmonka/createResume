@@ -1,4 +1,4 @@
-import { Accordion, Box, Grid, Typography } from '@mui/material'
+import { Accordion, Box, Button, Grid, Typography } from '@mui/material'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
@@ -12,6 +12,9 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import FormContacts from '../FormContacts/FormContacts'
+import { ChangeEvent, useState } from 'react'
+
+
 const FormMainInFormation = () => {
     const methods = useFormContext<Candidate>()
     const { register, control, watch, setValue, setError, trigger, formState: { errors } } = methods
@@ -19,6 +22,16 @@ const FormMainInFormation = () => {
     const interestingArray: string[] = ['', 'Полная занятность', 'Частичная занятность', 'Проектная работа', 'Волонтёрство', 'Стажировка']
     const scheduleArray: string[] = ['', 'Полный день', 'Сменный график', 'Гибкий график', 'Удалённая работа', 'Вахтовый метод']
     const object = watch();
+    const [file, setFile] = useState<string | null>(null);
+
+    function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
+        if (e.target.files && e.target.files.length > 0) {
+            setFile(URL.createObjectURL(e.target.files[0]));
+            setValue('photoProfile', URL.createObjectURL(e.target.files[0]))
+        }
+    }
+    console.log(watch('photoProfile'))
+
 
     return (
         <Box
@@ -27,7 +40,7 @@ const FormMainInFormation = () => {
                 flexDirection: 'column',
                 border: '2px solid #e1e5f2',
                 padding: '20px',
-                borderRadius: '20px',
+                borderRadius: '5px',
                 gap: '20px',
             }}>
             <Typography>Основная информация</Typography>
@@ -67,7 +80,32 @@ const FormMainInFormation = () => {
                             label={'Отчество'}
                             {...register('lastName')} />
                     </Box>
-                    <Box sx={{ width: '200px', height: '200px', border: '1px solid black' }} />
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+                        <Box
+                            sx={{
+                                width: '200px',
+                                height: '200px',
+                                border: '1px solid black',
+                                borderRadius: '100px',
+                                position: 'relative',
+                            }}
+                        >
+                            <input
+                                accept="image/ * "
+                                id="contained-button-file"
+                                type="file"
+                                style={{ display: 'none' }}
+                                onChange={handleFileChange}
+                            />
+                            {file && <img src={file} alt="Uploaded file" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '100px' }} />}
+                        </Box>
+
+                        <label htmlFor="contained-button-file">
+                            <Button variant="contained" component="span">
+                                Загрузить фото
+                            </Button>
+                        </label>
+                    </Box>
                 </Box>
 
                 <Controller
@@ -85,12 +123,11 @@ const FormMainInFormation = () => {
                         </LocalizationProvider>
                     )} />
 
-                <MyTextField sx={{ width: '400px' }} label={'Город'} {...register('city')}></MyTextField>
+                <MyTextField label={'Город'} {...register('city')}></MyTextField>
                 <FormContacts></FormContacts>
             </Box>
 
             <MyTextField
-                sx={{ width: '200px' }}
                 required
                 label={'Желаемая должность'}
                 {...register('desiredPosition', {
@@ -106,17 +143,22 @@ const FormMainInFormation = () => {
                     setValue('desiredPosition', e.target.value.slice(0, 20).replace(/[^a-zA-Zа-яА-Я]/g, ''));
                     trigger('desiredPosition');
                 }} />
-            <Controller
-                control={control}
-                name='interesting'
-                render={({ field: { onChange, value } }) => (<SelectForm label={'Занятность'} onChange={onChange} value={value} array={interestingArray || ['']} />)} />
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between'
+                }}
+            >
+                <Controller
+                    control={control}
+                    name='interesting'
+                    render={({ field: { onChange, value } }) => (<SelectForm sx={{ width: '320px' }} label={'Занятность'} onChange={onChange} value={value} array={interestingArray || ['']} />)} />
+                <Controller
+                    control={control}
+                    name="money"
+                    render={({ field: { onChange } }) => (<MyTextField sx={{ width: '320px' }} label={'Желаемая зарплата, Руб'} type={'number'} inputProps={{ min: 0, step: 5000 }} onChange={onChange} />)} />
+            </Box>
 
-
-
-            <Controller
-                control={control}
-                name="money"
-                render={({ field: { onChange } }) => (<MyTextField label={'Желаемая зарплата'} type={'number'} inputProps={{ min: 0, step: 5000 }} onChange={onChange} />)} />
 
             {/* <Accordion>
                 <AccordionSummary expandIcon={<ArrowDownwardIcon />}>

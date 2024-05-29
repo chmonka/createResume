@@ -49,7 +49,7 @@ function FormCourses() {
                 flexDirection: 'column',
                 gap: '20px',
                 border: '2px solid #e1e5f2',
-                borderRadius: '20px',
+                borderRadius: '5px',
             }}>
             <Typography sx={{ borderBottom: '2px solid #e1e5f2', padding: '20px' }}>Курсы повышения
                 квалификации</Typography>

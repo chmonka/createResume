@@ -34,12 +34,13 @@ function FormContacts() {
                 <Box
                     sx={{
                         display: 'flex',
-                        gap: '20px'
+                        gap: '20px',
+                        justifyContent:'space-between'
                     }}>
-                    <SelectForm value={social[index].icon} label={'Социальная сеть'} onChange={(e) => {
+                    <SelectForm value={social[index].icon} sx={{width:'300px', maxWidth:'100%'}} label={'Социальная сеть'} onChange={(e) => {
                         setValue(`socials.${index}.icon`, e.target.value)
                     }} array={socialArray} />
-                    <MyTextField label={'Ссылка'} onChange={(e) => {
+                    <MyTextField label={'Ссылка'} sx={{width:'300px', maxWidth:'100%'}} onChange={(e) => {
                         setValue(`socials.${index}.link`, e.target.value)
                     }} />
                 </Box>
@@ -49,13 +50,14 @@ function FormContacts() {
     
     return (
         <Box>
-            <Typography sx={{ borderBottom: '2px solid #e1e5f2', padding: '20px' }}>Контакты</Typography>
-            <Box sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <Typography sx={{  padding: '20px' }}>Контакты</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                 <Box sx={{
                     display: 'flex',
                     gap: '20px',
                 }}>
                     <MyTextField
+                    
                         required
                         label={'Электронная почта'}
                         {...register('email', {
@@ -87,7 +89,7 @@ function FormContacts() {
                     }}>
                     {socialsElement}
                 </Box>
-                <CustomButton innerText="Добавить социальную сеть" onClick={() => { appendSocial({ icon: '', link: '' }) }} />
+                <CustomButton  innerText="Добавить социальную сеть" onClick={() => { appendSocial({ icon: '', link: '' }) }} />
             </Box>
         </Box>
     )

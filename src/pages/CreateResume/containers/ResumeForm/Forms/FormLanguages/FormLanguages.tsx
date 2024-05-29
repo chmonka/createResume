@@ -49,7 +49,7 @@ function FormLanguages() {
                 flexDirection: 'column',
                 gap: '20px',
                 border: '2px solid #e1e5f2',
-                borderRadius: '20px',
+                borderRadius: '5px',
             }}>
             <Typography sx={{ borderBottom: '2px solid #e1e5f2', padding: '20px' }}>Знание языков</Typography>
             <Box
@@ -61,7 +61,8 @@ function FormLanguages() {
                 }}>
                 </Box>
                 {languagesElement}
-                <CustomButton innerText="Добавить язык" onClick={() => {
+                <CustomButton
+                 innerText="Добавить язык" onClick={() => {
                     appendLanguages({
                         nameLanguage: '',
                         levelLanguage: ''

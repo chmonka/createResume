@@ -30,6 +30,7 @@ export interface Candidate {
   }[]
   education: {
     institution: string
+    formEducation:string
     levelEducation: string
     faculty: string
     speciality: string
@@ -45,9 +46,10 @@ export interface Candidate {
     nameLanguage:string
     levelLanguage:string
   }[]
+  photoProfile:string
 }
 
-export const defaultValueForm: Candidate = {
+export const defaultValueForm: Partial<Candidate> = {
   desiredPosition: '',
   lastName: '',
   firstName: '',
@@ -69,5 +71,8 @@ export const defaultValueForm: Candidate = {
   education: [],
   trainingCourses: [],
   languages:[],
-  date:''
+  date:'',
+  photoProfile:'' ,
+
+
 }

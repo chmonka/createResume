@@ -31,9 +31,7 @@ function CustomButton({ children, onClick, innerText, ...rest }: IButtonProps) {
       <Button
         {...rest}
         onClick={onClick}
-        variant='outlined'
-        size='medium'
-        sx={{ borderColor: '#FFFFFF', color: '#FFFFFF' }}>
+        size='medium'>
         {innerText}
       </Button>
     </ThemeProvider>

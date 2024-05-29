@@ -18,6 +18,7 @@ function FormEducations() {
     });
     const yearArray: number[] = Array.from({ length: 21 }, (_, index) => 2000 + index)
     const object = watch('education')
+    const formEducation = ['Очная', 'Очно-заочная', 'Заочная', 'Дистанционная']
     const educationLevel = [
         'Основное общее',
         'Среднее общее', 'Среднее профессиональное',
@@ -41,44 +42,30 @@ function FormEducations() {
                         flexDirection: 'column',
                         gap: '20px',
                     }}>
+                    <SelectForm array={educationLevel} label={'Уровень образования'} onChange={(e) => {
+                        setValue(`education.${index}.levelEducation`, e.target.value)
+                    }} />
                     <Box
                         sx={{
                             display: 'flex',
                             gap: '20px'
                         }}>
-                        <MyTextField label={'Учебное заведение'} onChange={(e) => {
-                            setValue(`education.${index}.institution`, e.target.value)
+                        <SelectForm value={object[index].formEducation} sx={{ width: '300px', maxWidth: '100%' }} array={formEducation || ''} label={'Форма обучения'} onChange={(e) => {
+                            setValue(`education.${index}.formEducation`, e.target.value)
                         }} />
-                        <SelectForm array={educationLevel} onChange={(e) => {
-                            setValue(`education.${index}.levelEducation`, e.target.value)
+                        <SelectForm value={object[index].yearEndEducation} sx={{ width: '300px', maxWidth: '100%' }} array={yearArray || ''} label={'Год окончания'} onChange={(e) => {
+                            setValue(`education.${index}.yearEndEducation`, e.target.value)
                         }} />
                     </Box>
-                    <Box>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                gap: '20px'
-                            }}>
-                            <MyTextField label={'Факультет'} onChange={(e) => {
-                                setValue(`education.${index}.faculty`, e.target.value)
-                            }} />
-                            <MyTextField label={'Специальность'} onChange={(e) => {
-                                setValue(`education.${index}.speciality`, e.target.value)
-                            }} />
-                        </Box>
-                    </Box>
-                    <Box>
-                        <Typography>Окончание учёбы</Typography>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                gap: '20px'
-                            }}>
-                            <SelectForm value={object[index].yearEndEducation} array={yearArray || ''} label={'Год окончания'} onChange={(e) => {
-                                setValue(`education.${index}.yearEndEducation`, e.target.value)
-                            }} />
-                        </Box>
-                    </Box>
+                    <MyTextField label={'Название учебного заведения'} onChange={(e) => {
+                        setValue(`education.${index}.institution`, e.target.value)
+                    }} />
+                    <MyTextField label={'Факультет'} onChange={(e) => {
+                        setValue(`education.${index}.faculty`, e.target.value)
+                    }} />
+                    <MyTextField label={'Специальность'} onChange={(e) => {
+                        setValue(`education.${index}.speciality`, e.target.value)
+                    }} />
                 </AccordionDetails>
             </Accordion >
         ))
@@ -92,10 +79,9 @@ function FormEducations() {
                 flexDirection: 'column',
                 gap: '20px',
                 border: '2px solid #e1e5f2',
-                borderRadius: '20px',
+                borderRadius: '5px',
             }}>
-            <Typography sx={{ borderBottom: '2px solid #e1e5f2', padding: '20px' }}>Основное
-                образование</Typography>
+            <Typography sx={{ borderBottom: '2px solid #e1e5f2', padding: '20px' }}>Oбразование</Typography>
             <Box
                 sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <Box sx={{
@@ -105,9 +91,10 @@ function FormEducations() {
                 }}>
                     {educationElement}
                 </Box>
-                <CustomButton innerText="Добавить образование" onClick={() => appendEducation({
+                <CustomButton innerText="Добавить образование"  onClick={() => appendEducation({
                     institution: '',
                     levelEducation: '',
+                    formEducation: '',
                     faculty: '',
                     speciality: '',
                     yearEndEducation: ''

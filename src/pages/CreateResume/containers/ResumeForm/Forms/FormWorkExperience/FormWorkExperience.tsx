@@ -68,10 +68,10 @@ function FormWorkExperience() {
                                 display: 'flex',
                                 gap: '20px'
                             }}>
-                            <SelectForm array={monthArray || []} value={object[index].monthStart} label={'Месяц'} onChange={(e) => {
+                            <SelectForm sx={{ width: '300px' }} array={monthArray || []} value={object[index].monthStart} label={'Месяц'} onChange={(e) => {
                                 setValue(`jobs.${index}.monthStart`, e.target.value)
                             }} />
-                            <SelectForm array={yearArray || []} value={object[index].yearStart} label={'Год'} onChange={(e) => {
+                            <SelectForm sx={{ width: '300px' }} array={yearArray || []} value={object[index].yearStart} label={'Год'} onChange={(e) => {
                                 setValue(`jobs.${index}.yearStart`, e.target.value)
                             }} />
                         </Box>
@@ -83,10 +83,10 @@ function FormWorkExperience() {
                                 display: 'flex',
                                 gap: '20px'
                             }}>
-                            <SelectForm array={monthArray || []} label={'Месяц'} value={object[index].monthEnd} onChange={(e) => {
+                            <SelectForm sx={{ width: '300px' }} array={monthArray || []} label={'Месяц'} value={object[index].monthEnd} onChange={(e) => {
                                 setValue(`jobs.${index}.monthEnd`, e.target.value)
                             }} />
-                            <SelectForm array={yearArray || []} value={object[index].yearEnd} label={'Год'} onChange={(e) => {
+                            <SelectForm sx={{ width: '300px' }} array={yearArray || []} value={object[index].yearEnd} label={'Год'} onChange={(e) => {
                                 setValue(`jobs.${index}.yearEnd`, e.target.value)
                             }} />
                         </Box>
@@ -103,7 +103,7 @@ function FormWorkExperience() {
                 flexDirection: 'column',
                 gap: '20px',
                 border: '2px solid #e1e5f2',
-                borderRadius: '20px',
+                borderRadius: '5px',
             }}>
             <Typography sx={{ borderBottom: '2px solid #e1e5f2', padding: '20px' }}>Опыт работы</Typography>
             <Box

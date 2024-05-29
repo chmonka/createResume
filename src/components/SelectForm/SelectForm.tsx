@@ -13,14 +13,7 @@ const SelectForm = forwardRef<HTMLSelectElement, ISelectForm>(
         <Select
           variant="outlined"
           {...props}
-          ref={ref}
-          sx={{
-            width: '150px',
- 
-            fontSize:'12px',
-           
-          }}
-        >
+          ref={ref}>
           {array.map((item, index) => {
             return (
               <MenuItem key={index} value={item}>
