@@ -1,7 +1,4 @@
-import { Accordion, Box, Button, Grid, Typography } from '@mui/material'
-import AccordionDetails from '@mui/material/AccordionDetails'
-import AccordionSummary from '@mui/material/AccordionSummary'
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
+import { Box, Button, Typography } from '@mui/material'
 import { Controller, useFormContext } from 'react-hook-form'
 import MyTextField from '../../../../../../components/TextField/MyTextField'
 import SelectForm from '../../../../../../components/SelectForm/SelectForm'
@@ -17,9 +14,7 @@ import { ChangeEvent, useState } from 'react'
 
 const FormMainInFormation = () => {
     const methods = useFormContext<Candidate>()
-    const { register, control, watch, setValue, setError, trigger, formState: { errors } } = methods
-    const moneyArray: string[] = ['Руб', '$']
-    const interestingArray: string[] = ['', 'Полная занятность', 'Частичная занятность', 'Проектная работа', 'Волонтёрство', 'Стажировка']
+    const { register, control, watch, setValue, trigger, formState: { errors } } = methods
     const scheduleArray: string[] = ['', 'Полный день', 'Сменный график', 'Гибкий график', 'Удалённая работа', 'Вахтовый метод']
     const object = watch();
     const [file, setFile] = useState<string | null>(null);
@@ -117,12 +112,11 @@ const FormMainInFormation = () => {
                                 <DateField
                                     label="Дата рождения"
                                     defaultValue={dayjs('2022-04-17')}
-                                    format="MM-DD-YYYY"
+                                    format="DD-MM-YYYY"
                                     onChange={onChange} />
                             </DemoContainer>
                         </LocalizationProvider>
                     )} />
-
                 <MyTextField label={'Город'} {...register('city')}></MyTextField>
                 <FormContacts></FormContacts>
             </Box>
@@ -152,62 +146,12 @@ const FormMainInFormation = () => {
                 <Controller
                     control={control}
                     name='interesting'
-                    render={({ field: { onChange, value } }) => (<SelectForm sx={{ width: '320px' }} label={'Занятность'} onChange={onChange} value={value} array={interestingArray || ['']} />)} />
+                    render={({ field: { onChange, value } }) => (<SelectForm sx={{ width: '320px' }} label={'Занятность'} onChange={onChange} value={value} array={scheduleArray || ['']} />)} />
                 <Controller
                     control={control}
                     name="money"
                     render={({ field: { onChange } }) => (<MyTextField sx={{ width: '320px' }} label={'Желаемая зарплата, Руб'} type={'number'} inputProps={{ min: 0, step: 5000 }} onChange={onChange} />)} />
             </Box>
-
-
-            {/* <Accordion>
-                <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-                    <Typography variant={'h6'}>Дополнительная информация</Typography>
-                </AccordionSummary>
-                <AccordionDetails
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '20px',
-                    }}>
-                    <Grid
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            gap: '20px',
-                        }}>
-                       
-                        <Controller
-                            control={control}
-                            name="currency"
-                            render={({ field: { onChange, value } }) => (<SelectForm label={'Валюта'} value={value} onChange={onChange} array={moneyArray || ['']} />)} />
-
-
-                        <MyTextField
-                            label={'Гражданство'}
-                            {...register('citizenship')}
-                            error={!!errors.citizenship}
-                            helperText={errors.citizenship ? errors.citizenship.message : ""}
-                            onChange={e => {
-                                setValue('citizenship', e.target.value.slice(0, 15).replace(/[^a-zA-Zа-яА-Я]/g, ''));
-                                trigger('citizenship');
-                            }} />
-                    </Grid>
-                    <Grid
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            gap: '20px',
-                        }}>
-                     
-                        <Controller
-                            control={control}
-                            name='schedule'
-                            render={({ field: { onChange, value } }) => (<SelectForm label={'График работы'} onChange={onChange} value={value} array={scheduleArray || ['']} />)} />
-                    </Grid>
-                </AccordionDetails>
-            </Accordion> */}
         </Box >
     )
 }

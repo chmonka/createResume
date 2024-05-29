@@ -6,9 +6,9 @@ import { useFormContext } from 'react-hook-form'
 import FormViewMain from './FormsView/FormViewMain/FormViewMain'
 import FormViewSecond from './FormsView/FormViewSecond/FormViewSecond'
 import CustomButton from '../Button/CustomButton'
+import CustomContainer from '../Container/CustomContainer'
 
 const MyDocument = () => {
-  const { watch } = useFormContext()
   const pdfRef = useRef(null)
 
   const downloadPDF = () => {
@@ -27,7 +27,7 @@ const MyDocument = () => {
         const imgWidth = canvas.width;
         const imgHeight = canvas.height;
         const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth * ratio + 5, imgHeight * ratio );
+        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth * ratio + 5, imgHeight * ratio);
         pdf.save('resume.pdf')
       })
     } else {
@@ -36,61 +36,63 @@ const MyDocument = () => {
   }
 
   return (
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      width: '768px',
-      height:'100vh',
-      border: '1px solid #023e8a',
-      borderRadius: '5px',
-      justifyContent: 'flex-start',
-      alignItems: 'flex-start',
-      position: 'sticky',
-      top: 0
-    }}>
+    <CustomContainer>
       <Box sx={{
         display: 'flex',
-        padding: '10px 24px',
-        height: '54px',
-        width: '100%',
-        borderBottom: '1px solid black'
-      }}>
-        <CustomButton innerText="Download" onClick={downloadPDF} sx={{ padding: '20px' }} />
-      </Box>
-      <Box sx={{
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        flexDirection: 'column',
+        width: '768px',
+        height: '100vh',
+        border: '1px solid #023e8a',
+        borderRadius: '5px',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        position: 'sticky',
+        top: 0
       }}>
         <Box sx={{
-          width: '500px',
-          height:'720px'
+          display: 'flex',
+          padding: '10px 24px',
+          height: '54px',
+          width: '100%',
+          borderBottom: '1px solid black'
         }}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: '100%',
-              border: '1px solid #023e8a',
-            }}>
-            <Box ref={pdfRef} 
+          <CustomButton innerText="Download" onClick={downloadPDF} sx={{ padding: '20px' }} />
+        </Box>
+        <Box sx={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <Box sx={{
+            width: '500px',
+            height: '720px'
+          }}>
+            <Box
               sx={{
                 display: 'flex',
-                width: '100%',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
                 height: '100%',
-                flexDirection: 'row'
+                border: '1px solid #023e8a',
               }}>
-              <FormViewMain />
-              <FormViewSecond />
+              <Box ref={pdfRef}
+                sx={{
+                  display: 'flex',
+                  width: '100%',
+                  height: '100%',
+                  flexDirection: 'row'
+                }}>
+                <FormViewMain />
+                <FormViewSecond />
+              </Box>
             </Box>
           </Box>
         </Box>
       </Box>
-    </Box>
+    </CustomContainer>
   )
 }
 

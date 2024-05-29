@@ -1,7 +1,7 @@
-import ResumePreview from './containers/ResumePreview'
+import ResumeForm from './containers/ResumeForm/ResumeForm'
 
-const CreateResumePage = () => {
-  return <ResumePreview />
+function CreateResumePage() {
+  return <ResumeForm />
 }
 
 export default CreateResumePage
