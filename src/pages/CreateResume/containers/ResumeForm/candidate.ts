@@ -1,8 +1,8 @@
 export interface Candidate {
-  desiredPosition: string
-  lastName: string
-  firstName: string
-  middleName: string
+  desiredPosition?: string
+  lastName?: string
+  firstName?: string
+  middleName?: string
   day: string
   month: string
   year: string
@@ -41,7 +41,6 @@ export interface Candidate {
     nameCompany: string
     nameCourse: string
   }[]
-
   languages:{
     nameLanguage:string
     levelLanguage:string

@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button,Typography } from '@mui/material'
 import { Controller, useFormContext } from 'react-hook-form'
 import MyTextField from '../../../../../../components/TextField/MyTextField'
 import SelectForm from '../../../../../../components/SelectForm/SelectForm'
@@ -14,7 +14,9 @@ import { ChangeEvent, useState } from 'react'
 
 const FormMainInFormation = () => {
     const methods = useFormContext<Candidate>()
-    const { register, control, watch, setValue, trigger, formState: { errors } } = methods
+    const { register, control, handleSubmit, watch, setValue, setError, trigger, formState: { errors } } = methods
+    const moneyArray: string[] = ['Руб', '$']
+    const interestingArray: string[] = ['', 'Полная занятность', 'Частичная занятность', 'Проектная работа', 'Волонтёрство', 'Стажировка']
     const scheduleArray: string[] = ['', 'Полный день', 'Сменный график', 'Гибкий график', 'Удалённая работа', 'Вахтовый метод']
     const object = watch();
     const [file, setFile] = useState<string | null>(null);
@@ -25,7 +27,7 @@ const FormMainInFormation = () => {
             setValue('photoProfile', URL.createObjectURL(e.target.files[0]))
         }
     }
-    console.log(watch('photoProfile'))
+ 
 
 
     return (
@@ -112,11 +114,12 @@ const FormMainInFormation = () => {
                                 <DateField
                                     label="Дата рождения"
                                     defaultValue={dayjs('2022-04-17')}
-                                    format="DD-MM-YYYY"
+                                    format="MM-DD-YYYY"
                                     onChange={onChange} />
                             </DemoContainer>
                         </LocalizationProvider>
                     )} />
+
                 <MyTextField label={'Город'} {...register('city')}></MyTextField>
                 <FormContacts></FormContacts>
             </Box>
@@ -146,7 +149,7 @@ const FormMainInFormation = () => {
                 <Controller
                     control={control}
                     name='interesting'
-                    render={({ field: { onChange, value } }) => (<SelectForm sx={{ width: '320px' }} label={'Занятность'} onChange={onChange} value={value} array={scheduleArray || ['']} />)} />
+                    render={({ field: { onChange, value } }) => (<SelectForm sx={{ width: '320px' }} label={'Занятность'} onChange={onChange} value={value} array={interestingArray || ['']} />)} />
                 <Controller
                     control={control}
                     name="money"

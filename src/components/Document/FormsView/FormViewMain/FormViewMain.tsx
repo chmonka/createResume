@@ -3,10 +3,11 @@ import PlaceIcon from '@mui/icons-material/Place'
 import { useFormContext } from "react-hook-form"
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import CircleIcon from '@mui/icons-material/Circle';
+import { useLocation } from "react-router-dom";
 function FormViewMain() {
     const date = new Date().getFullYear()
-    const { watch } = useFormContext()
-    const object = watch()
+    const { state } = useLocation();
+
 
     const StyledRating = styled(Rating)({
         '& .MuiRating-iconFilled': {
@@ -16,6 +17,9 @@ function FormViewMain() {
             color: '#FFFFFF',
         },
     });
+    if (!state) {
+        return  <Typography variant='body1'>{state}</Typography>;
+    }
 
     return (
         <Box sx={{
@@ -32,15 +36,15 @@ function FormViewMain() {
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                     <Box sx={{ width: '100px', height: '100px', backgroundColor: 'white', borderRadius: '20px' }}></Box>
                 </Box>
-                <Typography sx={{ color: 'white', fontSize: '12px' }} variant="h6">{object.middleName.toUpperCase()} {object.firstName.toUpperCase()} {object.lastName.toUpperCase()}</Typography>
+                <Typography sx={{ color: 'white', fontSize: '12px' }} variant="h6">{state.middleName.toUpperCase()} {state.firstName.toUpperCase()} {state.lastName.toUpperCase()}</Typography>
                 <Box>
-                    <Typography sx={{ color: 'white', fontSize: '12px' }} variant="h6">Должность: {object.desiredPosition}</Typography>
-                    <Typography sx={{ color: 'white', fontSize: '12px' }} variant="h6">Возраст: {date - object.year}</Typography>
-                    <Typography sx={{ color: 'white', fontSize: '12px' }} variant="h6">Зароботная плата: {object.money} {object.currency}</Typography>
+                    <Typography sx={{ color: 'white', fontSize: '12px' }} variant="h6">Должность: {state.desiredPosition}</Typography>
+                    <Typography sx={{ color: 'white', fontSize: '12px' }} variant="h6">Возраст: {date - state.year}</Typography>
+                    <Typography sx={{ color: 'white', fontSize: '12px' }} variant="h6">Зароботная плата: {state.money} {state.currency}</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <PlaceIcon sx={{ color: 'white' }} />
-                    <Typography sx={{ color: 'white', fontSize: '12px' }}>{object.city}</Typography>
+                    <Typography sx={{ color: 'white', fontSize: '12px' }}>{state.city}</Typography>
                 </Box>
             </Box>
             <Box>
@@ -51,7 +55,7 @@ function FormViewMain() {
                         fontSize: '12px',
                         fontWeight: 'bold'
                     }}>Контакты:</Typography>
-                {object.socials.map((item: { icon: string, link: string }, index: number) => {
+                {state.socials.map((item: { icon: string, link: string }, index: number) => {
                     return (<Box display={"flex"} flexDirection={"row"} gap={"20px"} key={index}>
                         <Typography sx={{ fontSize: '12px', color: '#FFFFFF' }}>{item.icon}</Typography>
                         <Typography sx={{ fontSize: '12px', color: '#FFFFFF' }}>{item.link}</Typography>
@@ -66,7 +70,7 @@ function FormViewMain() {
                         fontSize: '12px',
                         fontWeight: 'bold'
                     }}>Знание языков:</Typography>
-                {object.languages.map((item: { nameLanguage: string, levelLanguage: string }, index: number) => {
+                {state.languages.map((item: { nameLanguage: string, levelLanguage: string }, index: number) => {
                     const levelLang = {
                         'A1-начальный': 0,
                         'A2-элементарный': 1,

@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material'
+import { Box, Button, Grid } from '@mui/material'
 import CustomContainer from '../../../../components/Container/CustomContainer.tsx'
 import { Candidate, defaultValueForm } from './candidate.ts'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -7,27 +7,40 @@ import FormWorkExperience from './Forms/FormWorkExperience/FormWorkExperience.ts
 import FormEducations from './Forms/FormEducations/FormEducations.tsx'
 import FormLanguages from './Forms/FormLanguages/FormLanguages.tsx'
 import FormCourses from './Forms/FormCourses/FormCourses.tsx'
-import { Link } from 'react-router-dom'
-import MyDocument from '../../../../components/Document/MyDocument.tsx'
+import { useNavigate } from 'react-router-dom'
+
 
 const ResumeForm = () => {
   const methods = useForm<Candidate>({ defaultValues: defaultValueForm, mode: 'onChange' })
+  const {
+    handleSubmit,
+  } = methods
+
+  const navigate = useNavigate()
+
+  const onSubmit = (data: Candidate) => {
+    navigate("/resumeviewform", { state: data });
+    console.log(data)
+  }
+
   return (
-    <Box >
+    <Box>
       <FormProvider {...methods}>
         <CustomContainer sx={{ position: 'relative' }}>
           <Grid sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '50%' }}>
-              <FormMainInFormation />
-              <FormWorkExperience />
-              <FormEducations />
-              <FormCourses />
-              <FormLanguages />
+
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <FormMainInFormation />
+                <FormWorkExperience />
+                <FormEducations />
+                <FormCourses />
+                <FormLanguages />
+                <Button type="submit" variant="contained">Submit</Button>
+              </form>
             </Box>
             <Box>
-              <Link to={'/resumeviewform'}>
-                <button type="button">Перейти</button>
-              </Link>
+
             </Box>
           </Grid>
         </CustomContainer>

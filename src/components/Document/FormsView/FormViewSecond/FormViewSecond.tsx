@@ -1,11 +1,14 @@
 import { Box, Typography } from "@mui/material"
 import { useFormContext } from "react-hook-form"
+import { useLocation } from "react-router-dom";
 
 
 function FormViewSecond() {
 
-    const { watch } = useFormContext()
-    const object = watch()
+    const { state } = useLocation();
+    if (!state) {
+        return <Typography variant='body1'>State is null</Typography>;
+    }
     return (
         <Box sx={{
             justifyContent: 'center',
@@ -15,7 +18,7 @@ function FormViewSecond() {
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: "10px" }}>
                 <Box>
                     <Typography variant='h6' sx={{ border: '1px solid #0567e3', padding: '5px', fontSize: '15px' }}>Опыт работы</Typography>
-                    {object.jobs.map((item: { postJob: string, nameCompany: string, monthStart: string, yearStart: string, monthEnd: string, yearEnd: string }, index: number) => {
+                    {state.jobs.map((item: { postJob: string, nameCompany: string, monthStart: string, yearStart: string, monthEnd: string, yearEnd: string }, index: number) => {
                         return (
                             <Box key={index}
                                 sx={{
@@ -34,7 +37,7 @@ function FormViewSecond() {
                 </Box>
                 <Box>
                     <Typography variant='h6' sx={{ border: '1px solid #0567e3', padding: '5px', fontSize: '15px' }}>Образование</Typography>
-                    {object.education.map((item: { institution: string, levelEducation: string, faculty: string, speciality: string, yearEndEducation: string }, index: number) => {
+                    {state.education.map((item: { institution: string, levelEducation: string, faculty: string, speciality: string, yearEndEducation: string }, index: number) => {
                         return (
                             <Box key={index}>
                                 <Typography sx={{ fontSize: '12px' }}>Год окончания: {item.yearEndEducation}</Typography>
@@ -49,16 +52,16 @@ function FormViewSecond() {
                     <Typography variant='h6' sx={{
                         border: '1px solid #0567e3', padding: '5px', fontSize: '14px',
                         fontWeight: 'bold',
-                        width:'100%'
+                        width: '100%'
                     }}>Курсы</Typography>
-                    {object.trainingCourses.map((item: { yearEnd: string, nameCompany: string, nameCourse: string }, index: number) => {
+                    {state.trainingCourses.map((item: { yearEnd: string, nameCompany: string, nameCourse: string }, index: number) => {
                         return (
-                            <Box key={index} sx={{ display: 'flex', flexDirection: 'row' , justifyContent:"space-between" }}>
-                                <Box  sx={{display:"flex", flexDirection: 'column'}} >
-                                    <Typography sx={{ fontSize: '12px',fontWeight:'bold' }}>{item.nameCourse}</Typography>
+                            <Box key={index} sx={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between" }}>
+                                <Box sx={{ display: "flex", flexDirection: 'column' }} >
+                                    <Typography sx={{ fontSize: '12px', fontWeight: 'bold' }}>{item.nameCourse}</Typography>
                                     <Typography sx={{ fontSize: '12px' }}>{item.nameCompany}</Typography>
                                 </Box>
-                                <Typography sx={{ fontSize: '12px',}}>{item.yearEnd}</Typography>
+                                <Typography sx={{ fontSize: '12px', }}>{item.yearEnd}</Typography>
                             </Box>
                         )
                     })}
