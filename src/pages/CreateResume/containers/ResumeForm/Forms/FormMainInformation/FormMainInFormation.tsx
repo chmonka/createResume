@@ -1,4 +1,4 @@
-import { Box, Button,Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import { Controller, useFormContext } from 'react-hook-form'
 import MyTextField from '../../../../../../components/TextField/MyTextField'
 import SelectForm from '../../../../../../components/SelectForm/SelectForm'
@@ -27,7 +27,7 @@ const FormMainInFormation = () => {
             setValue('photoProfile', URL.createObjectURL(e.target.files[0]))
         }
     }
- 
+
 
 
     return (
@@ -50,13 +50,17 @@ const FormMainInFormation = () => {
                             label={'Фамилия'}
                             {...register('middleName', {
                                 required: "Заполните обязательное поле",
+                                maxLength: {
+                                    value: 15,
+                                    message: "Фамилия должна содержать не более 15 символов"
+                                },
+                                pattern: {
+                                    value: /^[a-zA-Zа-яА-Я\s]*$/,
+                                    message: "Фамилия может содержать только буквы и пробелы"
+                                }
                             })}
                             error={!!errors.middleName}
                             helperText={errors.middleName ? errors.middleName.message : ""}
-                            onChange={e => {
-                                setValue('middleName', e.target.value.slice(0, 15).replace(/[^a-zA-Zа-яА-Я]/g, ''));
-                                trigger('middleName');
-                            }}
                         />
                         <MyTextField
                             required
@@ -64,18 +68,29 @@ const FormMainInFormation = () => {
                             label={'Имя'}
                             {...register('firstName', {
                                 required: "Заполните обязательное поле",
+                                maxLength: {
+                                    value: 15,
+                                    message: "Имя должно содержать не более 15 символов"
+                                },
+                                pattern: {
+                                    value: /^[a-zA-Zа-яА-Я\s]*$/,
+                                    message: "Имя может содержать только буквы и пробелы"
+                                }
                             })}
                             error={!!errors.firstName}
                             helperText={errors.firstName ? errors.firstName.message : ""}
-                            onChange={e => {
-                                setValue('firstName', e.target.value.slice(0, 15).replace(/[^a-zA-Zа-яА-Я]/g, ''));
-                                trigger('firstName');
-                            }}
                         />
                         <MyTextField
                             sx={{ width: '400px' }}
                             label={'Отчество'}
-                            {...register('lastName')} />
+                            {...register('lastName', {
+                                maxLength: {
+                                    value: 15,
+                                    message: "Отчество должно содержать не более 15 символов"
+                                },
+                            })}
+                            error={!!errors.lastName}
+                            helperText={errors.lastName ? errors.lastName.message : ""} />
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
                         <Box
@@ -85,8 +100,7 @@ const FormMainInFormation = () => {
                                 border: '1px solid black',
                                 borderRadius: '100px',
                                 position: 'relative',
-                            }}
-                        >
+                            }}>
                             <input
                                 accept="image/ * "
                                 id="contained-button-file"
@@ -104,48 +118,47 @@ const FormMainInFormation = () => {
                         </label>
                     </Box>
                 </Box>
-
                 <Controller
                     control={control}
                     name="date"
+                    rules={{
+                        required: 'Дата рождения является обязательным полем',
+                    }}
                     render={({ field: { onChange, value } }) => (
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['DateField', 'DateField']}>
                                 <DateField
                                     label="Дата рождения"
-                                    defaultValue={dayjs('2022-04-17')}
                                     format="MM-DD-YYYY"
-                                    onChange={onChange} />
-                            </DemoContainer>
-                        </LocalizationProvider>
+                                    onChange={onChange}
+                                />
+                            </DemoContainer >
+                        </LocalizationProvider >
                     )} />
-
                 <MyTextField label={'Город'} {...register('city')}></MyTextField>
-                <FormContacts></FormContacts>
+                <FormContacts />
             </Box>
-
             <MyTextField
                 required
                 label={'Желаемая должность'}
                 {...register('desiredPosition', {
                     required: "Заполните обязательное поле",
+                    maxLength: {
+                        value: 20,
+                        message: "Должность должно содержать не более 15 символов"
+                    },
                     pattern: {
-                        value: /[а-яё]+/,
-                        message: "Используйте только кирилические буквы"
+                        value: /^[a-zA-Zа-яА-Я\s]*$/,
+                        message: "Должность может содержать только буквы и пробелы"
                     }
                 })}
                 error={!!errors.desiredPosition}
-                helperText={errors.desiredPosition ? errors.desiredPosition.message : ""}
-                onChange={e => {
-                    setValue('desiredPosition', e.target.value.slice(0, 20).replace(/[^a-zA-Zа-яА-Я]/g, ''));
-                    trigger('desiredPosition');
-                }} />
+                helperText={errors.desiredPosition ? errors.desiredPosition.message : ""} />
             <Box
                 sx={{
                     display: 'flex',
                     justifyContent: 'space-between'
-                }}
-            >
+                }}>
                 <Controller
                     control={control}
                     name='interesting'

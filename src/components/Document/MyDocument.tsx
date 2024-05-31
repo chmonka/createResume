@@ -36,7 +36,7 @@ const MyDocument = () => {
   }
 
   return (
-    <CustomContainer>
+    <CustomContainer display={'flex'} justifyItems={'center'}>
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',

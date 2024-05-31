@@ -27,22 +27,18 @@ const ResumeForm = () => {
     <Box>
       <FormProvider {...methods}>
         <CustomContainer sx={{ position: 'relative' }}>
-          <Grid sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '50%' }}>
-
-              <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '50%' }}>
                 <FormMainInFormation />
                 <FormWorkExperience />
                 <FormEducations />
                 <FormCourses />
                 <FormLanguages />
-                <Button type="submit" variant="contained">Submit</Button>
-              </form>
-            </Box>
-            <Box>
-
-            </Box>
-          </Grid>
+              </Box>
+              <Button type="submit" variant="contained">Сформировать резюме</Button>
+            </Grid>
+          </form>
         </CustomContainer>
       </FormProvider>
     </Box>
