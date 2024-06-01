@@ -28,8 +28,6 @@ const FormMainInFormation = () => {
         }
     }
 
-
-
     return (
         <Box
             sx={{
@@ -42,10 +40,14 @@ const FormMainInFormation = () => {
             }}>
             <Typography>Основная информация</Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
+                <Box sx={(theme) => ({
+                    [theme.breakpoints.up('xs')]: { gap: '20px', flexDirection: 'column-reverse', alignItems: 'flex-start' },
+                    [theme.breakpoints.up('xl')]: { gap: '20px', flexDirection: 'row' },
+                    display: 'flex',
+                    justifyContent: 'space-between'
+                })}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '45px', width: '100%' }}>
                         <MyTextField
-                            sx={{ width: '400px' }}
                             required
                             label={'Фамилия'}
                             {...register('middleName', {
@@ -64,7 +66,6 @@ const FormMainInFormation = () => {
                         />
                         <MyTextField
                             required
-                            sx={{ width: '400px' }}
                             label={'Имя'}
                             {...register('firstName', {
                                 required: "Заполните обязательное поле",
@@ -81,7 +82,6 @@ const FormMainInFormation = () => {
                             helperText={errors.firstName ? errors.firstName.message : ""}
                         />
                         <MyTextField
-                            sx={{ width: '400px' }}
                             label={'Отчество'}
                             {...register('lastName', {
                                 maxLength: {
@@ -96,6 +96,8 @@ const FormMainInFormation = () => {
                         <Box
                             sx={{
                                 width: '200px',
+                                maxHeight: '100%',
+                                maxWidth: '100%',
                                 height: '200px',
                                 border: '1px solid black',
                                 borderRadius: '100px',
@@ -157,16 +159,17 @@ const FormMainInFormation = () => {
             <Box
                 sx={{
                     display: 'flex',
-                    justifyContent: 'space-between'
+                    justifyContent: 'space-between',
+                    gap:'20px'
                 }}>
                 <Controller
                     control={control}
                     name='interesting'
-                    render={({ field: { onChange, value } }) => (<SelectForm sx={{ width: '320px' }} label={'Занятность'} onChange={onChange} value={value} array={interestingArray || ['']} />)} />
+                    render={({ field: { onChange, value } }) => (<SelectForm label={'Занятность'} onChange={onChange} value={value} array={interestingArray || ['']} />)} />
                 <Controller
                     control={control}
                     name="money"
-                    render={({ field: { onChange } }) => (<MyTextField sx={{ width: '320px' }} label={'Желаемая зарплата, Руб'} type={'number'} inputProps={{ min: 0, step: 5000 }} onChange={onChange} />)} />
+                    render={({ field: { onChange } }) => (<MyTextField label={'Желаемая зарплата, Руб'} type={'number'} inputProps={{ min: 0, step: 5000 }} onChange={onChange} />)} />
             </Box>
         </Box >
     )

@@ -50,10 +50,10 @@ function FormEducations() {
                             display: 'flex',
                             gap: '20px'
                         }}>
-                        <SelectForm value={object[index].formEducation} sx={{ width: '300px', maxWidth: '100%' }} array={formEducation || ''} label={'Форма обучения'} onChange={(e) => {
+                        <SelectForm value={object[index].formEducation} array={formEducation || ''} label={'Форма обучения'} onChange={(e) => {
                             setValue(`education.${index}.formEducation`, e.target.value)
                         }} />
-                        <SelectForm value={object[index].yearEndEducation} sx={{ width: '300px', maxWidth: '100%' }} array={yearArray || ''} label={'Год окончания'} onChange={(e) => {
+                        <SelectForm value={object[index].yearEndEducation} array={yearArray || ''} label={'Год окончания'} onChange={(e) => {
                             setValue(`education.${index}.yearEndEducation`, e.target.value)
                         }} />
                     </Box>

@@ -6,11 +6,12 @@ type ISelectForm = BaseSelectProps<string> & {
 }
 
 const SelectForm = forwardRef<HTMLSelectElement, ISelectForm>(
-  ({label, array, ...props }, ref) => {
+  ({ label, array, ...props }, ref) => {
     return (
-      <FormControl>
-        <InputLabel style={{ color: '#000',background:'#FFFFFF' }}>{label}</InputLabel>
+      <FormControl sx={{ width: '100%' }}>
+        <InputLabel style={{ color: '#000', background: '#FFFFFF' }}>{label}</InputLabel>
         <Select
+
           variant="outlined"
           {...props}
           ref={ref}>

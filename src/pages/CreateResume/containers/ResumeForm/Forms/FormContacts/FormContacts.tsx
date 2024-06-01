@@ -21,7 +21,8 @@ function FormContacts() {
 
     const socialsElement = socials.map((field, index) => (
         <Accordion
-            key={index}>
+            key={index}
+            sx={{width:'100%'}}>
             <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
                 <Typography variant={'h6'}>{social[index].icon}</Typography>
             </AccordionSummary>
@@ -37,10 +38,10 @@ function FormContacts() {
                         gap: '20px',
                         justifyContent:'space-between'
                     }}>
-                    <SelectForm value={social[index].icon} sx={{width:'300px', maxWidth:'100%'}} label={'Социальная сеть'} onChange={(e) => {
+                    <SelectForm value={social[index].icon}  label={'Социальная сеть'} onChange={(e) => {
                         setValue(`socials.${index}.icon`, e.target.value)
                     }} array={socialArray} />
-                    <MyTextField label={'Ссылка'} sx={{width:'300px', maxWidth:'100%'}} onChange={(e) => {
+                    <MyTextField label={'Ссылка'}onChange={(e) => {
                         setValue(`socials.${index}.link`, e.target.value)
                     }} />
                 </Box>
@@ -57,7 +58,6 @@ function FormContacts() {
                     gap: '20px',
                 }}>
                     <MyTextField
-                    
                         required
                         label={'Электронная почта'}
                         {...register('email', {
