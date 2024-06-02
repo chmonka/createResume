@@ -1,12 +1,12 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from "@mui/material"
 import CustomButton from "../../../../../../components/Button/CustomButton"
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import { Candidate } from "../../candidate";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import MyTextField from "../../../../../../components/TextField/MyTextField";
 import SelectForm from "../../../../../../components/SelectForm/SelectForm";
-
-
+import SchoolIcon from '@mui/icons-material/School';
+import DeleteIcon from '@mui/icons-material/Delete';
 function FormEducations() {
 
 
@@ -34,7 +34,12 @@ function FormEducations() {
                     width: '100%'
                 }}>
                 <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-                    <Typography variant={'h6'}>{object[index].institution}</Typography>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row-reverse', width: '100%' }}>
+                        <IconButton onClick={() => removeEducation(index)}>
+                            <DeleteIcon />
+                        </IconButton>
+                        <Typography variant={'h6'}>{object[index].institution}</Typography>
+                    </Box>
                 </AccordionSummary>
                 <AccordionDetails
                     sx={{
@@ -78,10 +83,14 @@ function FormEducations() {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '20px',
-                border: '2px solid #e1e5f2',
+                border: '2px solid #ccdbfd',
                 borderRadius: '5px',
             }}>
-            <Typography sx={{ borderBottom: '2px solid #e1e5f2', padding: '20px' }}>Oбразование</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', borderBottom: '2px solid #ccdbfd', padding: '10px 20px', gap: '20px' }}>
+                <SchoolIcon sx={{ fontSize: '40px' }} />
+                <Typography variant='h2'>Oбразование</Typography>
+            </Box>
+
             <Box
                 sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <Box sx={{
@@ -91,7 +100,7 @@ function FormEducations() {
                 }}>
                     {educationElement}
                 </Box>
-                <CustomButton innerText="Добавить образование"  onClick={() => appendEducation({
+                <CustomButton innerText="Добавить образование" onClick={() => appendEducation({
                     institution: '',
                     levelEducation: '',
                     formEducation: '',

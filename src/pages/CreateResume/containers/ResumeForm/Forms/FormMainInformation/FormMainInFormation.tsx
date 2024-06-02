@@ -7,18 +7,15 @@ import { DateField } from '@mui/x-date-pickers/DateField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider/LocalizationProvider'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs from 'dayjs';
 import FormContacts from '../FormContacts/FormContacts'
 import { ChangeEvent, useState } from 'react'
-
+import CustomButton from '../../../../../../components/Button/CustomButton'
+import InfoIcon from '@mui/icons-material/Info';
 
 const FormMainInFormation = () => {
     const methods = useFormContext<Candidate>()
-    const { register, control, handleSubmit, watch, setValue, setError, trigger, formState: { errors } } = methods
-    const moneyArray: string[] = ['Руб', '$']
-    const interestingArray: string[] = ['', 'Полная занятность', 'Частичная занятность', 'Проектная работа', 'Волонтёрство', 'Стажировка']
+    const { register, control, setValue, formState: { errors } } = methods
     const scheduleArray: string[] = ['', 'Полный день', 'Сменный график', 'Гибкий график', 'Удалённая работа', 'Вахтовый метод']
-    const object = watch();
     const [file, setFile] = useState<string | null>(null);
 
     function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
@@ -33,13 +30,15 @@ const FormMainInFormation = () => {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                border: '2px solid #e1e5f2',
-                padding: '20px',
+                border: '2px solid #ccdbfd',
                 borderRadius: '5px',
                 gap: '20px',
             }}>
-            <Typography>Основная информация</Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', borderBottom: '2px solid #ccdbfd', padding: '10px 20px', gap: '20px' }}>
+                <InfoIcon sx={{ fontSize: '40px' }} />
+                <Typography variant='h2'>Основная информация</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '20px', }}>
                 <Box sx={(theme) => ({
                     [theme.breakpoints.up('xs')]: { gap: '20px', flexDirection: 'column-reverse', alignItems: 'flex-start' },
                     [theme.breakpoints.up('xl')]: { gap: '20px', flexDirection: 'row' },
@@ -92,7 +91,7 @@ const FormMainInFormation = () => {
                             error={!!errors.lastName}
                             helperText={errors.lastName ? errors.lastName.message : ""} />
                     </Box>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', }}>
                         <Box
                             sx={{
                                 width: '200px',
@@ -114,9 +113,7 @@ const FormMainInFormation = () => {
                         </Box>
 
                         <label htmlFor="contained-button-file">
-                            <Button variant="contained" component="span">
-                                Загрузить фото
-                            </Button>
+                            <CustomButton innerText={'Загрузить фото'} component="span" />
                         </label>
                     </Box>
                 </Box>
@@ -126,10 +123,11 @@ const FormMainInFormation = () => {
                     rules={{
                         required: 'Дата рождения является обязательным полем',
                     }}
-                    render={({ field: { onChange, value } }) => (
+                    render={({ field: { onChange } }) => (
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['DateField', 'DateField']}>
                                 <DateField
+                                    required
                                     label="Дата рождения"
                                     format="MM-DD-YYYY"
                                     onChange={onChange}
@@ -140,36 +138,45 @@ const FormMainInFormation = () => {
                 <MyTextField label={'Город'} {...register('city')}></MyTextField>
                 <FormContacts />
             </Box>
-            <MyTextField
-                required
-                label={'Желаемая должность'}
-                {...register('desiredPosition', {
-                    required: "Заполните обязательное поле",
-                    maxLength: {
-                        value: 20,
-                        message: "Должность должно содержать не более 15 символов"
-                    },
-                    pattern: {
-                        value: /^[a-zA-Zа-яА-Я\s]*$/,
-                        message: "Должность может содержать только буквы и пробелы"
-                    }
-                })}
-                error={!!errors.desiredPosition}
-                helperText={errors.desiredPosition ? errors.desiredPosition.message : ""} />
             <Box
                 sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
-                    gap:'20px'
+                    flexDirection: 'column',
+                    gap: '20px',
+                    padding: '20px'
                 }}>
-                <Controller
-                    control={control}
-                    name='interesting'
-                    render={({ field: { onChange, value } }) => (<SelectForm label={'Занятность'} onChange={onChange} value={value} array={interestingArray || ['']} />)} />
-                <Controller
-                    control={control}
-                    name="money"
-                    render={({ field: { onChange } }) => (<MyTextField label={'Желаемая зарплата, Руб'} type={'number'} inputProps={{ min: 0, step: 5000 }} onChange={onChange} />)} />
+                <MyTextField
+                    required
+                    label={'Желаемая должность'}
+                    {...register('desiredPosition', {
+                        required: "Заполните обязательное поле",
+                        maxLength: {
+                            value: 20,
+                            message: "Должность должно содержать не более 15 символов"
+                        },
+                        pattern: {
+                            value: /^[a-zA-Zа-яА-Я\s]*$/,
+                            message: "Должность может содержать только буквы и пробелы"
+                        }
+                    })}
+                    error={!!errors.desiredPosition}
+                    helperText={errors.desiredPosition ? errors.desiredPosition.message : ""} />
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                    gap: '20px',
+                }}>
+                    <Controller
+                        control={control}
+                        name='interesting'
+                        render={({ field: { onChange, value } }) => (<SelectForm label={'Занятность'} onChange={onChange} value={value} array={scheduleArray || ['']} />)} />
+                    <Controller
+                        control={control}
+                        name="money"
+                        render={({ field: { onChange } }) => (<MyTextField label={'Желаемая зарплата, Руб'} type={'number'} inputProps={{ min: 0, step: 5000 }} onChange={onChange} />)} />
+                </Box>
             </Box>
         </Box >
     )

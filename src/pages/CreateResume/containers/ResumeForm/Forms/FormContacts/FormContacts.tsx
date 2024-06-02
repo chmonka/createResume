@@ -2,12 +2,11 @@
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import CustomButton from '../../../../../../components/Button/CustomButton'
 import MyTextField from '../../../../../../components/TextField/MyTextField'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from '@mui/material'
 import { Candidate } from '../../candidate'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import SelectForm from '../../../../../../components/SelectForm/SelectForm'
-import { useState } from 'react'
-
+import DeleteIcon from '@mui/icons-material/Delete';
 function FormContacts() {
     const socialArray: string[] = [' ', 'vk', 'telegram', 'instagram']
     const methods = useFormContext<Candidate>()
@@ -22,9 +21,14 @@ function FormContacts() {
     const socialsElement = socials.map((field, index) => (
         <Accordion
             key={index}
-            sx={{width:'100%'}}>
+            sx={{ width: '100%' }}>
             <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-                <Typography variant={'h6'}>{social[index].icon}</Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row-reverse', width: '100%' }}>
+                    <IconButton onClick={() => removeSocial(index)}>
+                        <DeleteIcon />
+                    </IconButton>
+                    <Typography variant={'h6'}>{social[index].icon}</Typography>
+                </Box>
             </AccordionSummary>
             <AccordionDetails
                 sx={{
@@ -36,26 +40,27 @@ function FormContacts() {
                     sx={{
                         display: 'flex',
                         gap: '20px',
-                        justifyContent:'space-between'
+                        justifyContent: 'space-between'
                     }}>
-                    <SelectForm value={social[index].icon}  label={'Социальная сеть'} onChange={(e) => {
+                    <SelectForm value={social[index].icon} label={'Социальная сеть'} onChange={(e) => {
                         setValue(`socials.${index}.icon`, e.target.value)
                     }} array={socialArray} />
-                    <MyTextField label={'Ссылка'}onChange={(e) => {
+                    <MyTextField label={'Ссылка'} onChange={(e) => {
                         setValue(`socials.${index}.link`, e.target.value)
                     }} />
                 </Box>
             </AccordionDetails>
         </Accordion>
     ))
-    
+
     return (
         <Box>
-            <Typography sx={{  padding: '20px' }}>Контакты</Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+            <Typography variant='h2'>Контакты</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px', }}>
                 <Box sx={{
                     display: 'flex',
                     gap: '20px',
+                    
                 }}>
                     <MyTextField
                         required
@@ -89,7 +94,7 @@ function FormContacts() {
                     }}>
                     {socialsElement}
                 </Box>
-                <CustomButton  innerText="Добавить социальную сеть" onClick={() => { appendSocial({ icon: '', link: '' }) }} />
+                <CustomButton innerText="Добавить социальную сеть" onClick={() => { appendSocial({ icon: '', link: '' }) }} />
             </Box>
         </Box>
     )

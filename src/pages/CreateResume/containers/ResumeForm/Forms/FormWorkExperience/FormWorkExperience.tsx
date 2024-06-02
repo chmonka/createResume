@@ -1,10 +1,12 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from "@mui/material"
 import CustomButton from "../../../../../../components/Button/CustomButton"
 import { useFieldArray, useFormContext } from "react-hook-form"
 import { Candidate } from "../../candidate"
 import MyTextField from "../../../../../../components/TextField/MyTextField"
 import SelectForm from "../../../../../../components/SelectForm/SelectForm"
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
+import WorkOutline from "@mui/icons-material/WorkOutline"
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function FormWorkExperience() {
 
@@ -25,7 +27,7 @@ function FormWorkExperience() {
         'Ноябрь',
         'Декабрь'
     ];
-    const { fields: jobs, append: appendJob } = useFieldArray<Candidate>({
+    const { fields: jobs, append: appendJob, remove: removeJob } = useFieldArray<Candidate>({
         name: 'jobs',
         control: control,
     });
@@ -39,9 +41,14 @@ function FormWorkExperience() {
                     width: '100%'
                 }}>
                 <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-                    <Typography variant={'h6'}>
-                        {object[index].postJob}
-                    </Typography>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row-reverse', width: '100%' }}>
+                        <IconButton onClick={() => removeJob(index)}>
+                            <DeleteIcon />
+                        </IconButton>
+                        <Typography variant={'h6'}>
+                            {object[index].postJob}
+                        </Typography>
+                    </Box>
                 </AccordionSummary>
                 <AccordionDetails
                     sx={{
@@ -102,10 +109,13 @@ function FormWorkExperience() {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '20px',
-                border: '2px solid #e1e5f2',
+                border: '2px solid #ccdbfd',
                 borderRadius: '5px',
             }}>
-            <Typography sx={{ borderBottom: '2px solid #e1e5f2', padding: '20px' }}>Опыт работы</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', borderBottom: '2px solid #ccdbfd', padding: '10px 20px', gap: '20px' }}>
+                <WorkOutline sx={{ fontSize: '40px' }} />
+                <Typography variant='h2'>Опыт работы</Typography>
+            </Box>
             <Box
                 sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <Box sx={{

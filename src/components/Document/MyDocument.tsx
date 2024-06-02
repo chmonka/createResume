@@ -2,11 +2,12 @@ import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
 import { useRef } from 'react'
 import { Box } from '@mui/material'
-import { useFormContext } from 'react-hook-form'
 import FormViewMain from './FormsView/FormViewMain/FormViewMain'
 import FormViewSecond from './FormsView/FormViewSecond/FormViewSecond'
 import CustomButton from '../Button/CustomButton'
 import CustomContainer from '../Container/CustomContainer'
+import { useNavigate } from 'react-router-dom'
+import ThemeDocumentPage from '../../pages/CreateResume/containers/ThemeDocument/ThemeDocumentPage'
 
 const MyDocument = () => {
   const pdfRef = useRef(null)
@@ -35,58 +36,74 @@ const MyDocument = () => {
     }
   }
 
+  const navigate = useNavigate()
+
+  const backToPageForm = () => {
+    navigate('/')
+  }
+
   return (
-    <CustomContainer display={'flex'} justifyItems={'center'}>
+    <CustomContainer>
       <Box sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: '768px',
-        height: '100vh',
-        border: '1px solid #023e8a',
-        borderRadius: '5px',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
-        position: 'sticky',
-        top: 0
+        display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'
       }}>
-        <Box sx={{
-          display: 'flex',
-          padding: '10px 24px',
-          height: '54px',
-          width: '100%',
-          borderBottom: '1px solid black'
-        }}>
-          <CustomButton innerText="Download" onClick={downloadPDF} sx={{ padding: '20px' }} />
+        <Box>
+          <ThemeDocumentPage />
         </Box>
-        <Box sx={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Box sx={{
-            width: '500px',
-            height: '720px'
+            display: 'flex',
+            flexDirection: 'column',
+            width: '568px',
+            height: '100vh',
+            border: '1px solid #023e8a',
+            borderRadius: '5px',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+            position: 'sticky',
+            top: 0
           }}>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: '100%',
-                border: '1px solid #023e8a',
+            <Box sx={{
+              display: 'flex',
+              padding: '10px 24px',
+              height: '54px',
+              width: '100%',
+              borderBottom: '1px solid black'
+            }}>
+              <CustomButton innerText="Назад" onClick={backToPageForm} sx={{ padding: '20px' }} />
+              <CustomButton innerText="Скачать PDF" onClick={downloadPDF} sx={{ padding: '20px' }} />
+            </Box>
+            <Box sx={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <Box sx={{
+                width: '500px',
+                height: '720px'
               }}>
-              <Box ref={pdfRef}
-                sx={{
-                  display: 'flex',
-                  width: '100%',
-                  height: '100%',
-                  flexDirection: 'row'
-                }}>
-                <FormViewMain />
-                <FormViewSecond />
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '100%',
+                    border: '1px solid #023e8a',
+                  }}>
+                  <Box ref={pdfRef}
+                    sx={{
+                      display: 'flex',
+                      width: '100%',
+                      height: '100%',
+                      flexDirection: 'row'
+                    }}>
+                    <FormViewMain />
+                    <FormViewSecond />
+                  </Box>
+                </Box>
               </Box>
             </Box>
           </Box>

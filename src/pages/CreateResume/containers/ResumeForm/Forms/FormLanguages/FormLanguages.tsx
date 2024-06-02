@@ -1,12 +1,12 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from "@mui/material"
 import CustomButton from "../../../../../../components/Button/CustomButton"
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Candidate } from "../../candidate";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
-import MyTextField from "../../../../../../components/TextField/MyTextField";
 import SelectForm from "../../../../../../components/SelectForm/SelectForm";
-
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useEffect, useState } from "react";
+import LanguageIcon from '@mui/icons-material/Language';
 
 function FormLanguages() {
 
@@ -19,13 +19,18 @@ function FormLanguages() {
     const arrayLevelLanguages = ['A1-начальный', 'A2-элементарный', 'B1-пороговый', 'B2-промежуточный', 'C1-продвинутый', 'C2-совершенный']
     const foreignLanguages = ["Испанский", "Французский", "Немецкий", "Японский", "Русский", "Китайский", "Арабский", "Португальский", "Итальянский", "Корейский"]
     const object = watch('languages')
-
+    const [disabledButton, setDisabled] = useState(false)
     const languagesElement = languages.map((field, index) => (
         <Accordion key={index}>
-            <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-                <Typography variant={'h6'}>
-                    {object[index].nameLanguage}
-                </Typography>
+            <AccordionSummary expandIcon={<ArrowDownwardIcon />} >
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row-reverse', width: '100%' }}>
+                    <IconButton onClick={() => removeLanguages(index)}>
+                        <DeleteIcon />
+                    </IconButton>
+                    <Typography variant={'h6'}>
+                        {object[index].nameLanguage}
+                    </Typography>
+                </Box>
             </AccordionSummary>
             <AccordionDetails>
                 <Box
@@ -40,7 +45,9 @@ function FormLanguages() {
             </AccordionDetails>
         </Accordion>
     ))
-
+    useEffect(() => {
+        setDisabled(languages.length >= 3);
+    }, [languages.length]);
 
     return (
         <Box
@@ -48,10 +55,13 @@ function FormLanguages() {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '20px',
-                border: '2px solid #e1e5f2',
+                border: '2px solid #ccdbfd',
                 borderRadius: '5px',
-            }}>
-            <Typography sx={{ borderBottom: '2px solid #e1e5f2', padding: '20px' }}>Знание языков</Typography>
+            }}>  
+            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', borderBottom: '2px solid #e1e5f2', padding: '10px 20px', gap: '20px' }}>
+                <LanguageIcon sx={{ fontSize: '40px' }} />
+                <Typography variant='h2'>Знание языков</Typography>
+            </Box>
             <Box
                 sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <Box sx={{
@@ -62,12 +72,13 @@ function FormLanguages() {
                 </Box>
                 {languagesElement}
                 <CustomButton
-                 innerText="Добавить язык" onClick={() => {
-                    appendLanguages({
-                        nameLanguage: '',
-                        levelLanguage: ''
-                    })
-                }} />
+                    disabled={disabledButton}
+                    innerText="Добавить язык" onClick={() => {
+                        appendLanguages({
+                            nameLanguage: '',
+                            levelLanguage: ''
+                        })
+                    }} />
             </Box>
         </Box>
     )
