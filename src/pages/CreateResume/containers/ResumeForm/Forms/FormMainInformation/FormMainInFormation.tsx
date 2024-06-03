@@ -32,7 +32,6 @@ const FormMainInFormation = () => {
                 flexDirection: 'column',
                 border: '2px solid #ccdbfd',
                 borderRadius: '5px',
-                gap: '20px',
             }}>
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', borderBottom: '2px solid #ccdbfd', padding: '10px 20px', gap: '20px' }}>
                 <InfoIcon sx={{ fontSize: '40px' }} />

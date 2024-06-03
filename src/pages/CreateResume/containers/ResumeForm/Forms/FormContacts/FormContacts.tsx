@@ -54,13 +54,12 @@ function FormContacts() {
     ))
 
     return (
-        <Box>
+        <Box sx={{display:'flex',flexDirection:'column', gap:'20px'}}>
             <Typography variant='h2'>Контакты</Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px', }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                 <Box sx={{
                     display: 'flex',
-                    gap: '20px',
-                    
+                    gap: '20px'
                 }}>
                     <MyTextField
                         required

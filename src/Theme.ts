@@ -43,13 +43,17 @@ const theme = createTheme({
       fontWeight: 600,
       fontSize: '.75rem',
     },
+    subtitle2:{
+      fontWeight: 500,
+      fontSize: '1rem',
+    },
     body1: {
       fontWeight: 400,
-      fontSize: '1rem',
+      fontSize: '0.85rem',
     },
     body2: {
       fontWeight: 500,
-      fontSize: '.875rem',
+      fontSize: '0.7rem',
     },
     button: {
       fontWeight: 700,

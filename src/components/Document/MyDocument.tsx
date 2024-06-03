@@ -1,7 +1,7 @@
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
 import { useRef } from 'react'
-import { Box } from '@mui/material'
+import { Box, createMuiTheme } from '@mui/material'
 import FormViewMain from './FormsView/FormViewMain/FormViewMain'
 import FormViewSecond from './FormsView/FormViewSecond/FormViewSecond'
 import CustomButton from '../Button/CustomButton'
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import ThemeDocumentPage from '../../pages/CreateResume/containers/ThemeDocument/ThemeDocumentPage'
 
 const MyDocument = () => {
+  
   const pdfRef = useRef(null)
 
   const downloadPDF = () => {
