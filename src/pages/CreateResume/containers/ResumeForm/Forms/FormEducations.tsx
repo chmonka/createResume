@@ -1,10 +1,10 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from "@mui/material"
-import CustomButton from "../../../../../../components/Button/CustomButton"
+import CustomButton from "../../../../../components/Button/CustomButton"
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
-import { Candidate } from "../../candidate";
+import { Candidate } from "../candidate";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import MyTextField from "../../../../../../components/TextField/MyTextField";
-import SelectForm from "../../../../../../components/SelectForm/SelectForm";
+import MyTextField from "../../../../../components/TextField/MyTextField";
+import SelectForm from "../../../../../components/SelectForm/SelectForm";
 import SchoolIcon from '@mui/icons-material/School';
 import DeleteIcon from '@mui/icons-material/Delete';
 function FormEducations() {
@@ -84,13 +84,14 @@ function FormEducations() {
                 border: '2px solid #ccdbfd',
                 borderRadius: '5px',
             }}>
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', borderBottom: '2px solid #ccdbfd', padding: '10px 20px', gap: '20px' }}>
-                <SchoolIcon sx={{ fontSize: '40px' }} />
-                <Typography variant='h2'>Oбразование</Typography>
+            <Box sx={{ width: '100%', borderBottom: '2px solid #ccdbfd' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '20px 10px', gap: '20px' }}>
+                    <SchoolIcon sx={{ fontSize: '40px' }} />
+                    <Typography variant='h2'>Oбразование</Typography>
+                </Box>
             </Box>
 
-            <Box
-                sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <Box sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <Box sx={{
                     display: 'flex',
                     gap: '20px',

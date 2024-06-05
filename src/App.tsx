@@ -1,11 +1,9 @@
-
-
 import { Route, Routes } from 'react-router-dom'
-import './scss/prinсipal.scss'
 import CreateResumePage from './pages/CreateResume/CreateResumePage'
 import { ThemeProvider } from '@mui/material'
 import theme from './Theme.ts'
-import DocumentViewPage from './pages/CreateResume/DocumentViewPage.tsx'
+import MainPage from './pages/MainPage/MainPage.tsx'
+import ViewDocumentPage from './pages/ViewDocumentPage/ViewDocumentPage.tsx'
 
 
 
@@ -14,8 +12,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Routes>
-          <Route path="/resumeviewform" element={<DocumentViewPage />} />
-          <Route path="/" element={<CreateResumePage />} />
+          <Route path="/resumeviewform" element={<ViewDocumentPage />} />
+          <Route path="/resumeform" element={<CreateResumePage />} />
+          <Route path="/" element={<MainPage/>}/>
         </Routes>
       </div>
     </ThemeProvider>

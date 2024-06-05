@@ -25,7 +25,7 @@ function Welcome() {
               Займет всего несколько минут вашего времени
             </Typography>
           </Box>
-          <Link to='/createResume'>
+          <Link to='/resumeform'>
             <CustomButton innerText={'Сделать резюме'} />
           </Link>
         </Grid>

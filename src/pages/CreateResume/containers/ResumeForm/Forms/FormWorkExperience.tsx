@@ -1,9 +1,9 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from "@mui/material"
-import CustomButton from "../../../../../../components/Button/CustomButton"
+import CustomButton from "../../../../../components/Button/CustomButton"
 import { useFieldArray, useFormContext } from "react-hook-form"
-import { Candidate } from "../../candidate"
-import MyTextField from "../../../../../../components/TextField/MyTextField"
-import SelectForm from "../../../../../../components/SelectForm/SelectForm"
+import { Candidate } from "../candidate"
+import MyTextField from "../../../../../components/TextField/MyTextField"
+import SelectForm from "../../../../../components/SelectForm/SelectForm"
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import WorkOutline from "@mui/icons-material/WorkOutline"
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -112,9 +112,11 @@ function FormWorkExperience() {
                 border: '2px solid #ccdbfd',
                 borderRadius: '5px',
             }}>
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', borderBottom: '2px solid #ccdbfd', padding: '10px 20px', gap: '20px' }}>
-                <WorkOutline sx={{ fontSize: '40px' }} />
-                <Typography variant='h2'>Опыт работы</Typography>
+            <Box sx={{ width: '100%', borderBottom: '2px solid #ccdbfd'}}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '20px 10px', gap: '20px' }}>
+                    <WorkOutline sx={{ fontSize: '40px' }} />
+                    <Typography variant='h2'>Опыт работы</Typography>
+                </Box>
             </Box>
             <Box
                 sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>

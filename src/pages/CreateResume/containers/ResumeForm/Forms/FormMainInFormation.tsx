@@ -1,15 +1,15 @@
 import { Box, Button, Typography } from '@mui/material'
 import { Controller, useFormContext } from 'react-hook-form'
-import MyTextField from '../../../../../../components/TextField/MyTextField'
-import SelectForm from '../../../../../../components/SelectForm/SelectForm'
-import { Candidate } from '../../candidate'
+import MyTextField from '../../../../../components/TextField/MyTextField'
+import SelectForm from '../../../../../components/SelectForm/SelectForm'
+import { Candidate } from '../candidate'
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider/LocalizationProvider'
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import FormContacts from '../FormContacts/FormContacts'
+import FormContacts from './FormContacts'
 import { ChangeEvent, useState } from 'react'
-import CustomButton from '../../../../../../components/Button/CustomButton'
+import CustomButton from '../../../../../components/Button/CustomButton'
 import InfoIcon from '@mui/icons-material/Info';
 
 const FormMainInFormation = () => {
@@ -33,9 +33,11 @@ const FormMainInFormation = () => {
                 border: '2px solid #ccdbfd',
                 borderRadius: '5px',
             }}>
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', borderBottom: '2px solid #ccdbfd', padding: '10px 20px', gap: '20px' }}>
-                <InfoIcon sx={{ fontSize: '40px' }} />
-                <Typography variant='h2'>Основная информация</Typography>
+            <Box sx={{ width: '100%', borderBottom: '2px solid #ccdbfd' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '20px 10px', gap: '20px' }}>
+                    <InfoIcon sx={{ fontSize: '40px' }} />
+                    <Typography variant='h2'>Основная информация</Typography>
+                </Box>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '20px', }}>
                 <Box sx={(theme) => ({

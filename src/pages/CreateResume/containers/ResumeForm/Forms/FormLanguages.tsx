@@ -1,9 +1,9 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from "@mui/material"
-import CustomButton from "../../../../../../components/Button/CustomButton"
+import CustomButton from "../../../../../components/Button/CustomButton"
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { Candidate } from "../../candidate";
+import { Candidate } from "../candidate";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
-import SelectForm from "../../../../../../components/SelectForm/SelectForm";
+import SelectForm from "../../../../../components/SelectForm/SelectForm";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useEffect, useState } from "react";
 import LanguageIcon from '@mui/icons-material/Language';
@@ -57,10 +57,12 @@ function FormLanguages() {
                 gap: '20px',
                 border: '2px solid #ccdbfd',
                 borderRadius: '5px',
-            }}>  
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', borderBottom: '2px solid #e1e5f2', padding: '10px 20px', gap: '20px' }}>
-                <LanguageIcon sx={{ fontSize: '40px' }} />
-                <Typography variant='h2'>Знание языков</Typography>
+            }}>
+            <Box sx={{width: '100%', borderBottom: '2px solid #e1e5f2' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '20px 10px', gap: '20px' }}>
+                    <LanguageIcon sx={{ fontSize: '40px' }} />
+                    <Typography variant='h2'>Знание языков</Typography>
+                </Box>
             </Box>
             <Box
                 sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>

@@ -1,11 +1,11 @@
 
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import CustomButton from '../../../../../../components/Button/CustomButton'
-import MyTextField from '../../../../../../components/TextField/MyTextField'
+import CustomButton from '../../../../../components/Button/CustomButton'
+import MyTextField from '../../../../../components/TextField/MyTextField'
 import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from '@mui/material'
-import { Candidate } from '../../candidate'
+import { Candidate } from '../candidate'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
-import SelectForm from '../../../../../../components/SelectForm/SelectForm'
+import SelectForm from '../../../../../components/SelectForm/SelectForm'
 import DeleteIcon from '@mui/icons-material/Delete';
 function FormContacts() {
     const socialArray: string[] = [' ', 'vk', 'telegram', 'instagram']

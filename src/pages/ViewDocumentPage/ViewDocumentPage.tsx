@@ -2,8 +2,8 @@
 import MyDocument from '../../components/Document/MyDocument'
 
 
-function DocumentViewPage() {
+function ViewDocumentPage() {
     return <MyDocument />
 }
 
-export default DocumentViewPage
+export default ViewDocumentPage

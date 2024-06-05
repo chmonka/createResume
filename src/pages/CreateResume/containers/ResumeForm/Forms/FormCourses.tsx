@@ -1,9 +1,9 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from "@mui/material"
-import CustomButton from "../../../../../../components/Button/CustomButton"
+import CustomButton from "../../../../../components/Button/CustomButton"
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { Candidate } from "../../candidate";
-import SelectForm from "../../../../../../components/SelectForm/SelectForm";
-import MyTextField from "../../../../../../components/TextField/MyTextField";
+import { Candidate } from "../candidate";
+import SelectForm from "../../../../../components/SelectForm/SelectForm";
+import MyTextField from "../../../../../components/TextField/MyTextField";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -57,9 +57,11 @@ function FormCourses() {
                 borderRadius: '5px',
             }}>
 
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', borderBottom: '2px solid #ccdbfd', padding: '10px 20px', gap: '20px' }}>
-                <AutoGraphIcon sx={{ fontSize: '40px' }} />
-                <Typography variant='h2'>Курсы повышения квалификации</Typography>
+            <Box sx={{ width: '100%', borderBottom: '2px solid #ccdbfd'}}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding:'20px 10px', gap: '20px' }}>
+                    <AutoGraphIcon sx={{ fontSize: '40px' }} />
+                    <Typography variant='h2'>Курсы повышения квалификации</Typography>
+                </Box>
             </Box>
             <Box
                 sx={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
