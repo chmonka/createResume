@@ -45,7 +45,7 @@ function FormEducations() {
                         flexDirection: 'column',
                         gap: '20px',
                     }}>
-                    <SelectForm array={educationLevel} label={'Уровень образования'} onChange={(e) => {
+                    <SelectForm value={object[index].levelEducation} array={educationLevel || ''} label={'Уровень образования'} onChange={(e) => {
                         setValue(`education.${index}.levelEducation`, e.target.value)
                     }} />
                     <Box

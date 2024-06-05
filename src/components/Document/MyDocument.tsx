@@ -1,16 +1,18 @@
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
-import { useRef } from 'react'
-import { Box, createMuiTheme } from '@mui/material'
-import FormViewMain from './FormsView/FormViewMain/FormViewMain'
-import FormViewSecond from './FormsView/FormViewSecond/FormViewSecond'
+import { useEffect, useRef, useState } from 'react'
+import { Box, Button, Typography, createMuiTheme } from '@mui/material'
+import FormViewMain from './Templates/TemplateOne/FormViewMain/FormViewMain'
+import FormViewSecond from './Templates/TemplateOne/FormViewSecond/FormViewSecond'
 import CustomButton from '../Button/CustomButton'
 import CustomContainer from '../Container/CustomContainer'
 import { useNavigate } from 'react-router-dom'
 import ThemeDocumentPage from '../../pages/CreateResume/containers/ThemeDocument/ThemeDocumentPage'
+import TemplateOne from './Templates/TemplateOne/TemplateOne'
+import TemplateSecond from './Templates/TemplateSecond/TemplateSecond'
 
 const MyDocument = () => {
-  
+
   const pdfRef = useRef(null)
 
   const downloadPDF = () => {
@@ -37,7 +39,25 @@ const MyDocument = () => {
     }
   }
 
+
+  const TemplateTwo = () => <TemplateSecond />;
+  const TemplateThree = () => <div>Template Three Content</div>;
+
   const navigate = useNavigate()
+  const [template, setTemplate] = useState(() => <TemplateOne />)
+
+
+  function resetPage() {
+    setTemplate(TemplateTwo)
+  }
+
+  function resetPageTemplateOne() {
+    setTemplate(<TemplateOne />)
+  }
+
+  useEffect(() => {
+    console.log(template)
+  }, [template])
 
   const backToPageForm = () => {
     navigate('/')
@@ -46,10 +66,24 @@ const MyDocument = () => {
   return (
     <CustomContainer>
       <Box sx={{
-        display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'
+        display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexDirection: 'row'
       }}>
         <Box>
-          <ThemeDocumentPage />
+          <Box sx={{display:'flex',gap:'20px'}}>
+            <CustomButton innerText="Назад" onClick={backToPageForm} sx={{ padding: '7px' }} />
+            <CustomButton innerText="Скачать PDF" onClick={downloadPDF} sx={{ padding: '7px' }} />
+          </Box>
+          <Box sx={{ display: 'flex', gap: '20px', flexDirection: 'column', paddingTop: '20px' }}>
+            <Typography variant='h2'>Шаблоны документа</Typography>
+            <Box sx={{ display: 'flex', gap: '20px' }}>
+              <Box sx={{ width: '200px', height: '250px', border: '1px solid black', borderRadius: '10px' }}>
+                <Button onClick={resetPageTemplateOne}>1</Button>
+              </Box>
+              <Box sx={{ width: '200px', height: '250px', border: '1px solid black', borderRadius: '10px' }}>
+                <Button onClick={resetPage}>2</Button>
+              </Box>
+            </Box>
+          </Box>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Box sx={{
@@ -64,16 +98,7 @@ const MyDocument = () => {
             position: 'sticky',
             top: 0
           }}>
-            <Box sx={{
-              display: 'flex',
-              padding: '10px 24px',
-              height: '54px',
-              width: '100%',
-              borderBottom: '1px solid black'
-            }}>
-              <CustomButton innerText="Назад" onClick={backToPageForm} sx={{ padding: '20px' }} />
-              <CustomButton innerText="Скачать PDF" onClick={downloadPDF} sx={{ padding: '20px' }} />
-            </Box>
+
             <Box sx={{
               width: '100%',
               height: '100%',
@@ -101,8 +126,7 @@ const MyDocument = () => {
                       height: '100%',
                       flexDirection: 'row'
                     }}>
-                    <FormViewMain />
-                    <FormViewSecond />
+                    {template}
                   </Box>
                 </Box>
               </Box>
