@@ -1,14 +1,14 @@
 import { Box, Grid, Typography } from '@mui/material'
-import CustomContainer from '../../../../components/Container/CustomContainer.tsx'
 import { Candidate, defaultValueForm } from './candidate.ts'
 import { FormProvider, useForm } from 'react-hook-form'
 import FormMainInFormation from './Forms/FormMainInFormation.tsx'
 import FormWorkExperience from './Forms/FormWorkExperience.tsx'
 import FormLanguages from './Forms/FormLanguages.tsx'
 import { useNavigate } from 'react-router-dom'
-import CustomButton from '../../../../components/Button/CustomButton.tsx'
 import FormCourses from './Forms/FormCourses.tsx'
 import FormEducations from './Forms/FormEducations.tsx'
+import CustomButton from '../../../components/Button/CustomButton.tsx'
+import CustomContainer from '../../../components/Container/CustomContainer.tsx'
 
 
 const ResumeForm = () => {

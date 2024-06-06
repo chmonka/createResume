@@ -1,12 +1,13 @@
 
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import CustomButton from '../../../../../components/Button/CustomButton'
-import MyTextField from '../../../../../components/TextField/MyTextField'
-import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from '@mui/material'
+import CustomButton from '../../../../components/Button/CustomButton'
+import MyTextField from '../../../../components/TextField/MyTextField'
+import { Accordion, AccordionDetails, AccordionSummary, Box, FormControl, IconButton, InputLabel, MenuItem, Select, Typography } from '@mui/material'
 import { Candidate } from '../candidate'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
-import SelectForm from '../../../../../components/SelectForm/SelectForm'
 import DeleteIcon from '@mui/icons-material/Delete';
+import SelectForm from '../../../../components/SelectForm/SelectForm'
+import iconByLinkName from '../../../../img/socials'
 function FormContacts() {
     const socialArray: string[] = [' ', 'vk', 'telegram', 'instagram']
     const methods = useFormContext<Candidate>()
@@ -15,9 +16,12 @@ function FormContacts() {
         name: 'socials',
         control: control,
     });
+
+
+
     const social = watch('socials')
     const object = watch()
-
+    console.log(object)
     const socialsElement = socials.map((field, index) => (
         <Accordion
             key={index}
@@ -27,7 +31,7 @@ function FormContacts() {
                     <IconButton onClick={() => removeSocial(index)}>
                         <DeleteIcon />
                     </IconButton>
-                    <Typography variant={'h6'}>{social[index].icon}</Typography>
+                    <Typography variant={'h6'}>{social[index].name}</Typography>
                 </Box>
             </AccordionSummary>
             <AccordionDetails
@@ -42,19 +46,38 @@ function FormContacts() {
                         gap: '20px',
                         justifyContent: 'space-between'
                     }}>
-                    <SelectForm value={social[index].icon} label={'Социальная сеть'} onChange={(e) => {
+                    <FormControl fullWidth>
+                        <InputLabel>Сеть</InputLabel>
+                        <Select 
+                            {...register(`socials.${index}.name`)}>
+                            {Object.entries(iconByLinkName).map(([key, value]) => {
+                                return <MenuItem value={key} sx={{display:'flex', flexDirection:'row'}}>
+                                    <img src={value} width={'20px'} />
+                                    {/* <Typography>{key}</Typography> */}
+                                </MenuItem>
+                            })}
+                        </Select>
+                    </FormControl>
+
+                    {/* <SelectForm value={social[index].icon} label={'Социальная сеть'} onChange={(e) => {
                         setValue(`socials.${index}.icon`, e.target.value)
-                    }} array={socialArray} />
-                    <MyTextField label={'Ссылка'} onChange={(e) => {
-                        setValue(`socials.${index}.link`, e.target.value)
-                    }} />
+                    }} array={socialArray} /> */}
+                    <MyTextField label={'Ссылка'}
+                        {...register(`socials.${index}.link`, {
+                            pattern: {
+                                value: /(http|https):\/\/[a-zA-Z0-9\-\.]+\.(com|ru|org|net|gov|edu|info|biz|uk|us|de|jp)(\/\S*)?$/,
+                                message: "Ссылка не валидна"
+                            }
+                        })}
+                        error={!!errors.socials?.[index]?.link}
+                        helperText={errors.socials?.[index]?.link?.message || ""} />
                 </Box>
             </AccordionDetails>
         </Accordion>
     ))
 
     return (
-        <Box sx={{display:'flex',flexDirection:'column', gap:'20px'}}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <Typography variant='h2'>Контакты</Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                 <Box sx={{
@@ -93,7 +116,7 @@ function FormContacts() {
                     }}>
                     {socialsElement}
                 </Box>
-                <CustomButton innerText="Добавить социальную сеть" onClick={() => { appendSocial({ icon: '', link: '' }) }} />
+                <CustomButton innerText="Добавить социальную сеть" onClick={() => { appendSocial({ name: '', link: '' }) }} />
             </Box>
         </Box>
     )

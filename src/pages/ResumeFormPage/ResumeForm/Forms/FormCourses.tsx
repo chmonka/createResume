@@ -1,9 +1,9 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from "@mui/material"
-import CustomButton from "../../../../../components/Button/CustomButton"
+import CustomButton from "../../../../components/Button/CustomButton"
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Candidate } from "../candidate";
-import SelectForm from "../../../../../components/SelectForm/SelectForm";
-import MyTextField from "../../../../../components/TextField/MyTextField";
+import SelectForm from "../../../../components/SelectForm/SelectForm";
+import MyTextField from "../../../../components/TextField/MyTextField";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import DeleteIcon from '@mui/icons-material/Delete';

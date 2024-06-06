@@ -1,9 +1,9 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from "@mui/material"
-import CustomButton from "../../../../../components/Button/CustomButton"
+import CustomButton from "../../../../components/Button/CustomButton"
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Candidate } from "../candidate";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
-import SelectForm from "../../../../../components/SelectForm/SelectForm";
+import SelectForm from "../../../../components/SelectForm/SelectForm";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useEffect, useState } from "react";
 import LanguageIcon from '@mui/icons-material/Language';
@@ -35,7 +35,7 @@ function FormLanguages() {
             <AccordionDetails>
                 <Box
                     sx={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
-                    <SelectForm array={foreignLanguages || ''} value={object[index].nameLanguage} label={'Язык'} onChange={(e) => {
+                    <SelectForm array={foreignLanguages || ''}  value={object[index].nameLanguage} label={'Язык'} onChange={(e) => {
                         setValue(`languages.${index}.nameLanguage`, e.target.value)
                     }} />
                     <SelectForm array={arrayLevelLanguages || ''} value={object[index].levelLanguage} label={'Уровень'} onChange={(e) => {

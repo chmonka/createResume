@@ -3,13 +3,11 @@ import { useLocation } from "react-router-dom";
 
 
 function FormViewSecond() {
-
     const { state } = useLocation();
     if (!state) {
-
-        return  <Box sx={{display:'flex', alignItems:'center', justifyContent:'center' , width:'100%'}}>
-        <Typography variant='body1'>Форма не заполнена</Typography>
-    </Box>
+        return <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+            <Typography variant='body1'>Форма не заполнена</Typography>
+        </Box>
     }
     return (
         <Box sx={{

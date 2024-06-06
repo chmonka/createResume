@@ -1,10 +1,10 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from "@mui/material"
-import CustomButton from "../../../../../components/Button/CustomButton"
+import CustomButton from "../../../../components/Button/CustomButton"
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import { Candidate } from "../candidate";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import MyTextField from "../../../../../components/TextField/MyTextField";
-import SelectForm from "../../../../../components/SelectForm/SelectForm";
+import MyTextField from "../../../../components/TextField/MyTextField";
+import SelectForm from "../../../../components/SelectForm/SelectForm";
 import SchoolIcon from '@mui/icons-material/School';
 import DeleteIcon from '@mui/icons-material/Delete';
 function FormEducations() {
@@ -16,7 +16,7 @@ function FormEducations() {
         name: 'education',
         control: control,
     });
-    const yearArray: number[] = Array.from({ length: 21 }, (_, index) => 2000 + index)
+    const yearArray: number[] = Array.from({ length: 30 }, (_, index) => 2000 + index)
     const object = watch('education')
     const formEducation = ['Очная', 'Очно-заочная', 'Заочная', 'Дистанционная']
     const educationLevel = [

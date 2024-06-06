@@ -1,9 +1,9 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, IconButton, Typography } from "@mui/material"
-import CustomButton from "../../../../../components/Button/CustomButton"
+import CustomButton from "../../../../components/Button/CustomButton"
 import { useFieldArray, useFormContext } from "react-hook-form"
 import { Candidate } from "../candidate"
-import MyTextField from "../../../../../components/TextField/MyTextField"
-import SelectForm from "../../../../../components/SelectForm/SelectForm"
+import MyTextField from "../../../../components/TextField/MyTextField"
+import SelectForm from "../../../../components/SelectForm/SelectForm"
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import WorkOutline from "@mui/icons-material/WorkOutline"
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -11,8 +11,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 function FormWorkExperience() {
 
     const methods = useFormContext<Candidate>()
-    const { control, setValue, watch } = methods
-    const yearArray: number[] = Array.from({ length: 21 }, (_, index) => 2000 + index)
+    const { control, setValue, watch, register, formState: { errors } } = methods
+    const yearArray: number[] = Array.from({ length: 30 }, (_, index) => 2000 + index)
     const monthArray = [
         'Январь',
         'Февраль',
@@ -32,7 +32,6 @@ function FormWorkExperience() {
         control: control,
     });
     const object = watch("jobs")
-
     const jobsWorkerElement =
         jobs.map((field, index) => (
             <Accordion
@@ -40,7 +39,7 @@ function FormWorkExperience() {
                 sx={{
                     width: '100%'
                 }}>
-                <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
+                <AccordionSummary expandIcon={<ArrowDownwardIcon />} sx={{ display: 'flex' }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row-reverse', width: '100%' }}>
                         <IconButton onClick={() => removeJob(index)}>
                             <DeleteIcon />
@@ -61,26 +60,41 @@ function FormWorkExperience() {
                             display: 'flex',
                             gap: '20px'
                         }}>
-                        <MyTextField label={'Должность'} onChange={(e) => {
-                            setValue(`jobs.${index}.postJob`, e.target.value)
-                        }} />
-                        <MyTextField label={'Название компании'} onChange={(e) => {
-                            setValue(`jobs.${index}.nameCompany`, e.target.value)
-                        }} />
+
+                        <MyTextField
+                            label={'Должность'}
+                            {...register(`jobs.${index}.postJob`, {
+                                maxLength: {
+                                    value: 20,
+                                    message: "Должность должно содержать не более 20 символов"
+                                },
+                            })}
+                            error={!!errors.jobs?.[index]?.postJob}
+                            helperText={errors.jobs?.[index]?.postJob?.message || ""} />
+                        <MyTextField label={'Название компании'}
+                            {...register(`jobs.${index}.nameCompany`, {
+                                maxLength: {
+                                    value: 20,
+                                    message: "Название компании должно содержать не более 20 символов"
+                                },
+                            })}
+                            error={!!errors.desiredPosition}
+                            helperText={errors.desiredPosition ? errors.desiredPosition.message : ""} />
                     </Box>
                     <Box>
                         <Typography>Начало работы</Typography>
                         <Box
                             sx={{
                                 display: 'flex',
+                                paddingTop: '20px',
                                 gap: '20px'
                             }}>
-                            <SelectForm array={monthArray || []} value={object[index].monthStart} label={'Месяц'} onChange={(e) => {
-                                setValue(`jobs.${index}.monthStart`, e.target.value)
-                            }} />
-                            <SelectForm array={yearArray || []} value={object[index].yearStart} label={'Год'} onChange={(e) => {
-                                setValue(`jobs.${index}.yearStart`, e.target.value)
-                            }} />
+                            <SelectForm array={monthArray || []} value={object[index].monthStart}
+                                label={'Месяц'}
+                                {...register(`jobs.${index}.monthStart`)} />
+                            <SelectForm array={yearArray || []} value={object[index].yearStart}
+                                label={'Год'}
+                                {...register(`jobs.${index}.yearStart`)} />
                         </Box>
                     </Box>
                     <Box>
@@ -88,14 +102,13 @@ function FormWorkExperience() {
                         <Box
                             sx={{
                                 display: 'flex',
+                                paddingTop: '20px',
                                 gap: '20px'
                             }}>
-                            <SelectForm array={monthArray || []} label={'Месяц'} value={object[index].monthEnd} onChange={(e) => {
-                                setValue(`jobs.${index}.monthEnd`, e.target.value)
-                            }} />
-                            <SelectForm array={yearArray || []} value={object[index].yearEnd} label={'Год'} onChange={(e) => {
-                                setValue(`jobs.${index}.yearEnd`, e.target.value)
-                            }} />
+                            <SelectForm array={monthArray || []} label={'Месяц'} value={object[index].monthEnd}
+                                {...register(`jobs.${index}.monthEnd`)} />
+                            <SelectForm array={yearArray || []} value={object[index].yearEnd} label={'Год'}
+                                {...register(`jobs.${index}.yearEnd`)} />
                         </Box>
                     </Box>
                 </AccordionDetails>
@@ -112,7 +125,7 @@ function FormWorkExperience() {
                 border: '2px solid #ccdbfd',
                 borderRadius: '5px',
             }}>
-            <Box sx={{ width: '100%', borderBottom: '2px solid #ccdbfd'}}>
+            <Box sx={{ width: '100%', borderBottom: '2px solid #ccdbfd' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '20px 10px', gap: '20px' }}>
                     <WorkOutline sx={{ fontSize: '40px' }} />
                     <Typography variant='h2'>Опыт работы</Typography>

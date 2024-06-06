@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
-import CreateResumePage from './pages/CreateResume/CreateResumePage'
 import { ThemeProvider } from '@mui/material'
 import theme from './Theme.ts'
 import MainPage from './pages/MainPage/MainPage.tsx'
 import ViewDocumentPage from './pages/ViewDocumentPage/ViewDocumentPage.tsx'
+import ResumeFormPage from './pages/ResumeFormPage/ResumeFormPage.tsx'
 
 
 
@@ -13,7 +13,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/resumeviewform" element={<ViewDocumentPage />} />
-          <Route path="/resumeform" element={<CreateResumePage />} />
+          <Route path="/resumeform" element={<ResumeFormPage />} />
           <Route path="/" element={<MainPage/>}/>
         </Routes>
       </div>

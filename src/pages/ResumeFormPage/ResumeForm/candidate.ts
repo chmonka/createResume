@@ -15,9 +15,9 @@ export interface Candidate {
   email: string
   interesting: string
   schedule: string
-  date:string
+  date: string
   socials: {
-    icon: string
+    name: string
     link: string
   }[]
   jobs: {
@@ -30,7 +30,7 @@ export interface Candidate {
   }[]
   education: {
     institution: string
-    formEducation:string
+    formEducation: string
     levelEducation: string
     faculty: string
     speciality: string
@@ -41,11 +41,11 @@ export interface Candidate {
     nameCompany: string
     nameCourse: string
   }[]
-  languages:{
-    nameLanguage:string
-    levelLanguage:string
+  languages: {
+    nameLanguage: string
+    levelLanguage: string
   }[]
-  photoProfile:string
+  photoProfile: string
 }
 
 export const defaultValueForm: Partial<Candidate> = {
@@ -69,9 +69,12 @@ export const defaultValueForm: Partial<Candidate> = {
   jobs: [],
   education: [],
   trainingCourses: [],
-  languages:[],
-  date:'',
-  photoProfile:'' ,
+  languages: [],
+  date: '',
+  photoProfile: '',
 
 
 }
+
+
+

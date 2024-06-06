@@ -1,5 +1,5 @@
+import MyDocument from "./Document/MyDocument"
 
-import MyDocument from '../../components/Document/MyDocument'
 
 
 function ViewDocumentPage() {

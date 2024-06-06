@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from '@mui/material'
 import { Controller, useFormContext } from 'react-hook-form'
-import MyTextField from '../../../../../components/TextField/MyTextField'
-import SelectForm from '../../../../../components/SelectForm/SelectForm'
+import MyTextField from '../../../../components/TextField/MyTextField'
+import SelectForm from '../../../../components/SelectForm/SelectForm'
 import { Candidate } from '../candidate'
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider/LocalizationProvider'
@@ -9,7 +9,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import FormContacts from './FormContacts'
 import { ChangeEvent, useState } from 'react'
-import CustomButton from '../../../../../components/Button/CustomButton'
+import CustomButton from '../../../../components/Button/CustomButton'
 import InfoIcon from '@mui/icons-material/Info';
 
 const FormMainInFormation = () => {
@@ -173,10 +173,10 @@ const FormMainInFormation = () => {
                         control={control}
                         name='interesting'
                         render={({ field: { onChange, value } }) => (<SelectForm label={'Занятность'} onChange={onChange} value={value} array={scheduleArray || ['']} />)} />
-                    <Controller
-                        control={control}
-                        name="money"
-                        render={({ field: { onChange } }) => (<MyTextField label={'Желаемая зарплата, Руб'} type={'number'} inputProps={{ min: 0, step: 5000 }} onChange={onChange} />)} />
+                    <MyTextField
+                        label={'Желаемая зарплата, Руб'}
+                        type={'number'} inputProps={{ min: 0, step: 5000 }}
+                        {...register('money')} />
                 </Box>
             </Box>
         </Box >

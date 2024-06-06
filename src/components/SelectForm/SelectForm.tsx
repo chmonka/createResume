@@ -11,7 +11,6 @@ const SelectForm = forwardRef<HTMLSelectElement, ISelectForm>(
       <FormControl sx={{ width: '100%' }}>
         <InputLabel style={{ color: '#000', background: '#FFFFFF' }}>{label}</InputLabel>
         <Select
-
           variant="outlined"
           {...props}
           ref={ref}>

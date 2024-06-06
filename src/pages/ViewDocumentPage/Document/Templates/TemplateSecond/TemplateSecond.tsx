@@ -1,4 +1,3 @@
-import React from 'react'
 import FormViewMain from './FormViewMain/FormViewMain'
 import FormViewSecond from './FormViewSecond/FormViewSecond'
 
