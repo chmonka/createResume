@@ -53,7 +53,6 @@ function FormContacts() {
                             {Object.entries(iconByLinkName).map(([key, value]) => {
                                 return <MenuItem value={key} sx={{display:'flex', flexDirection:'row'}}>
                                     <img src={value} width={'20px'} />
-                                    {/* <Typography>{key}</Typography> */}
                                 </MenuItem>
                             })}
                         </Select>

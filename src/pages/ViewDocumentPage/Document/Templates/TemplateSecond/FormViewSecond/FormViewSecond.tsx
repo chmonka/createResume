@@ -71,7 +71,7 @@ function FormViewSecond() {
                         }}>Курсы</Typography>
                     {state.trainingCourses.map((item: { yearEnd: string, nameCompany: string, nameCourse: string }, index: number) => {
                         return (
-                            <Box display={'flex'} flexDirection={'column'} gap={'10px'} key={index}>
+                            <Box display={'flex'} flexDirection={'column'} gap={'10px'} >
                                 <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between" }}>
                                     <Box sx={{ display: "flex", flexDirection: 'column' }} >
                                         <Typography variant='body1' sx={{ fontWeight: 'bold' }}>{item.nameCourse}</Typography>
