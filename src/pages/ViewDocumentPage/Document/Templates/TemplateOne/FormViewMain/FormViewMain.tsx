@@ -96,8 +96,8 @@ function FormViewMain() {
                         }
                         const levelLangValue = levelLang[item.levelLanguage as keyof typeof levelLang]
                         return (
-                            <Box>
-                                <Box key={index} >
+                            <Box key={index}>
+                                <Box>
                                     <Box display={"flex"} alignItems={'center'} justifyContent={'space-between'}>
                                         <Typography variant="body1" sx={{ color: '#FFFFFF' }}>{item.nameLanguage}</Typography>
                                         <StyledRating

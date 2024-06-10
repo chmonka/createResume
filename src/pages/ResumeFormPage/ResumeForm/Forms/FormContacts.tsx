@@ -16,12 +16,7 @@ function FormContacts() {
         name: 'socials',
         control: control,
     });
-
-
-
     const social = watch('socials')
-    const object = watch()
-    console.log(object)
     const socialsElement = socials.map((field, index) => (
         <Accordion
             key={index}
@@ -51,7 +46,7 @@ function FormContacts() {
                         <Select 
                             {...register(`socials.${index}.name`)}>
                             {Object.entries(iconByLinkName).map(([key, value]) => {
-                                return <MenuItem value={key} sx={{display:'flex', flexDirection:'row'}}>
+                                return <MenuItem key={key} value={key} sx={{display:'flex', flexDirection:'row'}}>
                                     <img src={value} width={'20px'} />
                                 </MenuItem>
                             })}
