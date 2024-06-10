@@ -7,6 +7,7 @@ import SelectForm from "../../../../components/SelectForm/SelectForm"
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import WorkOutline from "@mui/icons-material/WorkOutline"
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useEffect, useState } from "react"
 
 function FormWorkExperience() {
 
@@ -32,6 +33,12 @@ function FormWorkExperience() {
         control: control,
     });
     const object = watch("jobs")
+    const [disabledButton, setDisabled] = useState(false)
+    useEffect(() => {
+        setDisabled(jobs.length >= 2);
+    }, [jobs.length]);
+
+
     const jobsWorkerElement =
         jobs.map((field, index) => (
             <Accordion
@@ -140,7 +147,7 @@ function FormWorkExperience() {
                 }}>
                     {jobsWorkerElement}
                 </Box>
-                <CustomButton innerText="Добавить Опыт работы" onClick={() => {
+                <CustomButton disabled={disabledButton} innerText="Добавить Опыт работы" onClick={() => {
                     appendJob({
                         postJob: '',
                         nameCompany: '',

@@ -57,10 +57,6 @@ function FormContacts() {
                             })}
                         </Select>
                     </FormControl>
-
-                    {/* <SelectForm value={social[index].icon} label={'Социальная сеть'} onChange={(e) => {
-                        setValue(`socials.${index}.icon`, e.target.value)
-                    }} array={socialArray} /> */}
                     <MyTextField label={'Ссылка'}
                         {...register(`socials.${index}.link`, {
                             pattern: {

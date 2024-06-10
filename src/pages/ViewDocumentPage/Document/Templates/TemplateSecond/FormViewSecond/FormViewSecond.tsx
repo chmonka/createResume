@@ -67,14 +67,14 @@ function FormViewSecond() {
                     {state.jobs && state.jobs.length > 0 &&
                         <Typography variant='subtitle2'
                             sx={{
-                                border: '1px solid #39393B', padding: '5px',
-                                width: '100%'
+                                border: '1px solid #39393B',
+                                padding: '5px',
                             }}>Курсы</Typography>
                     }
 
                     {state.trainingCourses.map((item: { yearEnd: string, nameCompany: string, nameCourse: string }, index: number) => {
                         return (
-                            <Box display={'flex'} flexDirection={'column'} gap={'10px'} >
+                            <Box  >
                                 <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between" }}>
                                     <Box sx={{ display: "flex", flexDirection: 'column' }} >
                                         <Typography variant='body1' sx={{ fontWeight: 'bold' }}>{item.nameCourse}</Typography>

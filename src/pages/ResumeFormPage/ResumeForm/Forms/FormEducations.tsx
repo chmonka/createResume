@@ -7,15 +7,23 @@ import MyTextField from "../../../../components/TextField/MyTextField";
 import SelectForm from "../../../../components/SelectForm/SelectForm";
 import SchoolIcon from '@mui/icons-material/School';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useEffect, useState } from "react";
 function FormEducations() {
 
 
     const methods = useFormContext<Candidate>()
-    const { control, setValue, watch } = methods
+    const { control, setValue, watch, register, formState: { errors } } = methods
     const { fields: education, append: appendEducation, remove: removeEducation } = useFieldArray<Candidate>({
         name: 'education',
         control: control,
     });
+
+    const [disabledButton, setDisabled] = useState(false)
+    useEffect(() => {
+        setDisabled(education.length >= 2);
+    }, [education.length]);
+
+
     const yearArray: number[] = Array.from({ length: 30 }, (_, index) => 2000 + index)
     const object = watch('education')
     const formEducation = ['Очная', 'Очно-заочная', 'Заочная', 'Дистанционная']
@@ -45,35 +53,48 @@ function FormEducations() {
                         flexDirection: 'column',
                         gap: '20px',
                     }}>
-                    <SelectForm value={object[index].levelEducation} array={educationLevel || ''} label={'Уровень образования'} onChange={(e) => {
-                        setValue(`education.${index}.levelEducation`, e.target.value)
-                    }} />
+                    <SelectForm value={object[index].levelEducation} array={educationLevel || ''} label={'Уровень образования'}
+                        {...register(`education.${index}.levelEducation`)} />
                     <Box
                         sx={{
                             display: 'flex',
                             gap: '20px'
                         }}>
-                        <SelectForm value={object[index].formEducation} array={formEducation || ''} label={'Форма обучения'} onChange={(e) => {
-                            setValue(`education.${index}.formEducation`, e.target.value)
-                        }} />
-                        <SelectForm value={object[index].yearEndEducation} array={yearArray || ''} label={'Год окончания'} onChange={(e) => {
-                            setValue(`education.${index}.yearEndEducation`, e.target.value)
-                        }} />
+                        <SelectForm value={object[index].formEducation} array={formEducation || ''} label={'Форма обучения'}
+                            {...register(`education.${index}.formEducation`)} />
+                        <SelectForm value={object[index].yearEndEducation} array={yearArray || ''} label={'Год окончания'}
+                            {...register(`education.${index}.yearEndEducation`)} />
                     </Box>
-                    <MyTextField label={'Название учебного заведения'} onChange={(e) => {
-                        setValue(`education.${index}.institution`, e.target.value)
-                    }} />
-                    <MyTextField label={'Факультет'} onChange={(e) => {
-                        setValue(`education.${index}.faculty`, e.target.value)
-                    }} />
-                    <MyTextField label={'Специальность'} onChange={(e) => {
-                        setValue(`education.${index}.speciality`, e.target.value)
-                    }} />
+                    <MyTextField label={'Название учебного заведения'}
+                        {...register(`education.${index}.institution`, {
+                            maxLength: {
+                                value: 30,
+                                message: "Название должно содержать не более 30 символов"
+                            },
+                        })}
+                        error={!!errors.education?.[index]?.institution}
+                        helperText={errors.education?.[index]?.institution?.message || ""} />
+                    <MyTextField label={'Факультет'}
+                        {...register(`education.${index}.faculty`, {
+                            maxLength: {
+                                value: 30,
+                                message: "Факультет должнен содержать не более 30 символов"
+                            },
+                        })}
+                        error={!!errors.education?.[index]?.faculty}
+                        helperText={errors.education?.[index]?.faculty?.message || ""} />
+                    <MyTextField label={'Специальность'}
+                        {...register(`education.${index}.speciality`, {
+                            maxLength: {
+                                value: 30,
+                                message: "Специальность должнен содержать не более 30 символов"
+                            },
+                        })}
+                        error={!!errors.education?.[index]?.speciality}
+                        helperText={errors.education?.[index]?.speciality?.message || ""} />
                 </AccordionDetails>
             </Accordion >
         ))
-
-
 
     return (
         <Box
@@ -99,7 +120,7 @@ function FormEducations() {
                 }}>
                     {educationElement}
                 </Box>
-                <CustomButton innerText="Добавить образование" onClick={() => appendEducation({
+                <CustomButton  disabled={disabledButton} innerText="Добавить образование" onClick={() => appendEducation({
                     institution: '',
                     levelEducation: '',
                     formEducation: '',

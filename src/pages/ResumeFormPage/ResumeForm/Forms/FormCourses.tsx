@@ -7,16 +7,22 @@ import MyTextField from "../../../../components/TextField/MyTextField";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useEffect, useState } from "react";
 function FormCourses() {
     const methods = useFormContext<Candidate>()
-    const { control, setValue, watch } = methods
-    const yearArray: number[] = Array.from({ length: 21 }, (_, index) => 2000 + index)
+    const { control, setValue, watch, register, formState: { errors } } = methods
+    const yearArray: number[] = Array.from({ length: 29 }, (_, index) => 2000 + index)
     const { fields: trainingCourses, append: appendCourses, remove: removeCourses } = useFieldArray<Candidate>({
         name: 'trainingCourses',
         control: control,
     });
 
     const object = watch('trainingCourses')
+    const [disabledButton, setDisabled] = useState(false)
+    useEffect(() => {
+        setDisabled(trainingCourses.length >= 2);
+    }, [trainingCourses.length]);
+
 
     const coursesElement = trainingCourses.map((field, index) => (
         <Accordion
@@ -33,15 +39,28 @@ function FormCourses() {
                 <Box
                     sx={{ display: 'flex', gap: '20px', flexDirection: 'column' }}
                 >
-                    <MyTextField label={'Название'} onChange={(e) => {
-                        setValue(`trainingCourses.${index}.nameCourse`, e.target.value)
-                    }} />
-                    <MyTextField label={'Название организации'} onChange={(e) => {
-                        setValue(`trainingCourses.${index}.nameCompany`, e.target.value)
-                    }} />
-                    <SelectForm array={yearArray || []} value={object[index].yearEnd} label={'Год окончания'} onChange={(e) => {
-                        setValue(`trainingCourses.${index}.yearEnd`, e.target.value)
-                    }} />
+                    <MyTextField label={'Название'}
+                        {...register(`trainingCourses.${index}.nameCourse`, {
+                            maxLength: {
+                                value: 24,
+                                message: "Название должно содержать не более 24 символов"
+                            },
+                        })}
+                        error={!!errors.trainingCourses?.[index]?.nameCourse}
+                        helperText={errors.trainingCourses?.[index]?.nameCourse?.message || ""}
+                    />
+                    <MyTextField label={'Название организации'}
+                        {...register(`trainingCourses.${index}.nameCompany`, {
+                            maxLength: {
+                                value: 24,
+                                message: "Название организации должно содержать не более 24 символов"
+                            },
+                        })}
+                        error={!!errors.trainingCourses?.[index]?.nameCompany}
+                        helperText={errors.trainingCourses?.[index]?.nameCompany?.message || ""}
+                    />
+                    <SelectForm array={yearArray || []} value={object[index].yearEnd} label={'Год окончания'}
+                        {...register(`trainingCourses.${index}.yearEnd`)} />
                 </Box>
             </AccordionDetails>
         </Accordion>
@@ -57,8 +76,8 @@ function FormCourses() {
                 borderRadius: '5px',
             }}>
 
-            <Box sx={{ width: '100%', borderBottom: '2px solid #ccdbfd'}}>
-                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding:'20px 10px', gap: '20px' }}>
+            <Box sx={{ width: '100%', borderBottom: '2px solid #ccdbfd' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '20px 10px', gap: '20px' }}>
                     <AutoGraphIcon sx={{ fontSize: '40px' }} />
                     <Typography variant='h2'>Курсы повышения квалификации</Typography>
                 </Box>
@@ -72,7 +91,7 @@ function FormCourses() {
                 }}>
                     {coursesElement}
                 </Box>
-                <CustomButton innerText="Добавить Курс" onClick={() => appendCourses({
+                <CustomButton  disabled={disabledButton} innerText="Добавить Курс" onClick={() => appendCourses({
                     yearEnd: '',
                     nameCompany: '',
                     nameCourse: '',

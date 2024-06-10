@@ -64,11 +64,11 @@ function FormViewMain() {
                         }}>Контакты:</Typography>
                 }
 
-                {state.socials && state.socials.length > 0 && state.socials.map((item: { icon: string, link: string }, index: number) => {
+                {state.socials && state.socials.length > 0 && state.socials.map((item: { name: string, link: string }, index: number) => {
                     return (
                         <Box key={index}>
                             <Box sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-                                <Typography variant="body2" sx={{ color: '#FFFFFF' }}>{item.icon}</Typography>
+                                <Typography variant="body2" sx={{ color: '#FFFFFF' }}>{item.name}</Typography>
                                 <Typography variant="body2" sx={{ color: '#FFFFFF' }}>{item.link}</Typography>
                             </Box>
                         </Box>

@@ -6,7 +6,7 @@ function FormViewSecond() {
 
     const { state } = useLocation();
     if (!state) {
-        return   <Box sx={{display:'flex', alignItems:'center', justifyContent:'center' , width:'100%'}}>
+        return <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
             <Typography variant='body1'>Форма не заполнена</Typography>
         </Box>
     }
@@ -14,9 +14,9 @@ function FormViewSecond() {
         <Box sx={{
             justifyContent: 'center',
             width: '100%',
-            padding: '10px'
+
         }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: "10px" }}>
+            <Box sx={{ padding: '10px' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     {state.jobs && state.jobs.length > 0 &&
                         <Typography variant='subtitle2' sx={{ border: '1px solid #39393B', padding: '5px' }}>Опыт работы</Typography>
@@ -38,7 +38,6 @@ function FormViewSecond() {
                             sx={{
                                 border: '1px solid #39393B',
                                 padding: '5px',
-                                width: '100%'
                             }}>
                             Образование</Typography>
                     }
@@ -57,14 +56,13 @@ function FormViewSecond() {
                 <Box sx={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '10px'
+                    gap: '10px',
                 }}>
                     {state.trainingCourses && state.languages.length > 0 &&
                         <Typography variant='subtitle2'
                             sx={{
                                 border: '1px solid #39393B',
                                 padding: '5px',
-                                width: '100%'
                             }}>Курсы</Typography>
                     }
                     {state.trainingCourses.map((item: { yearEnd: string, nameCompany: string, nameCourse: string }, index: number) => {
