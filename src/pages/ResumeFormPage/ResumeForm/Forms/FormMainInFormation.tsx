@@ -163,12 +163,14 @@ const FormMainInFormation = () => {
                     })}
                     error={!!errors.desiredPosition}
                     helperText={errors.desiredPosition ? errors.desiredPosition.message : ""} />
-                <Box sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    flexDirection: 'row',
-                    gap: '20px',
-                }}>
+                <Box
+
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        flexDirection: 'row',
+                        gap: '20px',
+                    }}>
                     <Controller
                         control={control}
                         name='interesting'
