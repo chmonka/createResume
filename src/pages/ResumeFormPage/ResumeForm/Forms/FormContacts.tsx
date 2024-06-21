@@ -17,6 +17,7 @@ function FormContacts() {
         control: control,
     });
     const social = watch('socials')
+    
     const socialsElement = socials.map((field, index) => (
         <Accordion
             key={index}

@@ -68,8 +68,8 @@ function FormEducations() {
                     <MyTextField label={'Название учебного заведения'}
                         {...register(`education.${index}.institution`, {
                             maxLength: {
-                                value: 30,
-                                message: "Название должно содержать не более 30 символов"
+                                value: 50,
+                                message: "Название должно содержать не более 50 символов"
                             },
                         })}
                         error={!!errors.education?.[index]?.institution}
@@ -77,8 +77,8 @@ function FormEducations() {
                     <MyTextField label={'Факультет'}
                         {...register(`education.${index}.faculty`, {
                             maxLength: {
-                                value: 30,
-                                message: "Факультет должнен содержать не более 30 символов"
+                                value: 50,
+                                message: "Факультет должнен содержать не более 50 символов"
                             },
                         })}
                         error={!!errors.education?.[index]?.faculty}

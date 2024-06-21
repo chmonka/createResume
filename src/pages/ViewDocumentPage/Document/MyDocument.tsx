@@ -5,6 +5,7 @@ import { Box, Button, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import TemplateOne from './Templates/TemplateOne/TemplateOne'
 import TemplateSecond from './Templates/TemplateSecond/TemplateSecond'
+import TemplateThree from './Templates/TemplateThree/TemplateThree'
 import CustomButton from '../../../components/Button/CustomButton'
 import CustomContainer from '../../../components/Container/CustomContainer'
 
@@ -37,24 +38,21 @@ const MyDocument = () => {
     }
 
 
-    const TemplateTwo = () => <TemplateSecond />;
-    const TemplateThree = () => <div>Template Three Content</div>;
 
     const navigate = useNavigate()
     const [template, setTemplate] = useState(() => <TemplateOne />)
 
-
-    function resetPage() {
-        setTemplate(TemplateTwo)
+    function setTemplateFirst() {
+        setTemplate(<TemplateOne/>)
     }
 
-    function resetPageTemplateOne() {
-        setTemplate(<TemplateOne />)
+    function setTemplateSecond() {
+        setTemplate(<TemplateSecond/>)
     }
 
-    useEffect(() => {
-        console.log(template)
-    }, [template])
+    function setTemplateThree() {
+        setTemplate(<TemplateThree/>)
+    }
 
     const backToPageForm = () => {
         navigate('/resumeform')
@@ -72,8 +70,8 @@ const MyDocument = () => {
                     </Box>
                     <Box sx={{ display: 'flex', gap: '20px', flexDirection: 'column', paddingTop: '20px' }}>
                         <Typography variant='h2'>Шаблоны документа</Typography>
-                        <Box sx={{ display: 'flex', gap: '20px' }}>
-                            <Box onClick={resetPageTemplateOne}
+                        <Box sx={{ display: 'flex', gap: '10px' }}>
+                            <Box onClick={setTemplateFirst}
                                 sx={{
                                     cursor: 'pointer',
                                     width: '260px',
@@ -86,7 +84,7 @@ const MyDocument = () => {
                                 <img src='src/pages/ViewDocumentPage/Document/Templates/Img/themeOne.jpg'
                                     style={{ width: '100%', height: '100%', borderRadius: '10px', }} />
                             </Box>
-                            <Box onClick={resetPage} sx={{
+                            <Box onClick={setTemplateSecond} sx={{
                                 cursor: 'pointer',
                                 width: '260px',
                                 height: '350px',
@@ -96,6 +94,18 @@ const MyDocument = () => {
                                 backgroundPosition: 'center'
                             }}>
                                 <img src='src/pages/ViewDocumentPage/Document/Templates/Img/themeTwo.jpg'
+                                    style={{ width: '100%', height: '100%', borderRadius: '10px', }} />
+                            </Box>
+                            <Box onClick={setTemplateThree} sx={{
+                                cursor: 'pointer',
+                                width: '260px',
+                                height: '350px',
+                                border: '1px solid black',
+                                borderRadius: '10px',
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center'
+                            }}>
+                                <img src='src/pages/ViewDocumentPage/Document/Templates/Img/themeThree.jpg'
                                     style={{ width: '100%', height: '100%', borderRadius: '10px', }} />
                             </Box>
                         </Box>
